@@ -1,7 +1,8 @@
 const env = process.env.NODE_ENV || 'development';
-const serverIP = '172.18.0.4';
+const serverIP = '172.18.0.5';
 const serverPort = env === 'production' ? 3000 : 9632;
 export default {
+  PHONE_NUMBER: '(877)355-3585',
   CUSTOMER: 'customer',
   CREATOR: 'creator',
   CONTEST_STATUS_ACTIVE: 'active',

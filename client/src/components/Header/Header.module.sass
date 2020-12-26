@@ -23,6 +23,7 @@
         display: none
 
     .startContestBtn
+      margin: auto 0
       text-align: center
       max-width: 340px
       padding: 10px 22px
@@ -31,15 +32,16 @@
       border-radius: 5px
       font-size: 14px
       font-weight: 400
-      margin-bottom: 10px
 
       &:hover
         color: white
         background-color: #28d2d0
+        cursor: pointer
 
     .leftNav
       display: flex
       @media(max-width: 750px)
+        width: 100%
         align-items: center
         flex-direction: column
 
@@ -56,7 +58,6 @@
             padding: 0
           @media(max-width: 700px)
             flex-direction: column
-            align-items: flex-start
 
           &:last-child li
             ul
@@ -66,12 +67,14 @@
             display: flex
             align-items: center
             justify-content: flex-start
-            margin-right: 30px
+            padding: 5px 30px 5px 0
             @media(max-width: 700px)
+              flex-direction: column
               width: 100%
               padding: 0 15px
 
             &:hover
+              cursor: default
               span
                 color: #f27e51
 
@@ -80,11 +83,12 @@
                 position: absolute
                 border: 1px solid #eee
                 z-index: 1000
-                top: 130px
+                top: 127px
                 background-color: white
+                margin-left: -15px
                 @media(max-width: 700px)
-                  top: auto
-                  left: 145px
+                  position: sticky
+                  
 
             ul
               padding: 0
@@ -129,7 +133,6 @@
     align-items: center
     justify-content: space-around
     border: 1px solid #ebebeb
-    margin-bottom: 13px
 
     .userButtonsContainer
       margin-left: 100px
@@ -146,21 +149,24 @@
         margin-left: 0
 
       .emailIcon
-        padding: 0 15px
+        padding: 10px 15px
         border-right: 1px solid #ebebeb
+        &:hover
+          cursor: pointer
 
       .userInfo
         display: flex
         justify-content: center
         align-items: center
-        padding: 0 15px
+        padding: 10px 15px
         border-right: 1px solid #ebebeb
 
         &:hover
+          cursor: default
           ul
             display: block
             position: absolute
-            top: 45px
+            top: 71px
 
         ul
           border: 1px solid #eee
@@ -168,7 +174,7 @@
           padding: 5px 0
           list-style: none
           background: white
-          width: 180px
+          width: 173px
           display: none
 
           li
@@ -182,6 +188,7 @@
               padding: 5px 15px
               color: #333
               font-size: 16px
+              cursor: pointer
 
         img
           width: 20px
@@ -221,11 +228,16 @@
         margin-left: 0
 
       span
-        color: #337ab7
+        color: #7696b3
         font-size: 14px
         margin-left: 10px
         @media(max-width: 360px)
           font-size: 12px
+
+      &:hover
+        cursor: pointer
+        span
+          color: #337ab7
 
   .fixedHeader
     z-index: 500

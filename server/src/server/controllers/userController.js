@@ -167,7 +167,7 @@ module.exports.payment = async (req, res, next) => {
         prize,
       });
     });
-    const ret = await db.Contests.bulkCreate(req.body.contests, transaction);
+    await db.Contests.bulkCreate(req.body.contests, transaction);
     transaction.commit();
     res.send();
   } catch (err) {

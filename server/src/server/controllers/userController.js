@@ -159,7 +159,7 @@ module.exports.payment = async (req, res, next) => {
           ? Math.ceil(req.body.price / req.body.contests.length)
           : Math.floor(req.body.price / req.body.contests.length);
       contest = Object.assign(contest, {
-        status: index === 0 ? 'active' : 'pending',
+        status: 'active', //status: index === 0 ? 'active' : 'pending',  (( there are no active/pending switcher ))
         userId: req.tokenData.userId,
         priority: index + 1,
         orderId,
@@ -167,7 +167,7 @@ module.exports.payment = async (req, res, next) => {
         prize,
       });
     });
-    await db.Contests.bulkCreate(req.body.contests, transaction);
+    const ret = await db.Contests.bulkCreate(req.body.contests, transaction);
     transaction.commit();
     res.send();
   } catch (err) {

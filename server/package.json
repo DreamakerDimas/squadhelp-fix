@@ -8,6 +8,11 @@
     "test": "jest",
     "build": "babel src -d dist"
   },
+  "nodemonConfig": {
+    "ignore": [
+      "logs/*.json"
+    ]
+  },
   "dependencies": {
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",

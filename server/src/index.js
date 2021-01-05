@@ -5,6 +5,7 @@ const router = require('./server/router');
 const cors = require('cors');
 const controller = require('./socketInit');
 const handlerError = require('./server/handlerError/handler');
+const loggerInit = require('./logger');
 
 const PORT = process.env.PORT || 9632;
 const app = express();
@@ -20,3 +21,4 @@ server.listen(PORT, () =>
   console.log(`Example app listening on port ${PORT}!`)
 );
 controller.createConnection(server);
+loggerInit();

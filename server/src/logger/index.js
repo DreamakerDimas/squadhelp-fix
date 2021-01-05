@@ -30,7 +30,7 @@ module.exports.logWrite = async (err) => {
     // Write logs to file
     fs.writeFileSync(
       currentLogPath,
-      JSON.stringify(dataArray, null, 4),
+      JSON.stringify(logArray, null, 4),
       'UTF-8'
     );
   } catch (err) {

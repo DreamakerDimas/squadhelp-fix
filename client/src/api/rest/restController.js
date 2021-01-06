@@ -1,30 +1,31 @@
 import http from '../interceptor';
 
-export const registerRequest = (data) => http.post('registration', data);
-export const loginRequest = (data) => http.post('login', data);
+export const registerRequest = (data) => http.post('registerRequest', data);
+export const loginRequest = (data) => http.post('loginRequest', data);
 export const getUser = () => http.get('getUser');
 export const updateContest = (data) => http.put('updateContest', data);
 export const setNewOffer = (data) => http.post('setNewOffer', data);
 export const setOfferStatus = (data) => http.post('setOfferStatus', data);
 export const downloadContestFile = (data) =>
-  http.get('downloadFile/' + data.fileName);
-export const payMent = (data) => http.post('pay', data.formData);
+  http.get('downloadContestFile/' + data.fileName);
+export const payment = (data) => http.post('payment', data.formData);
 export const changeMark = (data) => http.put('changeMark', data);
-export const getPreviewChat = () => http.get('getPreview');
+export const getPreviewChat = () => http.get('getPreviewChat');
 export const getDialog = (data) => http.post('getDialog', data);
 export const dataForContest = (data) => http.get('dataForContest', data);
-export const cashOut = (data) => http.post('cashout', data);
+export const cashOut = (data) => http.post('cashOut', data);
 export const updateUser = (data) => http.put('updateUser', data);
 export const newMessage = (data) => http.post('newMessage', data);
-export const changeChatFavorite = (data) => http.put('favorite', data);
-export const changeChatBlock = (data) => http.put('blackList', data);
-export const getCatalogList = (data) => http.get('getCatalogs', data);
-export const addChatToCatalog = (data) => http.put('addNewChatToCatalog', data);
+export const changeChatFavorite = (data) =>
+  http.put('changeChatFavorite', data);
+export const changeChatBlock = (data) => http.put('changeChatBlock', data);
+export const getCatalogList = (data) => http.get('getCatalogList', data);
+export const addChatToCatalog = (data) => http.put('addChatToCatalog', data);
 export const createCatalog = (data) => http.post('createCatalog', data);
 export const deleteCatalog = (data) => http.delete('deleteCatalog', data);
 export const removeChatFromCatalog = (data) =>
   http.delete('removeChatFromCatalog', data);
-export const changeCatalogName = (data) => http.put('updateNameCatalog', data);
+export const changeCatalogName = (data) => http.put('changeCatalogName', data);
 export const getCustomersContests = (data) => {
   return http.post(
     'getCustomersContests',
@@ -37,7 +38,7 @@ export const getCustomersContests = (data) => {
   );
 };
 
-export const getActiveContests = ({
+export const getAllActiveContests = ({
   offset,
   limit,
   typeIndex,
@@ -46,7 +47,7 @@ export const getActiveContests = ({
   awardSort,
   ownEntries,
 }) => {
-  return http.post('getAllContests', {
+  return http.post('getAllActiveContests', {
     offset,
     limit,
     typeIndex,

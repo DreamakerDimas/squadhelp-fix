@@ -200,7 +200,7 @@ module.exports.updateUser = async (req, res, next) => {
   }
 };
 
-module.exports.cashout = async (req, res, next) => {
+module.exports.cashOut = async (req, res, next) => {
   let transaction;
   try {
     transaction = await db.sequelize.transaction();

@@ -10,13 +10,13 @@ const upload = require('../utils/fileUpload');
 const router = express.Router();
 
 router.post(
-  '/registration',
+  '/registerRequest',
   validators.validateRegistrationData,
   hashPass,
   userController.registration
 );
 
-router.post('/login', validators.validateLogin, userController.login);
+router.post('/loginRequest', validators.validateLogin, userController.login);
 
 router.get(
   '/dataForContest',
@@ -25,7 +25,7 @@ router.get(
 );
 
 router.post(
-  '/pay',
+  '/payment',
   checkToken.checkToken,
   basicMiddlewares.onlyForCustomer,
   upload.uploadContestFiles,
@@ -48,7 +48,7 @@ router.get(
 );
 
 router.post(
-  '/getAllContests',
+  '/getAllActiveContests',
   checkToken.checkToken,
   basicMiddlewares.onlyForCreative,
   contestController.getContests
@@ -57,7 +57,7 @@ router.post(
 router.get('/getUser', checkToken.checkAuth);
 
 router.get(
-  '/downloadFile/:fileName',
+  '/downloadContestFile/:fileName',
   checkToken.checkToken,
   contestController.downloadFile
 );
@@ -99,21 +99,25 @@ router.put(
 );
 
 router.post(
-  '/cashout',
+  '/cashOut',
   checkToken.checkToken,
   basicMiddlewares.onlyForCreative,
-  userController.cashout
+  userController.cashOut
 );
 
 router.post('/newMessage', checkToken.checkToken, chatController.addMessage);
 
 router.post('/getDialog', checkToken.checkToken, chatController.getDialog);
 
-router.get('/getPreview', checkToken.checkToken, chatController.getPreview);
+router.get('/getPreviewChat', checkToken.checkToken, chatController.getPreview);
 
-router.put('/blackList', checkToken.checkToken, chatController.blackList);
+router.put('/changeChatBlock', checkToken.checkToken, chatController.blackList);
 
-router.put('/favorite', checkToken.checkToken, chatController.favoriteChat);
+router.put(
+  '/changeChatFavorite',
+  checkToken.checkToken,
+  chatController.favoriteChat
+);
 
 router.post(
   '/createCatalog',
@@ -122,13 +126,13 @@ router.post(
 );
 
 router.put(
-  '/updateNameCatalog',
+  '/changeCatalogName',
   checkToken.checkToken,
   chatController.updateNameCatalog
 );
 
 router.put(
-  '/addNewChatToCatalog',
+  '/addChatToCatalog',
   checkToken.checkToken,
   chatController.addNewChatToCatalog
 );
@@ -145,6 +149,10 @@ router.delete(
   chatController.deleteCatalog
 );
 
-router.get('/getCatalogs', checkToken.checkToken, chatController.getCatalogs);
+router.get(
+  '/getCatalogList',
+  checkToken.checkToken,
+  chatController.getCatalogs
+);
 
 module.exports = router;

@@ -14,7 +14,7 @@ const userQueries = require('./queries/userQueries');
 const bankQueries = require('./queries/bankQueries');
 const ratingQueries = require('./queries/ratingQueries');
 
-module.exports.login = async (req, res, next) => {
+module.exports.loginRequest = async (req, res, next) => {
   try {
     const foundUser = await userQueries.findUser({ email: req.body.email });
     await userQueries.passwordCompare(req.body.password, foundUser.password);
@@ -39,7 +39,7 @@ module.exports.login = async (req, res, next) => {
     next(err);
   }
 };
-module.exports.registration = async (req, res, next) => {
+module.exports.registerRequest = async (req, res, next) => {
   try {
     const newUser = await userQueries.userCreation(
       Object.assign(req.body, { password: req.hashPass })

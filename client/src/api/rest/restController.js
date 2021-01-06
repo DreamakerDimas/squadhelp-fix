@@ -22,9 +22,10 @@ export const changeChatBlock = (data) => http.put('changeChatBlock', data);
 export const getCatalogList = (data) => http.get('getCatalogList', data);
 export const addChatToCatalog = (data) => http.put('addChatToCatalog', data);
 export const createCatalog = (data) => http.post('createCatalog', data);
-export const deleteCatalog = (data) => http.delete('deleteCatalog', data);
+export const deleteCatalog = (data) =>
+  http.delete('deleteCatalog/' + data.catalogId);
 export const removeChatFromCatalog = (data) =>
-  http.delete('removeChatFromCatalog', data);
+  http.delete('removeChatFromCatalog/' + `${data.catalogId}/` + data.chatId);
 export const changeCatalogName = (data) => http.put('changeCatalogName', data);
 export const getCustomersContests = (data) => {
   return http.post(

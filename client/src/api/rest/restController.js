@@ -12,7 +12,13 @@ export const payment = (data) => http.post('payment', data.formData);
 export const changeMark = (data) => http.put('changeMark', data);
 export const getPreviewChat = () => http.get('getPreviewChat');
 export const getDialog = (data) => http.post('getDialog', data);
-export const dataForContest = (data) => http.get('dataForContest', data);
+export const dataForContest = (data) =>
+  http.get('dataForContest', {
+    headers: {
+      characteristic1: data.characteristic1,
+      characteristic2: data.characteristic2,
+    },
+  });
 export const cashOut = (data) => http.post('cashOut', data);
 export const updateUser = (data) => http.put('updateUser', data);
 export const newMessage = (data) => http.post('newMessage', data);

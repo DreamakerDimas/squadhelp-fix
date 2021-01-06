@@ -5,20 +5,14 @@ export const loginRequest = (data) => http.post('loginRequest', data);
 export const getUser = () => http.get('getUser');
 export const updateContest = (data) => http.put('updateContest', data);
 export const setNewOffer = (data) => http.post('setNewOffer', data);
-export const setOfferStatus = (data) => http.post('setOfferStatus', data);
+export const setOfferStatus = (data) => http.put('setOfferStatus', data);
 export const downloadContestFile = (data) =>
   http.get('downloadContestFile/' + data.fileName);
 export const payment = (data) => http.post('payment', data.formData);
 export const changeMark = (data) => http.put('changeMark', data);
 export const getPreviewChat = () => http.get('getPreviewChat');
 export const getDialog = (data) => http.get('getDialog/' + data.interlocutorId);
-export const dataForContest = (data) =>
-  http.get('dataForContest', {
-    headers: {
-      characteristic1: data.characteristic1,
-      characteristic2: data.characteristic2,
-    },
-  });
+export const dataForContest = (data) => http.post('dataForContest', data);
 export const cashOut = (data) => http.post('cashOut', data);
 export const updateUser = (data) => http.put('updateUser', data);
 export const newMessage = (data) => http.post('newMessage', data);

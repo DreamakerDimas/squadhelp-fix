@@ -22,7 +22,7 @@ router.post(
   userController.loginRequest
 );
 
-router.get('/dataForContest', checkToken, contestController.dataForContest);
+router.post('/dataForContest', checkToken, contestController.dataForContest);
 
 router.post(
   '/payment',

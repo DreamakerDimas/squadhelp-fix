@@ -15,8 +15,8 @@ module.exports.dataForContest = async (req, res, next) => {
       where: {
         type: {
           [db.Sequelize.Op.or]: [
-            req.headers.characteristic1,
-            req.headers.characteristic2,
+            req.body.characteristic1,
+            req.body.characteristic2,
             'industry',
           ],
         },

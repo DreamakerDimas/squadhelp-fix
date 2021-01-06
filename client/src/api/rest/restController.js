@@ -25,7 +25,7 @@ export const newMessage = (data) => http.post('newMessage', data);
 export const changeChatFavorite = (data) =>
   http.put('changeChatFavorite', data);
 export const changeChatBlock = (data) => http.put('changeChatBlock', data);
-export const getCatalogList = (data) => http.get('getCatalogList', data);
+export const getCatalogList = () => http.get('getCatalogList');
 export const addChatToCatalog = (data) => http.put('addChatToCatalog', data);
 export const createCatalog = (data) => http.post('createCatalog', data);
 export const deleteCatalog = (data) =>

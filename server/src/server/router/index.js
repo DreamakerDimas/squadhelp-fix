@@ -107,7 +107,7 @@ router.post(
 
 router.post('/newMessage', checkToken, chatController.newMessage);
 
-router.post('/getDialog', checkToken, chatController.getDialog);
+router.get('/getDialog/:interlocutorId', checkToken, chatController.getDialog);
 
 router.get('/getPreviewChat', checkToken, chatController.getPreviewChat);
 

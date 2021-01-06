@@ -74,7 +74,10 @@ module.exports.newMessage = async (req, res, next) => {
 };
 
 module.exports.getDialog = async (req, res, next) => {
-  const participants = [req.tokenData.userId, req.body.interlocutorId];
+  const participants = [
+    req.tokenData.userId,
+    Number(req.params.interlocutorId),
+  ];
   participants.sort(
     (participant1, participant2) => participant1 - participant2
   );
@@ -101,9 +104,8 @@ module.exports.getDialog = async (req, res, next) => {
         },
       },
     ]);
-    console.log('!! id: ', req.body.userId);
     const interlocutor = await userQueries.findUser({
-      id: req.body.interlocutorId,
+      id: req.params.interlocutorId,
     });
 
     res.send({

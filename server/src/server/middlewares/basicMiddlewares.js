@@ -1,5 +1,4 @@
 const bd = require('../models/index');
-const NotFound = require('../errors/UserNotFoundError');
 const RightsError = require('../errors/RightsError');
 const ServerError = require('../errors/ServerError');
 import CONSTANTS from '../../constants';

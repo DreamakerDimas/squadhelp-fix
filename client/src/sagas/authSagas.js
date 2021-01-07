@@ -1,7 +1,6 @@
 import { put } from 'redux-saga/effects';
 import ACTION from '../actions/actionTypes';
 import history from '../browserHistory';
-import React from 'react';
 import * as restController from '../api/rest/restController';
 
 export function* loginSaga(action) {

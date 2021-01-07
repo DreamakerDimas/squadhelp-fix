@@ -1,5 +1,5 @@
 import ACTION from '../actions/actionTypes';
-import CONTANTS from '../constants';
+import CONSTANTS from '../constants';
 
 const initialState = {
   isFetching: true,

@@ -9,7 +9,7 @@ import RoleInput from '../RoleInput/RoleInput';
 import AgreeTermOfServiceInput from '../AgreeTermOfServiceInput/AgreeTermOfServiceInput';
 import CONSTANTS from '../../constants';
 import customValidator from '../../validators/validator';
-import Schems from '../../validators/validationSchems';
+import Schemes from '../../validators/validationSchemes';
 
 class RegistrationForm extends React.Component {
   componentWillUnmount() {
@@ -164,6 +164,6 @@ export default connect(
 )(
   reduxForm({
     form: 'login',
-    validate: customValidator(Schems.RegistrationSchem),
+    validate: customValidator(Schemes.RegistrationSchema),
   })(RegistrationForm)
 );

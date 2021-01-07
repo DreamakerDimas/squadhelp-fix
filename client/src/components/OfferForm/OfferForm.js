@@ -7,7 +7,7 @@ import { reduxForm, Field } from 'redux-form';
 import ImageUpload from '../InputComponents/ImageUpload/ImageUpload';
 import FormInput from '../FormInput/FormInput';
 import customValidator from '../../validators/validator';
-import Schems from '../../validators/validationSchems';
+import Schemes from '../../validators/validationSchemes';
 import Error from '../../components/Error/Error';
 
 let contestType;
@@ -99,8 +99,8 @@ export default connect(
     form: 'offerForm',
     validate: customValidator(
       contestType === CONSTANTS.LOGO_CONTEST
-        ? Schems.LogoOfferSchema
-        : Schems.TextOfferSchema
+        ? Schemes.LogoOfferSchema
+        : Schemes.TextOfferSchema
     ),
   })(OfferForm)
 );

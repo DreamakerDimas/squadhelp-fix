@@ -9,7 +9,7 @@ import { Field, reduxForm } from 'redux-form';
 import FormInput from '../FormInput/FormInput';
 import SelectInput from '../SelectInput/SelectInput';
 import customValidator from '../../validators/validator';
-import Schems from '../../validators/validationSchems';
+import Schemes from '../../validators/validationSchemes';
 import FieldFileInput from '../InputComponents/FieldFileInput/FieldFileInput';
 import FormTextArea from '../InputComponents/FormTextArea/FormTextArea';
 import TryAgain from '../TryAgain/TryAgain';
@@ -264,7 +264,7 @@ export default withRouter(
   )(
     reduxForm({
       form: 'contestForm',
-      validate: customValidator(Schems.ContestSchem),
+      validate: customValidator(Schemes.ContestSchema),
       onSubmit: submit,
     })(ContestForm)
   )

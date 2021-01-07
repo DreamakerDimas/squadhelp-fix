@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { changeFocusOnCard } from '../../actions/actionCreator';
 import PayInput from '../InputComponents/PayInput/PayInput';
 import customValidator from '../../validators/validator';
-import Schems from '../../validators/validationSchems';
+import Schemes from '../../validators/validationSchemes';
 
 import 'react-credit-cards/es/styles-compiled.css';
 
@@ -175,7 +175,7 @@ export default connect(
   reduxForm({
     form: 'payForm',
     validate: customValidator(
-      isPayForOrder ? Schems.PaymentSchema : Schems.CashoutSchema
+      isPayForOrder ? Schemes.PaymentSchema : Schemes.CashoutSchema
     ),
   })(PayForm)
 );

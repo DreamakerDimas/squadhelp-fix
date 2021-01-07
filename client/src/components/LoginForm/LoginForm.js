@@ -6,7 +6,7 @@ import styles from './LoginForm.module.sass';
 import { Field, reduxForm } from 'redux-form';
 import FormInput from '../FormInput/FormInput';
 import customValidator from '../../validators/validator';
-import Schems from '../../validators/validationSchems';
+import Schemes from '../../validators/validationSchemes';
 import Error from '../../components/Error/Error';
 
 class LoginForm extends React.Component {
@@ -86,6 +86,6 @@ export default connect(
 )(
   reduxForm({
     form: 'login',
-    validate: customValidator(Schems.LoginSchem),
+    validate: customValidator(Schemes.LoginSchema),
   })(LoginForm)
 );

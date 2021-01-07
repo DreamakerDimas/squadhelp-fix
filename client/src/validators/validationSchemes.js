@@ -2,7 +2,7 @@ import * as yup from 'yup';
 import valid from 'card-validator';
 
 export default {
-  LoginSchem: yup.object().shape({
+  LoginSchema: yup.object().shape({
     email: yup.string().email('check email').required('required'),
     password: yup
       .string()
@@ -14,7 +14,7 @@ export default {
       .required('required'),
   }),
 
-  RegistrationSchem: yup.object().shape({
+  RegistrationSchema: yup.object().shape({
     email: yup.string().email('check email').required('Email is required'),
     password: yup
       .string()
@@ -62,7 +62,7 @@ export default {
       .required('Must Accept Terms and Conditions'),
   }),
 
-  ContestSchem: yup.object().shape({
+  ContestSchema: yup.object().shape({
     contestType: yup
       .string()
       .matches(/(name|tagline|logo)/)
@@ -100,7 +100,7 @@ export default {
     brandStyle: yup.string(),
   }),
 
-  filterSchem: yup.object().shape({
+  filterSchema: yup.object().shape({
     typeIndex: yup.number().oneOf[(1, 2, 3, 4, 5, 6, 7)],
     contestId: yup.string(),
     awardSort: yup.string().matches(/(desc|asc)/),

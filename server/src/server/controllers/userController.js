@@ -1,9 +1,6 @@
 const jwt = require('jsonwebtoken');
 const CONSTANTS = require('../../constants');
 const db = require('../models/index');
-const NotFound = require('../errors/UserNotFoundError');
-const ServerError = require('../errors/ServerError');
-const NotEnoughMoney = require('../errors/NotEnoughMoney');
 const NotUniqueEmail = require('../errors/NotUniqueEmail');
 const moment = require('moment');
 const uuid = require('uuid/v1');
@@ -11,6 +8,7 @@ const controller = require('../../socketInit');
 const userQueries = require('./queries/userQueries');
 const bankQueries = require('./queries/bankQueries');
 const ratingQueries = require('./queries/ratingQueries');
+const { resetPasswordMail } = require('../utils/mail/mailSender');
 
 module.exports.loginRequest = async (req, res, next) => {
   try {
@@ -37,6 +35,7 @@ module.exports.loginRequest = async (req, res, next) => {
     next(err);
   }
 };
+
 module.exports.registerRequest = async (req, res, next) => {
   try {
     const newUser = await userQueries.userCreation(
@@ -65,6 +64,24 @@ module.exports.registerRequest = async (req, res, next) => {
     } else {
       next(err);
     }
+  }
+};
+
+module.exports.resetPasswordMailRequest = async (req, res, next) => {
+  try {
+    const foundUser = await userQueries.findUser({ email: req.body.email });
+    if (foundUser) {
+      const { firstName, email, id } = foundUser;
+
+      const token = jwt.sign({ email }, CONSTANTS.JWT_SECRET, {
+        expiresIn: CONSTANTS.ACCESS_TOKEN_TIME,
+      });
+
+      await userQueries.updateUser({ resetToken: token }, id);
+      await resetPasswordMail(firstName, email, token);
+    }
+  } catch (err) {
+    next(err);
   }
 };
 

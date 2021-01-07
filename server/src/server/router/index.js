@@ -22,6 +22,11 @@ router.post(
   userController.loginRequest
 );
 
+router.post(
+  '/resetPasswordMailRequest',
+  userController.resetPasswordMailRequest
+);
+
 router.post('/dataForContest', checkToken, contestController.dataForContest);
 
 router.post(

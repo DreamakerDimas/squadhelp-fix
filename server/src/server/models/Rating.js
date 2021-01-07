@@ -1,7 +1,9 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  const Rating = sequelize.define('Ratings', {
+  const Rating = sequelize.define(
+    'Ratings',
+    {
       offerId: {
         allowNull: false,
         primaryKey: true,
@@ -24,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       timestamps: false,
-    });
+    }
+  );
 
   return Rating;
 };

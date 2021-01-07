@@ -1,7 +1,9 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  const Offer = sequelize.define('Offers', {
+  const Offer = sequelize.define(
+    'Offers',
+    {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-
       },
       contestId: {
         type: DataTypes.INTEGER,
@@ -37,15 +38,18 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       timestamps: false,
-    });
+    }
+  );
 
   Offer.associate = function (models) {
     Offer.belongsTo(models.User, { foreignKey: 'user_id', sourceKey: 'id' });
   };
 
   Offer.associate = function (models) {
-    Offer.belongsTo(models.Contest,
-      { foreignKey: 'contest_id', sourceKey: 'id' });
+    Offer.belongsTo(models.Contest, {
+      foreignKey: 'contest_id',
+      sourceKey: 'id',
+    });
   };
 
   return Offer;

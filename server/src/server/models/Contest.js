@@ -1,7 +1,9 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  const Contest = sequelize.define('Contests', {
+  const Contest = sequelize.define(
+    'Contests',
+    {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -87,7 +89,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       timestamps: false,
-    });
+    }
+  );
 
   return Contest;
 };

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const Schema = new mongoose.Schema({
+const Schema = new mongoose.Schema(
+  {
     participants: {
       type: [Number],
       required: true,
@@ -16,7 +17,8 @@ const Schema = new mongoose.Schema({
   },
   {
     timestamps: true,
-  });
+  }
+);
 
 const Conversation = mongoose.model('Conversation', Schema);
 module.exports = Conversation;

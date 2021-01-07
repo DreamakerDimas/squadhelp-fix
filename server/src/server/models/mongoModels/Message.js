@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const Schema = new mongoose.Schema({
+const Schema = new mongoose.Schema(
+  {
     sender: {
       type: 'Number',
       required: true,
@@ -16,7 +17,8 @@ const Schema = new mongoose.Schema({
   },
   {
     timestamps: true,
-  });
+  }
+);
 
 const Message = mongoose.model('Message', Schema);
 

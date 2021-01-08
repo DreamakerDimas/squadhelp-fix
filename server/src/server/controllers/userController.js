@@ -4,11 +4,13 @@ const db = require('../models/index');
 const NotUniqueEmail = require('../errors/NotUniqueEmail');
 const moment = require('moment');
 const uuid = require('uuid/v1');
+const bcrypt = require('bcrypt');
 const controller = require('../../socketInit');
 const userQueries = require('./queries/userQueries');
 const bankQueries = require('./queries/bankQueries');
 const ratingQueries = require('./queries/ratingQueries');
-const { resetPasswordMail } = require('../utils/mail/mailSender');
+const { sendToken, sendNewPassword } = require('../utils/mail/mailSender');
+const { genPassword } = require('../utils/functions');
 
 module.exports.loginRequest = async (req, res, next) => {
   try {
@@ -73,12 +75,30 @@ module.exports.resetPasswordMailRequest = async (req, res, next) => {
     if (foundUser) {
       const { firstName, email, id } = foundUser;
 
-      const token = jwt.sign({ email }, CONSTANTS.JWT_SECRET, {
+      const token = jwt.sign({ id }, CONSTANTS.JWT_SECRET, {
         expiresIn: CONSTANTS.ACCESS_TOKEN_TIME,
       });
 
       await userQueries.updateUser({ resetToken: token }, id);
-      await resetPasswordMail(firstName, email, token);
+      await sendToken(firstName, email, token);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports.resetPassword = async (req, res, next) => {
+  try {
+    const foundUser = userQueries.findUser({ id: req.id });
+    if (foundUser) {
+      const { firstName, email, id } = foundUser;
+      const newPass = genPassword(10);
+      const hashPass = bcrypt.hash(newPass, CONSTANTS.SALT_ROUNDS);
+      await userQueries.updateUser(
+        { password: hashPass, resetToken: null },
+        id
+      );
+      await sendNewPassword(firstName, email, newPass);
     }
   } catch (err) {
     next(err);

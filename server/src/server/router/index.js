@@ -3,7 +3,11 @@ const basicMiddlewares = require('../middlewares/basicMiddlewares');
 const hashPass = require('../middlewares/hashPass');
 const userController = require('../controllers/userController');
 const contestController = require('../controllers/contestController');
-const { checkAuth, checkToken } = require('../middlewares/authCheckers');
+const {
+  checkAuth,
+  checkToken,
+  resetPasswordTokenCheck,
+} = require('../middlewares/tokenCheckers');
 const validators = require('../middlewares/validators');
 const chatController = require('../controllers/chatController');
 const upload = require('../utils/fileUpload');
@@ -25,6 +29,12 @@ router.post(
 router.post(
   '/resetPasswordMailRequest',
   userController.resetPasswordMailRequest
+);
+
+router.get(
+  '/resetPassword/:token',
+  resetPasswordTokenCheck,
+  userController.resetPassword
 );
 
 router.post('/dataForContest', checkToken, contestController.dataForContest);

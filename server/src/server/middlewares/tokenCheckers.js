@@ -38,3 +38,17 @@ module.exports.checkToken = async (req, res, next) => {
     next(new TokenError());
   }
 };
+
+module.exports.resetPasswordTokenCheck = async (req, res, next) => {
+  const token = req.params.token;
+  if (!token) {
+    return next(new TokenError('need token'));
+  }
+  try {
+    const { id } = jwt.verify(token, CONSTANTS.JWT_SECRET);
+    req.id = id;
+    next();
+  } catch (err) {
+    next(new TokenError());
+  }
+};

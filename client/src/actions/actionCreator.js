@@ -14,6 +14,13 @@ export const authActionRegister = (data) => {
   };
 };
 
+export const authActionReset = (data) => {
+  return {
+    type: ACTION.AUTH_ACTION_RESET,
+    data: data,
+  };
+};
+
 export const clearErrorSignUpAndLogin = () => {
   return {
     type: ACTION.AUTH_ACTION_CLEAR_ERROR,

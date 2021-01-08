@@ -62,6 +62,10 @@ export default {
       .required('Must Accept Terms and Conditions'),
   }),
 
+  ResetSchema: yup.object().shape({
+    email: yup.string().email('check email').required('Email is required'),
+  }),
+
   ContestSchema: yup.object().shape({
     contestType: yup
       .string()

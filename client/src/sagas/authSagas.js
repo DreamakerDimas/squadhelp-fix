@@ -24,3 +24,14 @@ export function* registerSaga(action) {
     yield put({ type: ACTION.AUTH_ACTION_ERROR, error: e.response });
   }
 }
+
+export function* resetSaga(action) {
+  yield put({ type: ACTION.AUTH_ACTION_REQUEST });
+  try {
+    yield restController.resetPasswordMailRequest(action.data);
+    history.replace('/');
+    yield put({ type: ACTION.AUTH_ACTION_SUCCESS });
+  } catch (e) {
+    yield put({ type: ACTION.AUTH_ACTION_ERROR, error: e.response });
+  }
+}

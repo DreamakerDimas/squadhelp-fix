@@ -28,7 +28,10 @@ class ResetPasswordForm extends React.Component {
             clearError={authClear}
           />
         )}
-        <h2>Write email of your account to reset the password</h2>
+        <h2>
+          Write email of your account and new password, on your mail will be
+          sended reset link.
+        </h2>
         <form>
           <Field
             name="email"
@@ -37,13 +40,20 @@ class ResetPasswordForm extends React.Component {
             type="text"
             label="Email Address"
           />
+          <Field
+            name="password"
+            classes={formInputClasses}
+            component={FormInput}
+            type="password"
+            label="Password"
+          />
           <button
             type="submit"
             disabled={submitting}
             className={styles.submitContainer}
           >
             <span className={styles.inscription}>
-              {isFetching ? 'Submitting...' : 'Send reset mail'}
+              {isFetching ? 'Submitting...' : 'SEND'}
             </span>
           </button>
         </form>
@@ -68,6 +78,6 @@ export default connect(
 )(
   reduxForm({
     form: 'reset',
-    validate: customValidator(Schemes.ResetSchema),
+    validate: customValidator(Schemes.LoginSchema),
   })(ResetPasswordForm)
 );

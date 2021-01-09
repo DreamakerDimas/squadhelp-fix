@@ -73,6 +73,7 @@ module.exports.resetPasswordMailRequest = async (req, res, next) => {
     const foundUser = await userQueries.findUser({ email: req.body.email });
     if (foundUser) {
       const { firstName, email } = foundUser;
+      const { URL } = req.body.URL + 'resetPassword/';
 
       const token = jwt.sign(
         { email, hashPass: req.hashPass },
@@ -82,7 +83,7 @@ module.exports.resetPasswordMailRequest = async (req, res, next) => {
         }
       );
 
-      await sendResetToken(firstName, email, token);
+      await sendResetToken(firstName, email, URL, token);
     }
   } catch (err) {
     next(err);

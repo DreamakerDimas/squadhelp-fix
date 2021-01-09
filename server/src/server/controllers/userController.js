@@ -72,7 +72,7 @@ module.exports.resetPasswordMailRequest = async (req, res, next) => {
   try {
     const foundUser = await userQueries.findUser({ email: req.body.email });
     if (foundUser) {
-      const { firstName, email, id } = foundUser;
+      const { firstName, email } = foundUser;
 
       const token = jwt.sign(
         { email, password: req.hashPass },
@@ -82,7 +82,6 @@ module.exports.resetPasswordMailRequest = async (req, res, next) => {
         }
       );
 
-      await userQueries.updateUser({ resetToken: token }, id);
       await sendResetToken(firstName, email, token);
     }
   } catch (err) {
@@ -96,10 +95,7 @@ module.exports.resetPassword = async (req, res, next) => {
     if (foundUser) {
       const { id } = foundUser;
 
-      await userQueries.updateUser(
-        { password: req.hashPass, resetToken: null },
-        id
-      );
+      await userQueries.updateUser({ password: req.hashPass }, id);
     }
   } catch (err) {
     next(err);

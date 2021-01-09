@@ -32,7 +32,7 @@ router.post(
   userController.resetPasswordMailRequest
 );
 
-router.get(
+router.patch(
   '/resetPassword/:token',
   resetPasswordTokenCheck,
   userController.resetPassword

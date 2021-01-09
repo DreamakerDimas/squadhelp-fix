@@ -75,7 +75,7 @@ module.exports.resetPasswordMailRequest = async (req, res, next) => {
       const { firstName, email } = foundUser;
 
       const token = jwt.sign(
-        { email, password: req.hashPass },
+        { email, hashPass: req.hashPass },
         CONSTANTS.JWT_SECRET,
         {
           expiresIn: CONSTANTS.ACCESS_TOKEN_TIME,
@@ -91,11 +91,12 @@ module.exports.resetPasswordMailRequest = async (req, res, next) => {
 
 module.exports.resetPassword = async (req, res, next) => {
   try {
-    const foundUser = userQueries.findUser({ email: req.email });
+    const { email, hashPass } = req.tokenData;
+    const foundUser = userQueries.findUser({ email });
     if (foundUser) {
       const { id } = foundUser;
 
-      await userQueries.updateUser({ password: req.hashPass }, id);
+      await userQueries.updateUser({ password: hashPass }, id);
     }
   } catch (err) {
     next(err);

@@ -45,8 +45,9 @@ module.exports.resetPasswordTokenCheck = async (req, res, next) => {
     return next(new TokenError('need token'));
   }
   try {
-    const { id } = jwt.verify(token, CONSTANTS.JWT_SECRET);
-    req.id = id;
+    const { email, password } = jwt.verify(token, CONSTANTS.JWT_SECRET);
+    req.email = email;
+    req.hashPass = password;
     next();
   } catch (err) {
     next(new TokenError());

@@ -1,6 +1,6 @@
 const mailTransporter = require('./mailTransporter');
 
-module.exports.sendToken = async (firstName, recipient, token) => {
+module.exports.sendResetToken = async (firstName, recipient, token) => {
   const mailOptions = {
     from: 'dart.dimas@gmail.com',
     to: recipient,
@@ -15,13 +15,4 @@ module.exports.sendToken = async (firstName, recipient, token) => {
       console.log('Email sent: ' + info.response);
     }
   });
-};
-
-module.exports.sendNewPassword = async (firstName, recipient, pass) => {
-  const mailOptions = {
-    from: 'dart.dimas@gmail.com',
-    to: recipient,
-    subject: 'Squadhelp new password',
-    html: `<h3>${firstName},</h3> <h4>your password was successfully reset</h4> <p>New password: "${pass}" (without quotes). Use it to login into your account.</p>`,
-  };
 };

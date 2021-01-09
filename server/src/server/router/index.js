@@ -28,6 +28,7 @@ router.post(
 
 router.post(
   '/resetPasswordMailRequest',
+  hashPass,
   userController.resetPasswordMailRequest
 );
 

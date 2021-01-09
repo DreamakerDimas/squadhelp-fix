@@ -9,8 +9,7 @@ const controller = require('../../socketInit');
 const userQueries = require('./queries/userQueries');
 const bankQueries = require('./queries/bankQueries');
 const ratingQueries = require('./queries/ratingQueries');
-const { sendToken, sendNewPassword } = require('../utils/mail/mailSender');
-const { genPassword } = require('../utils/functions');
+const { sendResetToken } = require('../utils/mail/mailSender');
 
 module.exports.loginRequest = async (req, res, next) => {
   try {
@@ -75,12 +74,16 @@ module.exports.resetPasswordMailRequest = async (req, res, next) => {
     if (foundUser) {
       const { firstName, email, id } = foundUser;
 
-      const token = jwt.sign({ id }, CONSTANTS.JWT_SECRET, {
-        expiresIn: CONSTANTS.ACCESS_TOKEN_TIME,
-      });
+      const token = jwt.sign(
+        { email, password: req.hashPass },
+        CONSTANTS.JWT_SECRET,
+        {
+          expiresIn: CONSTANTS.ACCESS_TOKEN_TIME,
+        }
+      );
 
       await userQueries.updateUser({ resetToken: token }, id);
-      await sendToken(firstName, email, token);
+      await sendResetToken(firstName, email, token);
     }
   } catch (err) {
     next(err);
@@ -89,16 +92,14 @@ module.exports.resetPasswordMailRequest = async (req, res, next) => {
 
 module.exports.resetPassword = async (req, res, next) => {
   try {
-    const foundUser = userQueries.findUser({ id: req.id });
+    const foundUser = userQueries.findUser({ email: req.email });
     if (foundUser) {
-      const { firstName, email, id } = foundUser;
-      const newPass = genPassword(10);
-      const hashPass = bcrypt.hash(newPass, CONSTANTS.SALT_ROUNDS);
+      const { id } = foundUser;
+
       await userQueries.updateUser(
-        { password: hashPass, resetToken: null },
+        { password: req.hashPass, resetToken: null },
         id
       );
-      await sendNewPassword(firstName, email, newPass);
     }
   } catch (err) {
     next(err);

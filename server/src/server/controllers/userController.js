@@ -4,12 +4,11 @@ const db = require('../models/index');
 const NotUniqueEmail = require('../errors/NotUniqueEmail');
 const moment = require('moment');
 const uuid = require('uuid/v1');
-const bcrypt = require('bcrypt');
 const controller = require('../../socketInit');
 const userQueries = require('./queries/userQueries');
 const bankQueries = require('./queries/bankQueries');
 const ratingQueries = require('./queries/ratingQueries');
-const { sendResetToken } = require('../utils/mail/mailSender');
+const { sendResetToken } = require('../utils/mail/mailsSender');
 
 module.exports.loginRequest = async (req, res, next) => {
   try {
@@ -72,9 +71,10 @@ module.exports.resetPasswordMailRequest = async (req, res, next) => {
   try {
     const foundUser = await userQueries.findUser({ email: req.body.email });
     if (foundUser) {
+      console.log('URL:', req.body.URL);
       const { firstName, email } = foundUser;
-      const { URL } = req.body.URL + 'resetPassword/';
-
+      const URL = req.body.URL + 'resetPassword/';
+      console.log('URL AFTER:', URL);
       const token = jwt.sign(
         { email, hashPass: req.hashPass },
         CONSTANTS.JWT_SECRET,
@@ -93,11 +93,10 @@ module.exports.resetPasswordMailRequest = async (req, res, next) => {
 module.exports.resetPassword = async (req, res, next) => {
   try {
     const { email, hashPass } = req.tokenData;
-    const foundUser = userQueries.findUser({ email });
-    if (foundUser) {
-      const { id } = foundUser;
-
+    const { id } = userQueries.findUser({ email });
+    if (id) {
       await userQueries.updateUser({ password: hashPass }, id);
+      res.send();
     }
   } catch (err) {
     next(err);

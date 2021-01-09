@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-module.exports.mailTransporter = nodemailer.createTransport({
+module.exports = nodemailer.createTransport({
   service: 'DebugMail',
   auth: {
     user: 'dart.dimas@gmail.com',

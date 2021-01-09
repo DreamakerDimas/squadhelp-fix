@@ -2,6 +2,8 @@ import axios from 'axios';
 import CONSTANTS from '../constants';
 import history from '../browserHistory';
 
+const resetRegex = /\/reset\//;
+
 const instance = axios.create({
   baseURL: CONSTANTS.BASE_URL,
 });
@@ -25,11 +27,15 @@ instance.interceptors.response.use(
     return response;
   },
   (err) => {
+    const pathname = history.location.pathname;
+
     if (
       err.response.status === 408 &&
-      history.location.pathname !== '/login' &&
-      history.location.pathname !== '/registration' &&
-      history.location.pathname !== '/'
+      pathname !== '/login' &&
+      pathname !== '/registration' &&
+      pathname !== '/reset' &&
+      !resetRegex.test(pathname) &&
+      pathname !== '/'
     ) {
       history.replace('/login');
     }

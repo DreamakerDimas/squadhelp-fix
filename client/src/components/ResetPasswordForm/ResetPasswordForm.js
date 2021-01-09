@@ -1,16 +1,26 @@
 import React from 'react';
-import { Field } from 'redux-form';
+import { connect } from 'react-redux';
+import { authActionResetMail, clearAuth } from '../../actions/actionCreator';
+import styles from './ResetPasswordForm.module.sass';
+import { Field, reduxForm } from 'redux-form';
+import FormInput from '../FormInput/FormInput';
+import customValidator from '../../validators/validator';
+import Schemes from '../../validators/validationSchemes';
+import Error from '../../components/Error/Error';
 
 class ResetPasswordForm extends React.Component {
   componentWillUnmount() {
     this.props.authClear();
   }
 
-  resetRequest = () => {};
+  clicked = (values) => {
+    this.props.resetRequest(values);
+  };
 
   render() {
-    const { handleSubmit, submitting, auth, authClear } = this.props;
-    const { error } = auth;
+    const { error, isFetching } = this.props.auth;
+    const { handleSubmit, submitting, authClear } = this.props;
+
     const formInputClasses = {
       container: styles.inputContainer,
       input: styles.input,
@@ -28,11 +38,11 @@ class ResetPasswordForm extends React.Component {
             clearError={authClear}
           />
         )}
-        <h2>
+        <h3>
           Write email of your account and new password, on your mail will be
           sended reset link.
-        </h2>
-        <form>
+        </h3>
+        <form onSubmit={handleSubmit(this.clicked)}>
           <Field
             name="email"
             classes={formInputClasses}
@@ -68,7 +78,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  resetRequest: (data) => dispatch(authActionReset(data)),
+  resetRequest: (data) => dispatch(authActionResetMail(data)),
   authClear: () => dispatch(clearAuth()),
 });
 

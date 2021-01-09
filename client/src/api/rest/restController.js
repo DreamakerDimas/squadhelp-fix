@@ -5,6 +5,7 @@ export const registerRequest = (data) => http.post('registerRequest', data);
 export const loginRequest = (data) => http.post('loginRequest', data);
 export const resetPasswordMailRequest = (data) =>
   http.post('resetPasswordMailRequest', { ...data, URL: CONSTANTS.BASE_URL });
+export const resetPassword = (data) => http.patch('resetPassword/' + data);
 export const getUser = () => http.get('getUser');
 export const updateContest = (data) => http.put('updateContest', data);
 export const setNewOffer = (data) => http.post('setNewOffer', data);

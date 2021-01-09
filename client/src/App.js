@@ -3,6 +3,8 @@ import { Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import LoginPage from './pages/LoginPage/LoginPage';
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
+import ResetPage from './pages/ResetPage/ResetPage';
+import ResetTokenPage from './pages/ResetPage/ResetTokenPage';
 import Payment from './pages/Payment/Payment';
 import StartContestPage from './pages/StartContestPage/StartContestPage';
 import Dashboard from './pages/Dashboard/Dashboard';
@@ -45,6 +47,15 @@ class App extends Component {
             exact
             path="/registration"
             component={OnlyNotAuthorizedUserHoc(RegistrationPage)}
+          />
+          <Route
+            exact
+            path="/reset"
+            component={OnlyNotAuthorizedUserHoc(ResetPage)}
+          />
+          <Route
+            path="/reset/:token"
+            component={OnlyNotAuthorizedUserHoc(ResetTokenPage)}
           />
           <Route exact path="/payment" component={PrivateHoc(Payment)} />
           <Route

@@ -1,9 +1,17 @@
 import React from 'react';
+import ResetPasswordForm from '../../components/ResetPasswordForm/ResetPasswordForm';
+import Logo from '../../components/Logo';
+import styles from './ResetPage.module.sass';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { clearErrorSignUpAndLogin } from '../../actions/actionCreator';
+import CONSTANTS from '../../constants';
 
 const ResetPage = (props) => {
   const changeRoute = () => {
     props.history.replace('/');
   };
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.loginContainer}>

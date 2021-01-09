@@ -15,16 +15,20 @@ const Error = (props) => {
         return 'Bank decline transaction';
       case 406:
         return data;
+      case 408:
+        return data;
       default:
         return 'Server Error';
     }
   };
 
-  const { clearError } = props;
+  const { clearError, withoutClosing } = props;
   return (
     <div className={styles.errorContainer}>
       <span>{getMessage()}</span>
-      <i className="far fa-times-circle" onClick={() => clearError()} />
+      {!withoutClosing && (
+        <i className="far fa-times-circle" onClick={() => clearError()} />
+      )}
     </div>
   );
 };

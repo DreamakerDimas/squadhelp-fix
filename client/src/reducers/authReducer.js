@@ -25,6 +25,18 @@ export default function (state = initialState, action) {
         error: action.error,
       };
     }
+    case ACTION.AUTH_ACTION_RESET_SUCCESS: {
+      return {
+        isFetching: false,
+        error: null,
+      };
+    }
+    case ACTION.AUTH_ACTION_RESET_ERROR: {
+      return {
+        isFetching: false,
+        error: action.error,
+      };
+    }
     case ACTION.AUTH_ACTION_CLEAR_ERROR: {
       return {
         ...state,

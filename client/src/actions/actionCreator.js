@@ -14,6 +14,13 @@ export const authActionRegister = (data) => {
   };
 };
 
+export const authActionResetMail = (data) => {
+  return {
+    type: ACTION.AUTH_ACTION_RESET_MAIL,
+    data: data,
+  };
+};
+
 export const authActionReset = (data) => {
   return {
     type: ACTION.AUTH_ACTION_RESET,

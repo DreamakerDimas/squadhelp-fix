@@ -14,19 +14,23 @@ const ResetPage = (props) => {
 
   return (
     <div className={styles.mainContainer}>
-      <div className={styles.loginContainer}>
-        <div className={styles.headerSignUpPage}>
+      <div className={styles.resetContainer}>
+        <div className={styles.headerPagesLinks}>
           <Logo src={`${CONSTANTS.STATIC_IMAGES_PATH}logo.png`} alt="logo" />
-          <div className={styles.linkLoginContainer}>
-            <Link to="/login" style={{ textDecoration: 'none' }}>
-              <span>Login</span>
-            </Link>
-            <Link to="/registration" style={{ textDecoration: 'none' }}>
-              <span>Signup</span>
-            </Link>
+          <div className={styles.buttonsContainer}>
+            <div className={styles.linkContainer}>
+              <Link to="/login" style={{ textDecoration: 'none' }}>
+                <span>Login</span>
+              </Link>
+            </div>
+            <div className={styles.linkContainer}>
+              <Link to="/registration" style={{ textDecoration: 'none' }}>
+                <span>Signup</span>
+              </Link>
+            </div>
           </div>
         </div>
-        <div className={styles.loginFormContainer}>
+        <div className={styles.resetFormContainer}>
           <ResetPasswordForm changeRoute={changeRoute} />
         </div>
       </div>

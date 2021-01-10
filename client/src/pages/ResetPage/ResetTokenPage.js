@@ -1,9 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { authActionReset, clearAuth } from '../../actions/actionCreator';
+import Logo from '../../components/Logo';
+import { Link } from 'react-router-dom';
 import Error from '../../components/Error/Error';
 import SpinnerLoader from '../../components/Spinner/Spinner';
-
+import styles from './ResetPage.module.sass';
+import { connect } from 'react-redux';
+import { authActionReset, clearAuth } from '../../actions/actionCreator';
+import CONSTANTS from '../../constants';
 class ResetTokenPage extends React.Component {
   async componentDidMount() {
     await this.sendData();
@@ -25,19 +28,31 @@ class ResetTokenPage extends React.Component {
     const { message, error, isFetching } = this.props.auth;
 
     return (
-      <div>
-        {isFetching ? (
-          <SpinnerLoader />
-        ) : (
-          error && (
-            <Error
-              data={error.data}
-              status={error.status}
-              withoutClosing={true}
-            />
-          )
-        )}
-        {message && <span>{message}</span>}
+      <div className={styles.mainContainer}>
+        <div className={styles.resetContainer}>
+          <div className={styles.headerPagesLinks}>
+            <Logo src={`${CONSTANTS.STATIC_IMAGES_PATH}logo.png`} />
+            <div className={styles.linkContainer}>
+              <Link to="/login" style={{ textDecoration: 'none' }}>
+                <span>Login</span>
+              </Link>
+            </div>
+          </div>
+          <div className={styles.resetFormContainer}>
+            {isFetching ? (
+              <SpinnerLoader />
+            ) : (
+              error && (
+                <Error
+                  data={error.data}
+                  status={error.status}
+                  withoutClosing={true}
+                />
+              )
+            )}
+            {message && <div className={styles.resetSuccess}>{message}</div>}
+          </div>
+        </div>
       </div>
     );
   }

@@ -38,8 +38,9 @@ class ResetPasswordForm extends React.Component {
             clearError={authClear}
           />
         )}
+        <h2>RESET PASSWORD</h2>
         <h3>
-          Write email of your account and new password, on your mail will be
+          Write email of your account and new password. On your mail will be
           sended reset link.
         </h3>
         <form onSubmit={handleSubmit(this.clicked)}>
@@ -67,7 +68,7 @@ class ResetPasswordForm extends React.Component {
             </span>
           </button>
         </form>
-        {message && <span>{message}</span>}
+        {message && <h3>{message}</h3>}
       </div>
     );
   }

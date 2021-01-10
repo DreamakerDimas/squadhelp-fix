@@ -25,7 +25,7 @@ const LoginPage = (props) => {
         <div className={styles.loginFormContainer}>
           <LoginForm changeRoute={changeRoute} />
           <Link to="/reset" style={{ textDecoration: 'none' }}>
-            <span>Forgot password?</span>
+            <span className={styles.forgotPass}>Forgot password?</span>
           </Link>
         </div>
       </div>

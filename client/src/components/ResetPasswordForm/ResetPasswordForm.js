@@ -40,8 +40,8 @@ class ResetPasswordForm extends React.Component {
         )}
         <h2>RESET PASSWORD</h2>
         <h3>
-          Write email of your account and new password. On your mail will be
-          sended reset link.
+          Write the email of your account and new password. To your email will
+          be sent reset link.
         </h3>
         <form onSubmit={handleSubmit(this.clicked)}>
           <Field

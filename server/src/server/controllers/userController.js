@@ -84,7 +84,7 @@ module.exports.resetPasswordMailRequest = async (req, res, next) => {
 
       await sendResetToken(firstName, email, URL, token);
 
-      res.send('Reset mail was successfully sended');
+      res.send('Reset mail was successfully sent');
     }
   } catch (err) {
     next(err);

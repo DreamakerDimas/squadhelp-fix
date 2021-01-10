@@ -71,10 +71,9 @@ module.exports.resetPasswordMailRequest = async (req, res, next) => {
   try {
     const foundUser = await userQueries.findUser({ email: req.body.email });
     if (foundUser) {
-      console.log('URL:', req.body.URL);
       const { firstName, email } = foundUser;
-      const URL = req.body.URL + 'resetPassword/';
-      console.log('URL AFTER:', URL);
+      const URL = req.headers.origin + '/reset/';
+
       const token = jwt.sign(
         { email, hashPass: req.hashPass },
         CONSTANTS.JWT_SECRET,
@@ -84,6 +83,8 @@ module.exports.resetPasswordMailRequest = async (req, res, next) => {
       );
 
       await sendResetToken(firstName, email, URL, token);
+
+      res.send('Reset mail was successfully sended');
     }
   } catch (err) {
     next(err);
@@ -93,7 +94,8 @@ module.exports.resetPasswordMailRequest = async (req, res, next) => {
 module.exports.resetPassword = async (req, res, next) => {
   try {
     const { email, hashPass } = req.tokenData;
-    const { id } = userQueries.findUser({ email });
+    const { id } = await userQueries.findUser({ email });
+
     if (id) {
       await userQueries.updateUser({ password: hashPass }, id);
       res.send();

@@ -18,7 +18,7 @@ class ResetPasswordForm extends React.Component {
   };
 
   render() {
-    const { error, isFetching } = this.props.auth;
+    const { message, error, isFetching } = this.props.auth;
     const { handleSubmit, submitting, authClear } = this.props;
 
     const formInputClasses = {
@@ -67,6 +67,7 @@ class ResetPasswordForm extends React.Component {
             </span>
           </button>
         </form>
+        {message && <span>{message}</span>}
       </div>
     );
   }

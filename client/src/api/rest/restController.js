@@ -1,10 +1,9 @@
 import http from '../interceptor';
-import CONSTANTS from '../../constants';
 
 export const registerRequest = (data) => http.post('registerRequest', data);
 export const loginRequest = (data) => http.post('loginRequest', data);
 export const resetPasswordMailRequest = (data) =>
-  http.post('resetPasswordMailRequest', { ...data, URL: CONSTANTS.BASE_URL });
+  http.post('resetPasswordMailRequest', data);
 export const resetPassword = (data) => http.patch('resetPassword/' + data);
 export const getUser = () => http.get('getUser');
 export const updateContest = (data) => http.put('updateContest', data);

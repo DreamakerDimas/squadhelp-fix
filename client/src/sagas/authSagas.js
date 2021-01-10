@@ -28,19 +28,18 @@ export function* registerSaga(action) {
 export function* resetMailSaga(action) {
   yield put({ type: ACTION.AUTH_ACTION_REQUEST });
   try {
-    yield restController.resetPasswordMailRequest(action.data);
-    history.replace('/');
-    yield put({ type: ACTION.AUTH_ACTION_SUCCESS });
+    const data = yield restController.resetPasswordMailRequest(action.data);
+    yield put({ type: ACTION.AUTH_ACTION_RESET_SEND_SUCCESS, data: data });
   } catch (e) {
-    yield put({ type: ACTION.AUTH_ACTION_ERROR, error: e.response });
+    yield put({ type: ACTION.AUTH_ACTION_RESET_SEND_ERROR, error: e.response });
   }
 }
 
 export function* resetUserPasswordSaga(action) {
   yield put({ type: ACTION.AUTH_ACTION_REQUEST });
   try {
-    const data = yield restController.resetPassword(action.data);
-    yield put({ type: ACTION.AUTH_ACTION_RESET_SUCCESS, data: data });
+    yield restController.resetPassword(action.data);
+    yield put({ type: ACTION.AUTH_ACTION_RESET_SUCCESS });
   } catch (e) {
     console.log(e);
     yield put({ type: ACTION.AUTH_ACTION_RESET_ERROR, error: e.response });

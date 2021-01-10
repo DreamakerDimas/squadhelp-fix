@@ -42,6 +42,7 @@ export default function (state = initialState, action) {
       return {
         isFetching: false,
         error: null,
+        message: action.data.data,
       };
     }
     case ACTION.AUTH_ACTION_RESET_ERROR: {

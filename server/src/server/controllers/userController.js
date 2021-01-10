@@ -98,7 +98,7 @@ module.exports.resetPassword = async (req, res, next) => {
 
     if (id) {
       await userQueries.updateUser({ password: hashPass }, id);
-      res.send();
+      res.send('Password was successfully reset');
     }
   } catch (err) {
     next(err);

@@ -22,22 +22,22 @@ class ResetTokenPage extends React.Component {
   }
 
   render() {
-    const { error, isFetching } = this.props.auth;
-    console.log(isFetching);
-    console.log(error);
+    const { message, error, isFetching } = this.props.auth;
+
     return (
       <div>
         {isFetching ? (
           <SpinnerLoader />
-        ) : error ? (
-          <Error
-            data={error.data}
-            status={error.status}
-            withoutClosing={true}
-          />
         ) : (
-          <div>Password was reset successfully</div>
+          error && (
+            <Error
+              data={error.data}
+              status={error.status}
+              withoutClosing={true}
+            />
+          )
         )}
+        {message && <span>{message}</span>}
       </div>
     );
   }

@@ -6,10 +6,11 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Spinner from '../../components/Spinner/Spinner';
 import HeroBanner from '../../components/HowItWorks/HeroBanner';
+import Services from '../../components/HowItWorks/Services';
+import Features from '../../components/HowItWorks/Features';
 
 import styles from './HowItWorks.module.sass';
 import CONSTANTS from '../../constants';
-import Services from '../../components/HowItWorks/Services';
 
 const HowItWorks = (props) => {
   const { isFetching } = props;
@@ -24,7 +25,9 @@ const HowItWorks = (props) => {
           <div className={styles.mainContainer}>
             <HeroBanner />
             <Services />
-            <div className={styles.featuresSection}></div>
+            <hr />
+            <Features />
+            <hr />
             <div className={styles.questionsSection}></div>
             <div className={styles.ctaSection}></div>
             <div className={styles.statsSection}></div>

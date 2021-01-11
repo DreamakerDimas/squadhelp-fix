@@ -1,0 +1,75 @@
+.mainContainer
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: center
+    padding: 128px 16px
+
+    .featuresTitle
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        margin-bottom: 64px
+        img
+            width: 72px
+            margin-bottom: 16px
+        h2
+            text-align: center
+            font-size: 35px
+            line-height: 1.5
+
+    .featuresContainer
+        display: flex
+        flex-direction: row
+        align-items: stretch
+        @media  (max-width: 990px)
+            flex-direction: column-reverse
+
+        .leftColumn
+            display: flex
+            justify-content: center
+            align-items: center
+            width: 50%
+            padding: 0 15px
+            @media  (max-width: 990px)
+                width: 90%
+            img
+                width: 450px
+                @media  (max-width: 990px)
+                    margin-top: 64px
+                    width: 90%
+
+        .rightColumn
+            display: flex
+            align-items: stretch
+            width: 50%
+            padding: 0 15px
+            @media  (max-width: 990px)
+                    width: 100%
+            ul
+                display: flex
+                flex-direction: column
+                justify-content: space-between
+                align-items: stretch
+                li
+                    padding: 16px 0 16px 40px
+                    @media  (max-width: 990px)
+                        padding: 16px
+
+                    .textBox
+                        display: flex
+                        flex-direction: row
+                        justify-content: center
+                        align-items: center
+                        border: 1px solid #e7eaf3
+                        border-radius: 5px
+                        padding: 32px
+                        h2
+                            color: #377dff
+                            font-size: 60px
+                            margin-right: 16px
+                        p
+                            color: #77838f
+                            font-size: 17px
+                            line-height: 1.5

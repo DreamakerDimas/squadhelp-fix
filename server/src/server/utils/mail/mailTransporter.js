@@ -1,9 +1,4 @@
 const nodemailer = require('nodemailer');
+const { NODEMAILER_SETTINGS } = require('../../../constants');
 
-module.exports = nodemailer.createTransport({
-  service: 'DebugMail',
-  auth: {
-    user: 'dart.dimas@gmail.com',
-    pass: '52c4f6c0-50fd-11eb-875f-87492950ae45',
-  },
-});
+module.exports = nodemailer.createTransport(NODEMAILER_SETTINGS);

@@ -31,4 +31,12 @@ module.exports = {
   NOTIFICATION_CHANGE_OFFER_STATUS: 'changeOfferStatus',
   NEW_MESSAGE: 'newMessage',
   CHANGE_BLOCK_STATUS: 'CHANGE_BLOCK_STATUS',
+  MAIL_ADDRESS: 'dart.dimas@gmail.com',
+  NODEMAILER_SETTINGS: {
+    service: 'DebugMail',
+    auth: {
+      user: this.MAIL_ADDRESS,
+      pass: '52c4f6c0-50fd-11eb-875f-87492950ae45',
+    },
+  },
 };

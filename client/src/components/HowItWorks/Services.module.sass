@@ -1,0 +1,71 @@
+.mainContainer
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: center
+    margin: 20px 15px 0
+
+    .rowTitle
+        display: flex
+        flex-direction: column
+        align-items: center
+        margin-bottom: 64px
+        &>span
+            font-size: 12px
+            font-weight: 300
+            color: #377dff
+            background-color: #377dff2a
+            padding: 10px 15px
+            border-radius: 30px
+            user-select: none
+        h2
+            margin: 20px 0
+            font-size: 30px
+            font-weight: 400
+        p
+            color: #77838f
+            font-size: 18px
+            line-height: 1.5
+
+    .cardsContainer
+        display: flex
+        flex-direction: row
+        justify-content: center
+        align-items: flex-start
+        width: 100%
+        @media  (max-width: 770px)
+            flex-direction: column
+
+        .cardBody
+            box-sizing: border-box
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            margin: 0 15px
+            padding: 64px 30px
+            border: 1px solid #e7eaf3
+            border-radius: 5px
+            img
+                width: 72px
+                margin-bottom: 25px 
+            h3
+                font-size: 28px
+                font-weight: 400
+                margin-bottom: 25px
+            p
+                text-align: center
+                color: #77838f
+                margin-bottom: 30px
+                font-size: 17px
+                line-height: 1.5
+
+            .button
+                display: flex
+                justify-content: center
+                background-color: #377dff
+                border-radius: 35px
+                padding: 15px 20px
+                color: white
+                user-select: none
+                text-decoration: none

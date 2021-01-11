@@ -9,6 +9,7 @@ import HeroBanner from '../../components/HowItWorks/HeroBanner';
 
 import styles from './HowItWorks.module.sass';
 import CONSTANTS from '../../constants';
+import Services from '../../components/HowItWorks/Services';
 
 const HowItWorks = (props) => {
   const { isFetching } = props;
@@ -21,10 +22,8 @@ const HowItWorks = (props) => {
       ) : (
         <>
           <div className={styles.mainContainer}>
-            <div className={styles.heroBanner}>
-              <HeroBanner />
-            </div>
-            <div className={styles.servicesSection}></div>
+            <HeroBanner />
+            <Services />
             <div className={styles.featuresSection}></div>
             <div className={styles.questionsSection}></div>
             <div className={styles.ctaSection}></div>

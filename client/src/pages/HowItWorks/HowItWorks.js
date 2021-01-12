@@ -11,9 +11,7 @@ import Questions from '../../components/HowItWorks/Questions';
 import CTASection from '../../components/HowItWorks/CTASection';
 import Stats from '../../components/HowItWorks/Stats';
 import Pricing from '../../components/HowItWorks/Pricing';
-
-import styles from './HowItWorks.module.sass';
-import CONSTANTS from '../../constants';
+import Clients from '../../components/HowItWorks/Clients';
 
 const HowItWorks = (props) => {
   const { isFetching } = props;
@@ -25,7 +23,7 @@ const HowItWorks = (props) => {
         <Spinner />
       ) : (
         <>
-          <div className={styles.mainContainer}>
+          <div>
             <HeroBanner />
             <Services />
             <hr />
@@ -35,7 +33,7 @@ const HowItWorks = (props) => {
             <CTASection />
             <Stats />
             <Pricing />
-            <div className={styles.clientsSection}></div>
+            <Clients />
           </div>
           <Footer />
         </>

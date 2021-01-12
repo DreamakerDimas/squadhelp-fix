@@ -1,0 +1,85 @@
+.mainContainer
+    display: flex
+    flex-direction: row
+    justify-content: center
+    padding: 32px 15px
+
+    .leftColumn
+        padding: 64px
+        display: flex
+        justify-content: center
+        align-items: center
+        box-shadow: 0 10px 40px 10px rgba(140,152,164,.175)
+        ul
+            margin: 0
+            display: flex
+            flex-direction: column
+            justify-content: space-between
+            align-items: center
+            li
+                display: flex
+                flex-direction: row
+                justify-content: flex-start
+                align-items: flex-start
+                padding: 10px
+
+                .listBtn
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    margin-right: 25px
+                    color: #377dff
+                    background-color: #377dff2c
+                    min-width: 30px
+                    width: 30px
+                    height: 30px
+                    border-radius: 50%
+
+                .listBody
+                    h3
+                        font-size: 24px
+                    p
+                        color: #77838f
+                        line-height: 1.7
+
+            .borderTop
+                width: 100%
+                border-top: 1px solid #77838f50
+
+    .rightColumn
+        display: flex
+        flex-direction: column
+        justify-content: flex-start
+        align-items: flex-start
+        padding: 64px
+        background-color: #377dff
+        color: white
+        &>span
+            margin-top: 5px
+            font-size: 15px
+        h4
+            padding: 10px 0
+            font-size: 34px 
+            margin: 0
+        p
+            margin-bottom: 16px 
+
+        .consultationButt
+            background-color: white
+            color: #377dff
+            padding: 12px 16px
+            border-radius: 30px
+            text-decoration: none
+            user-select: none
+
+        .phoneLink
+            margin-top: 30px
+            display: flex
+            justify-content: center
+            align-items: center
+            color: white
+            text-decoration: none
+            &:hover
+                color: #cccfd1
+            img
+                margin-right: 15px 

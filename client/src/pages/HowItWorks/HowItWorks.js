@@ -8,6 +8,7 @@ import Spinner from '../../components/Spinner/Spinner';
 import HeroBanner from '../../components/HowItWorks/HeroBanner';
 import Services from '../../components/HowItWorks/Services';
 import Features from '../../components/HowItWorks/Features';
+import Questions from '../../components/HowItWorks/Questions';
 
 import styles from './HowItWorks.module.sass';
 import CONSTANTS from '../../constants';
@@ -28,7 +29,7 @@ const HowItWorks = (props) => {
             <hr />
             <Features />
             <hr />
-            <div className={styles.questionsSection}></div>
+            <Questions />
             <div className={styles.ctaSection}></div>
             <div className={styles.statsSection}></div>
             <div className={styles.pricingSection}></div>

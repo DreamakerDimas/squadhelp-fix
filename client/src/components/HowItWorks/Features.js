@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styles from './Features.module.sass';
 import CONSTANTS from '../../constants';
 

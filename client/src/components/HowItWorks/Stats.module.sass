@@ -1,0 +1,36 @@
+.mainContainer
+    padding: 64px 15px
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+    @media (max-width: 770px)
+        flex-direction: column
+        
+    .statsContainer
+        width: 30%
+        text-align: center
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        padding: 0 28px
+        @media (max-width: 770px)
+            width: 60%
+            padding: 20px 16px
+        img
+            width: 72px
+            margin-bottom: 16px
+        p
+            font-size: 18px
+            width: 75%
+            color: #77838f
+            line-height: 1.7
+            span
+                color: #1e2022
+                font-weight: 800
+
+    .border
+        width: 0
+        border-right: 1px solid #77838f60
+        height: 80px

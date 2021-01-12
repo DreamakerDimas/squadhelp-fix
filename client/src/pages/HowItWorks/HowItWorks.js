@@ -12,6 +12,7 @@ import CTASection from '../../components/HowItWorks/CTASection';
 
 import styles from './HowItWorks.module.sass';
 import CONSTANTS from '../../constants';
+import Stats from '../../components/HowItWorks/Stats';
 
 const HowItWorks = (props) => {
   const { isFetching } = props;
@@ -31,7 +32,7 @@ const HowItWorks = (props) => {
             <hr />
             <Questions />
             <CTASection />
-            <div className={styles.statsSection}></div>
+            <Stats />
             <div className={styles.pricingSection}></div>
             <div className={styles.clientsSection}></div>
           </div>

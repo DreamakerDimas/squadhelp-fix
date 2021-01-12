@@ -3,16 +3,17 @@
     display: flex
     flex-direction: row
     justify-content: center
-    align-items: center
+    align-items: stretch
     @media (max-width: 770px)
         flex-direction: column
+        align-items: center
         
     .statsContainer
-        width: 30%
+        width: 28%
         text-align: center
         display: flex
         flex-direction: column
-        justify-content: center
+        justify-content: flex-start
         align-items: center
         padding: 0 28px
         @media (max-width: 770px)
@@ -23,7 +24,6 @@
             margin-bottom: 16px
         p
             font-size: 18px
-            width: 75%
             color: #77838f
             line-height: 1.7
             span
@@ -31,6 +31,9 @@
                 font-weight: 800
 
     .border
+        margin-top: 35px
         width: 0
         border-right: 1px solid #77838f60
         height: 80px
+        @media (max-width: 770px)
+            display: none

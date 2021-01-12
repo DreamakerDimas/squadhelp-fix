@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Header from '../../components/Header/Header';
@@ -9,6 +8,7 @@ import HeroBanner from '../../components/HowItWorks/HeroBanner';
 import Services from '../../components/HowItWorks/Services';
 import Features from '../../components/HowItWorks/Features';
 import Questions from '../../components/HowItWorks/Questions';
+import CTASection from '../../components/HowItWorks/CTASection';
 
 import styles from './HowItWorks.module.sass';
 import CONSTANTS from '../../constants';
@@ -30,7 +30,7 @@ const HowItWorks = (props) => {
             <Features />
             <hr />
             <Questions />
-            <div className={styles.ctaSection}></div>
+            <CTASection />
             <div className={styles.statsSection}></div>
             <div className={styles.pricingSection}></div>
             <div className={styles.clientsSection}></div>

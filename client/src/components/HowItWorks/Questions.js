@@ -501,6 +501,7 @@ const Questions = () => {
                   </Card>
                 </Accordion>
               </Tab.Pane>
+
               <Tab.Pane eventKey="forCreatives">
                 <h2 className={styles.tabPaneTitle}>For Creatives</h2>
                 <Accordion>

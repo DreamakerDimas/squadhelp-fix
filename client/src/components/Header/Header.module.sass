@@ -127,16 +127,17 @@
               padding: 15px 0
 
   .loginSignnUpHeaders
+    box-sizing: border-box
     margin-top: 30px
     display: flex
     flex-direction: row
     align-items: center
     justify-content: space-around
-    border: 1px solid #ebebeb
+    border-bottom: 1px solid #ebebeb
 
     .userButtonsContainer
       margin-left: 100px
-      align-items: center
+      align-items: stretch
       justify-content: center
       display: flex
       border-left: 1px solid #ebebeb
@@ -203,12 +204,18 @@
           font-size: 16px
           border: none
 
-      span
-        padding: 11px 15px
-        color: #718888
-        font-weight: 400
-        font-size: 14px
-        border-right: 1px solid #ebebeb
+      a
+        display: flex
+        align-items: stretch
+        span
+          padding: 0 20px
+          display: flex
+          justify-content: center
+          align-items: center
+          color: #718888
+          font-weight: 400
+          font-size: 14px
+          border-right: 1px solid #ebebeb
 
     .numberContainer
       text-decoration: none
@@ -247,7 +254,6 @@
     width: 100%
     position: fixed
     background-color: rgb(69, 90, 137)
-    border-bottom: 3px solid rgb(255, 255, 255)
     height: 30px
 
     .info

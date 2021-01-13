@@ -35,6 +35,7 @@ instance.interceptors.response.use(
       pathname !== '/registration' &&
       pathname !== '/reset' &&
       !resetRegex.test(pathname) &&
+      pathname !== '/how-it-works' &&
       pathname !== '/'
     ) {
       history.replace('/login');

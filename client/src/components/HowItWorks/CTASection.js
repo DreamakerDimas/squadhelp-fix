@@ -12,7 +12,7 @@ const CTASection = () => {
           Fill out your contest brief and begin receiving custom name
           suggestions within minutes.
         </p>
-        <Link className={styles.startContestButt} to="https://google.com">
+        <Link className={styles.startContestButt} to="startContest">
           <span>Start A Contest</span>
         </Link>
       </div>

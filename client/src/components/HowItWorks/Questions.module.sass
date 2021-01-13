@@ -1,5 +1,11 @@
 .mainContainer
     margin: 128px 16px 64px 16px
+    &>div
+        min-width: 280px !important
+        max-width: 100% !important
+        @media ( max-width: 770px)
+            flex-direction: column !important
+            
 
 .markedList
     list-style-type: disc

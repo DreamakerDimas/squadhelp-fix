@@ -25,8 +25,7 @@ const Pricing = () => {
               <h3>Satisfaction Guarantee</h3>
               <p>
                 Of course! We have policies in place to ensure that you are
-                satisfied with your experience.{' '}
-                <a href="https://www.google.com">Learn more</a>
+                satisfied with your experience. <Link>Learn more</Link>
               </p>
             </div>
           </li>
@@ -39,13 +38,13 @@ const Pricing = () => {
           questions answered.
         </p>
         <Link className={styles.consultationButt}>Schedule Consultation</Link>
-        <Link className={styles.phoneLink}>
+        <a href={`tel:${CONSTANTS.PHONE_NUMBER}`} className={styles.phoneLink}>
           <img
             src={CONSTANTS.STATIC_IMAGES_PATH + '/svg/phone_icon.svg'}
             alt="Phone"
           />
           <span>{CONSTANTS.PHONE_NUMBER}</span>
-        </Link>
+        </a>
         <span>Call us for assistance</span>
       </div>
     </div>

@@ -25,7 +25,9 @@ const Services = () => {
             suggestions for your business or brand. All names are auto-checked
             for URL availability.
           </p>
-          <Link className={styles.button}>Launch a Contest</Link>
+          <Link to={'startContest'} className={styles.button}>
+            Launch a Contest
+          </Link>
         </div>
         <div className={styles.cardBody}>
           <img

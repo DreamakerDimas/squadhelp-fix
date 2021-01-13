@@ -123,7 +123,7 @@ const PayForm = (props) => {
                 error: styles.error,
               }}
               component={PayInput}
-              type="text"
+              type="password"
               label="cvc"
               changeFocus={changeFocusOnCard}
             />

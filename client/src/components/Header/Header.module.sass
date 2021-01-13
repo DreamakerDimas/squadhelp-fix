@@ -161,25 +161,27 @@
         align-items: center
         padding: 10px 15px
         border-right: 1px solid #ebebeb
+        width: 181px
 
         &:hover
           cursor: default
           ul
             display: block
             position: absolute
-            top: 71px
+            top: 70px
 
         ul
+          box-sizing: border-box
+          padding: 0 5px
           border: 1px solid #eee
           z-index: 500
-          padding: 5px 0
           list-style: none
           background: white
-          width: 173px
           display: none
 
           li
             text-align: left
+            margin-top: 5px
 
             &:hover
               background: #f9fafb

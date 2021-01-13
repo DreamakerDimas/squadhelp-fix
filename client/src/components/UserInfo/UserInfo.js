@@ -33,7 +33,7 @@ const UserInfo = (props) => {
       {isEdit ? (
         <UpdateUserInfoForm onSubmit={updateUserData} />
       ) : (
-        <div className={styles.infoContainer}>
+        <div className={styles.infoMainContainer}>
           <img
             src={
               avatar === 'anon.png'

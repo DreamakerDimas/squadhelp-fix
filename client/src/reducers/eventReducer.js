@@ -39,6 +39,12 @@ export default function (state = initialState, action) {
         alarmedEvents: action.data,
       };
     }
+    case ACTION.EVENT_CLEAR_ERROR: {
+      return {
+        ...state,
+        error: null,
+      };
+    }
     default: {
       return state;
     }

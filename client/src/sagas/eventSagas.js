@@ -19,12 +19,14 @@ export function* getEvents(action) {
 
 export function* createEvent(action) {
   yield put({ type: ACTION.CREATE_EVENT_REQUEST });
+  console.log('saga');
   try {
-    const events = yield getEventsFromLocal();
+    const events = yield getEventsFromLocal() || [];
     yield events.push(action.data);
     yield setEventsInLocal(events);
     yield put({ type: ACTION.CREATE_EVENT_SUCCESS, data: events });
   } catch (err) {
+    console.log(err);
     yield put({ type: ACTION.CREATE_EVENT_ERROR, error: err });
   }
 }

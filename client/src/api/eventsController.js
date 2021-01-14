@@ -1,9 +1,10 @@
 export const getEventsFromLocal = () => {
-  return localStorage.getItem('events');
+  return JSON.parse(localStorage.getItem('events'));
 };
 
 export const setEventsInLocal = (events) => {
-  localStorage.setItem('events', events);
+  const eventsString = JSON.stringify(events);
+  localStorage.setItem('events', eventsString);
 };
 
 // return events array for notifications

@@ -434,6 +434,12 @@ export const createEvent = (data) => {
   };
 };
 
+export const clearEventError = () => {
+  return {
+    type: ACTION.EVENT_CLEAR_ERROR,
+  };
+};
+
 export const getEvents = () => {
   return {
     type: ACTION.GET_EVENTS,

@@ -25,6 +25,7 @@
     "react-flickity-component": "^3.3.0",
     "react-image-lightbox": "^5.1.0",
     "react-input-mask": "^2.0.4",
+    "react-moment-input": "^0.2.31",
     "react-rating": "^1.6.2",
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.0",

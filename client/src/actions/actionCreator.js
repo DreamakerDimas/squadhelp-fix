@@ -426,3 +426,16 @@ export const changeModalShow = (data) => {
     data: data,
   };
 };
+
+export const createEvent = (data) => {
+  return {
+    type: ACTION.CREATE_EVENT,
+    data: data,
+  };
+};
+
+export const getEvents = () => {
+  return {
+    type: ACTION.GET_EVENTS,
+  };
+};

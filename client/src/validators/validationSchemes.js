@@ -1,6 +1,8 @@
 import * as yup from 'yup';
 import valid from 'card-validator';
 import moment from 'moment';
+import CONSTANTS from '../../constants';
+const { MOMENT_FORMAT } = CONSTANTS;
 
 export default {
   LoginSchema: yup.object().shape({
@@ -221,9 +223,7 @@ export default {
       )
       .test(
         'test-endDate',
-        `should be in future, current date: ${moment().format(
-          'YYYY-MM-DD HH:mm'
-        )}`,
+        `should be in future, current date: ${moment().format(MOMENT_FORMAT)}`,
         (value) => moment(value).isAfter(moment())
       )
       .required('required'),
@@ -236,9 +236,7 @@ export default {
       )
       .test(
         'test-notificationDate',
-        `should be in future, current date: ${moment().format(
-          'YYYY-MM-DD HH:mm'
-        )}`,
+        `should be in future, current date: ${moment().format(MOMENT_FORMAT)}`,
         (value) => moment(value).isAfter(moment())
       )
       .test(

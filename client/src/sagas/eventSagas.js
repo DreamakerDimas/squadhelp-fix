@@ -11,8 +11,9 @@ export function* getEvents(action) {
   try {
     const data = yield getEventsFromLocal();
     yield put({ type: ACTION.GET_EVENTS_SUCCESS, data: data });
-    yield put({ type: ACTION.CHECK_EVENTS });
+    //yield put({ type: ACTION.CHECK_EVENTS });
   } catch (err) {
+    console.log(err);
     yield put({ type: ACTION.GET_EVENTS_ERROR, error: err });
   }
 }

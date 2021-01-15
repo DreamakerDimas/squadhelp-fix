@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import MomentInput from 'react-moment-input';
-import styles from './CreateEventForm.module.sass';
-import Error from '../Error/Error';
 import { clearEventError, createEvent } from '../../actions/actionCreator';
 import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
+
 import customValidator from '../../validators/validator';
 import Schemes from '../../validators/validationSchemes';
 import FormInput from '../FormInput/FormInput';
 import DateInput from '../DateInput/DateInput';
-import { Field, reduxForm } from 'redux-form';
+import styles from './CreateEventForm.module.sass';
+import CONSTANTS from '../../constants';
+
+const { MOMENT_FORMAT } = CONSTANTS;
 
 const CreateEventForm = (props) => {
   const { error, isFetching } = props.eventsStore;
@@ -30,27 +32,25 @@ const CreateEventForm = (props) => {
 
   const parseDate = (value) => {
     return value
-      ? value.format('YYYY-MM-DD HH:mm')
-      : initDate().format('YYYY-MM-DD HH:mm');
+      ? value.format(MOMENT_FORMAT)
+      : initDate().format(MOMENT_FORMAT);
   };
 
   const formatDate = (value) => (value ? moment(value) : initDate());
 
   // submit handler
-  const submit = () => {
-    // const data = {
-    //   name: eventName,
-    //   creationDate,
-    //   notificationDate: notificationDateString,
-    //   endDate: endDateString,
-    // };
-    //props.createEventRequest(data);
+  const submit = (values) => {
+    const data = {
+      ...values,
+      startDate: moment().format(MOMENT_FORMAT),
+    };
+    props.createEventRequest(data);
   };
 
   return (
     <div className={styles.mainContainer}>
       <h2>Create Event</h2>
-      <form className={styles.formContainer} onSubmit={handleSubmit}>
+      <form className={styles.formContainer} onSubmit={handleSubmit(submit)}>
         <div className={styles.inputContainer}>
           <label htmlFor="name" className={styles.inputLabel}>
             Event name

@@ -16,6 +16,7 @@ export default function (state = initialState, action) {
         isFetching: true,
         error: null,
       };
+      break;
     case ACTION.GET_EVENTS_SUCCESS:
     case ACTION.CREATE_EVENT_SUCCESS:
       return {
@@ -24,6 +25,7 @@ export default function (state = initialState, action) {
         error: null,
         events: action.data,
       };
+      break;
     case ACTION.GET_EVENTS_ERROR:
     case ACTION.CREATE_EVENT_ERROR:
       return {
@@ -31,6 +33,7 @@ export default function (state = initialState, action) {
         isFetching: false,
         error: action.error,
       };
+      break;
     case ACTION.CHECK_EVENTS: {
       return {
         ...state,

@@ -79,4 +79,10 @@ export default {
       items: ['Terms of Service', 'Privacy Policy', 'Cookie Policy'],
     },
   ],
+  EVENTS_CONTENT_TYPES: {
+    CREATE_EVENT: 'CREATE_EVENT',
+    ALL_EVENTS: 'ALL_EVENTS',
+    ALARMED_EVENTS: 'ALARMED_EVENTS',
+  },
+  MOMENT_FORMAT: 'YYYY-MM-DD HH:mm',
 };

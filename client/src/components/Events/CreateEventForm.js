@@ -7,117 +7,111 @@ import { clearEventError, createEvent } from '../../actions/actionCreator';
 import { connect } from 'react-redux';
 import customValidator from '../../validators/validator';
 import Schemes from '../../validators/validationSchemes';
+import FormInput from '../FormInput/FormInput';
+import DateInput from '../DateInput/DateInput';
+import { Field, reduxForm } from 'redux-form';
 
 const CreateEventForm = (props) => {
   const { error, isFetching } = props.eventsStore;
-  const { submitting, errorClear } = props;
+  const { handleSubmit, submitting, errorClear } = props;
+
+  const formInputClasses = {
+    container: styles.inputContainer,
+    input: styles.input,
+    warning: styles.fieldWarning,
+    notValid: styles.notValid,
+    valid: styles.valid,
+  };
+
   const initDate = () => moment().add(1, 'days').startOf('Day');
 
-  const [eventName, setEventName] = useState('');
-  const [endDate, setEndDate] = useState(initDate);
-  const [notificationDate, setNotificationDate] = useState(initDate);
-  const [isEndDateError, setEndDateError] = useState(false);
-  const [isNotificationDateError, setNotificationDateError] = useState(false);
+  // endDate for max day in notificationDate (only for display purposes)
+  const [endDate, setEndDate] = useState(initDate());
 
-  const checkDates = () => {
-    setEndDateError(!endDate.isAfter(moment()));
-    setNotificationDateError(
-      !notificationDate.isAfter(moment()) || !notificationDate.isBefore(endDate)
-    );
+  const parseDate = (value) => {
+    return value
+      ? value.format('YYYY-MM-DD HH:mm')
+      : initDate().format('YYYY-MM-DD HH:mm');
   };
 
-  const clicked = () => {
-    const creationDate = moment().format();
-    const notificationDateString = notificationDate.format();
-    const endDateString = endDate.format();
-    const data = {
-      name: eventName,
-      creationDate,
-      notificationDate: notificationDateString,
-      endDate: endDateString,
-    };
-    console.log(data);
-    props.createEventRequest(data);
-  };
+  const formatDate = (value) => (value ? moment(value) : initDate());
 
-  useEffect(() => {
-    checkDates();
-  }, [endDate, notificationDate]);
+  // submit handler
+  const submit = () => {
+    // const data = {
+    //   name: eventName,
+    //   creationDate,
+    //   notificationDate: notificationDateString,
+    //   endDate: endDateString,
+    // };
+    //props.createEventRequest(data);
+  };
 
   return (
     <div className={styles.mainContainer}>
       <h2>Create Event</h2>
-      <div className={styles.formContainer}>
+      <form className={styles.formContainer} onSubmit={handleSubmit}>
         <div className={styles.inputContainer}>
-          <span className={styles.inputLabel}>Event name</span>
-          <input
+          <label htmlFor="name" className={styles.inputLabel}>
+            Event name
+          </label>
+          <Field
             name="name"
             type="text"
-            value={eventName}
-            onChange={(event) => {
-              setEventName(event.target.value);
-            }}
+            component={FormInput}
+            classes={formInputClasses}
+            label={'Event name'}
           />
         </div>
 
         <div className={styles.inputContainer}>
-          <span className={styles.inputLabel}>Event end date</span>
-          <MomentInput
-            name="date"
+          <label htmlFor="endDate" className={styles.inputLabel}>
+            Event end date
+          </label>
+          <Field
+            name="endDate"
             min={moment().endOf('Day')} // only for correct days disable
-            readOnly={false}
-            showIcon={true}
-            format="YYYY-MM-DD HH:mm"
-            value={endDate}
-            onChange={(date) => {
-              setEndDate(date);
+            component={DateInput}
+            parse={parseDate}
+            format={formatDate}
+            classes={formInputClasses}
+            onChange={(event, nextValue) => {
+              setEndDate(moment(nextValue));
             }}
           />
-          {isEndDateError && (
-            <div className={styles.dateError}>End date should be in future</div>
-          )}
         </div>
 
         <div className={styles.inputContainer}>
-          <span className={styles.inputLabel}>
+          <label htmlFor="notificationDate" className={styles.inputLabel}>
             When you want to get notification?
-          </span>
-          <MomentInput
-            id="notificationTime"
-            name="notificationTime"
+          </label>
+          <Field
+            name="notificationDate"
             min={moment().endOf('Day')} // only for correct days disable
-            max={endDate.startOf('Day')} // only for correct days disable
-            readOnly={false}
-            showIcon={true}
-            format="YYYY-MM-DD HH:mm"
-            value={notificationDate}
-            onChange={(date) => {
-              setNotificationDate(date);
-            }}
+            max={endDate}
+            component={DateInput}
+            parse={parseDate}
+            format={formatDate}
+            classes={formInputClasses}
           />
-          {isNotificationDateError && (
-            <div className={styles.dateError}>
-              Notification date should be between current date and end of event
-              date
-            </div>
-          )}
         </div>
+
+        {error && (
+          <div>
+            {error} <span onClick={errorClear()}>x</span>
+          </div>
+        )}
 
         <button
-          onClick={clicked}
-          disabled={submitting || isEndDateError || isNotificationDateError}
+          type="submit"
+          disabled={submitting}
           className={styles.submitContainer}
         >
           <span className={styles.inscription}>
-            {isFetching ? 'Submitting...' : 'CREATE'}
+            {isFetching ? 'Submitting...' : 'CREATE EVENT'}
           </span>
         </button>
-      </div>
-      {error && (
-        <div>
-          {error} <span onClick={errorClear()}>x</span>
-        </div>
-      )}
+      </form>
     </div>
   );
 };
@@ -132,4 +126,13 @@ const mapDispatchToProps = (dispatch) => ({
   errorClear: () => dispatch(clearEventError()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateEventForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(
+  reduxForm({
+    form: 'event',
+    touchOnChange: true,
+    validate: customValidator(Schemes.CreateEventSchema),
+  })(CreateEventForm)
+);

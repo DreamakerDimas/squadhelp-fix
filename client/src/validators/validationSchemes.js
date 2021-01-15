@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 import valid from 'card-validator';
+import moment from 'moment';
 
 export default {
   LoginSchema: yup.object().shape({
@@ -200,5 +201,52 @@ export default {
       )
       .required('required'),
     file: yup.mixed(),
+  }),
+
+  CreateEventSchema: yup.object().shape({
+    name: yup
+      .string()
+      .test(
+        'test-name',
+        'required',
+        (value) => value && value.trim().length >= 1
+      )
+      .required('required'),
+    endDate: yup
+      .string()
+      .test(
+        'test-endDate',
+        'required',
+        (value) => value && value.trim().length >= 1
+      )
+      .test(
+        'test-endDate',
+        `should be in future, current date: ${moment().format(
+          'YYYY-MM-DD HH:mm'
+        )}`,
+        (value) => moment(value).isAfter(moment())
+      )
+      .required('required'),
+    notificationDate: yup
+      .string()
+      .test(
+        'test-notificationDate',
+        'required',
+        (value) => value && value.trim().length >= 1
+      )
+      .test(
+        'test-notificationDate',
+        `should be in future, current date: ${moment().format(
+          'YYYY-MM-DD HH:mm'
+        )}`,
+        (value) => moment(value).isAfter(moment())
+      )
+      .test(
+        'test-notificationDate',
+        'should be before the end date',
+        function (value) {
+          return moment(value).isBefore(moment(this.parent.endDate));
+        }
+      ),
   }),
 };

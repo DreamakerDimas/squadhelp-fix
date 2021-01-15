@@ -6,6 +6,10 @@
     align-items: flex-start
     width: 100%
     min-height: 100vh
+    @media ( max-width: 770px )
+        flex-direction: column
+        justify-content: space-between
+        align-items: center
 
     .eventsNav
         flex-grow: 1
@@ -16,9 +20,13 @@
         min-height: 200px
         background-color: blue
         color: white
-        padding: 20px
+        padding: 20px 40px
         border-top-left-radius: 10px
         border-bottom-left-radius: 10px
+        @media ( max-width: 770px )
+            border-radius: 10px
+            width: 100%
+            align-items: center
         div
             font-size: 20px
             cursor: pointer
@@ -34,3 +42,7 @@
         border-top-right-radius: 10px
         border-bottom-right-radius: 10px
         border-bottom-left-radius: 10px
+        @media ( max-width: 770px )
+            margin-top: 20px
+            border-radius: 10px
+            width: 100%

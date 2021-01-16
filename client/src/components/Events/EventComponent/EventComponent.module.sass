@@ -1,0 +1,55 @@
+.mainContainer
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    border: 1px solid white
+    border-radius: 5px
+    padding: 20px 10px
+    margin-bottom: 30px
+    background-color: #357fbb
+
+    .eventHead
+        color: white
+        margin-bottom: 10px
+
+    .progressBarContainer
+        width: 90%
+        margin-bottom: 30px
+        &>div
+            height: 30px
+
+    .datesContainer
+        width: 100%
+        padding: 0 10px
+        display: flex
+        align-items: center
+        justify-content: space-around
+        
+        .date
+            display: flex
+            flex-direction: column
+            justify-content: stretch
+            align-items: center
+            background-color: #1d3394
+            border-radius: 5px
+            color: white
+            padding: 5px 10px
+            span
+                flex-grow: 1
+                font-size: 18px
+            p
+                flex-grow: 2
+                margin: 0
+
+.alarmed
+    background-color: #bd731f 
+    border-radius: 5px
+    padding: 5px 10px
+    color: white
+
+.ended
+    background-color: #b42e16 
+    border-radius: 5px
+    padding: 5px 10px
+    color: white

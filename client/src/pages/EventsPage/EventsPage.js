@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { getEvents } from '../../actions/actionCreator';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import CreateEventForm from '../../components/Events/CreateEventForm';
@@ -13,7 +14,8 @@ const {
   ALARMED_EVENTS,
 } = CONSTANTS.EVENTS_CONTENT_TYPES;
 
-const EventsPage = () => {
+const EventsPage = (props) => {
+  // --Switcher Controller--
   const [switcherId, setSwitcherId] = useState(ALARMED_EVENTS);
 
   // set content component
@@ -30,13 +32,30 @@ const EventsPage = () => {
         return <div></div>;
       }
       case ALL_EVENTS: {
-        return <EventsList />;
+        return <EventsList eventsArr={eventsArr} />;
       }
       case CREATE_EVENT: {
         return <CreateEventForm />;
       }
     }
   };
+  // --End of Switcher Controller--
+
+  // --Events Controller--
+  const { eventsStore, getEvents } = props;
+  const [eventsArr, setEventsArr] = useState([]);
+
+  // on mount
+  useEffect(() => {
+    getEvents();
+  }, []);
+
+  // set state of eventsArr when store did update
+  useEffect(() => {
+    setEventsArr(eventsStore.events);
+  }, [eventsStore]);
+
+  // --End of Events Controller--
 
   return (
     <>
@@ -60,4 +79,15 @@ const EventsPage = () => {
   );
 };
 
-export default EventsPage;
+const mapStateToProps = (state) => {
+  const { eventsStore } = state;
+  return { eventsStore };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getEvents: () => dispatch(getEvents()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventsPage);

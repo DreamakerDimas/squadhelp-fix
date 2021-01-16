@@ -43,6 +43,8 @@ const CreateEventForm = (props) => {
     const data = {
       ...values,
       startDate: moment().format(MOMENT_FORMAT),
+      isAlarmed: false,
+      isEnded: false,
     };
     props.createEventRequest(data);
   };

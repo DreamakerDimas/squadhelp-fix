@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 import valid from 'card-validator';
 import moment from 'moment';
-import CONSTANTS from '../../constants';
+import CONSTANTS from '../constants';
 const { MOMENT_FORMAT } = CONSTANTS;
 
 export default {

@@ -52,7 +52,6 @@ const CreateEventForm = (props) => {
 
   return (
     <div className={styles.mainContainer}>
-      <h2>Create Event</h2>
       <form className={styles.formContainer} onSubmit={handleSubmit(submit)}>
         <div className={styles.inputContainer}>
           <label htmlFor="name" className={styles.inputLabel}>

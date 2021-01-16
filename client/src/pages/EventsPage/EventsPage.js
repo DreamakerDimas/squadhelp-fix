@@ -23,30 +23,6 @@ const EventsPage = ({ eventsStore, checkEvents, sortEvents, getEvents }) => {
   const [alarmedEventsArr, setAlarmedEventsArr] = useState([]);
   const [switcherId, setSwitcherId] = useState(ALARMED_EVENTS);
 
-  // --Switcher Controller--
-  // set content component
-  function setSwitcherHandler(e) {
-    e.preventDefault();
-    console.log(e.currentTarget.dataset.id);
-    setSwitcherId(e.currentTarget.dataset.id);
-  }
-
-  // get content component
-  const renderContent = () => {
-    switch (switcherId) {
-      case ALARMED_EVENTS: {
-        return <EventsList eventsArr={alarmedEventsArr} />;
-      }
-      case ALL_EVENTS: {
-        return <EventsList eventsArr={eventsArr} />;
-      }
-      case CREATE_EVENT: {
-        return <CreateEventForm sortEvents={sortEvents} />;
-      }
-    }
-  };
-  // --End of Switcher Controller--
-
   // --Events Controller--
   // on mount
   useEffect(() => {
@@ -65,11 +41,65 @@ const EventsPage = ({ eventsStore, checkEvents, sortEvents, getEvents }) => {
 
   // set state of eventsArr when store did update
   useEffect(() => {
-    setEventsArr(eventsStore.events);
-    setAlarmedEventsArr(eventsStore.alarmedEvents);
+    setEventsArr(eventsStore.events || []);
+    setAlarmedEventsArr(eventsStore.alarmedEvents || []);
   }, [eventsStore]);
 
   // --End of Events Controller--
+
+  // set content component id
+  function setSwitcherHandler(e) {
+    e.preventDefault();
+    setSwitcherId(e.currentTarget.dataset.id);
+  }
+
+  // get content for id
+  const renderContent = () => {
+    switch (switcherId) {
+      case ALARMED_EVENTS: {
+        if (alarmedEventsArr.length > 0) {
+          return (
+            <>
+              <h2>Alarmed Events</h2>
+              <EventsList eventsArr={alarmedEventsArr} />
+            </>
+          );
+        }
+        return (
+          <>
+            <h2>Alarmed Events</h2>
+            <h3>No alarmed events yet</h3>
+          </>
+        );
+      }
+
+      case ALL_EVENTS: {
+        if (eventsArr.length > 0) {
+          return (
+            <>
+              <h2>All Events</h2>
+              <EventsList eventsArr={eventsArr} />
+            </>
+          );
+        }
+        return (
+          <>
+            <h2>All Events</h2>
+            <h3>No events yet</h3>
+          </>
+        );
+      }
+
+      case CREATE_EVENT: {
+        return (
+          <>
+            <h2>Create Event</h2>
+            <CreateEventForm sortEvents={sortEvents} />
+          </>
+        );
+      }
+    }
+  };
 
   return (
     <>

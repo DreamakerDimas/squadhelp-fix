@@ -36,7 +36,7 @@ import {
   changeCatalogName,
 } from './chatSagas';
 
-import { getEvents, createEvent, checkEvents } from './eventSagas';
+import { getEvents, createEvent, checkEvents, sortEvents } from './eventSagas';
 
 function* rootSaga() {
   yield takeLatest(ACTION.AUTH_ACTION_REGISTER, registerSaga);
@@ -78,6 +78,7 @@ function* rootSaga() {
   yield takeLatest(ACTION.GET_EVENTS, getEvents);
   yield takeLatest(ACTION.CREATE_EVENT, createEvent);
   yield takeLatest(ACTION.CHECK_EVENTS, checkEvents);
+  yield takeLatest(ACTION.SORT_EVENTS, sortEvents);
 }
 
 export default rootSaga;

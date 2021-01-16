@@ -10,8 +10,15 @@
     background-color: #357fbb
 
     .eventHead
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
         color: white
         margin-bottom: 10px
+        h3
+            font-size: 18px
+
 
     .progressBarContainer
         width: 90%
@@ -42,13 +49,13 @@
                 flex-grow: 2
                 margin: 0
 
-.alarmed
+.alarmMessage
     background-color: #bd731f 
     border-radius: 5px
     padding: 5px 10px
     color: white
 
-.ended
+.endMessage
     background-color: #b42e16 
     border-radius: 5px
     padding: 5px 10px

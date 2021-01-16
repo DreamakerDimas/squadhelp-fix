@@ -117,10 +117,12 @@ const EventComponent = ({
     <div className={styles.mainContainer}>
       <div className={styles.eventHead}>
         <h2>{name}</h2>
-        {isAlarmed && (
-          <h3 className={styles.alarm}>It's time to start your contest!</h3>
+        {isAlarmed && !isEnded && (
+          <h3 className={styles.alarmMessage}>
+            It's time to start your contest!
+          </h3>
         )}
-        {isEnded && <h3 className={styles.ended}>Event was over!</h3>}
+        {isEnded && <h3 className={styles.endMessage}>Event was over!</h3>}
       </div>
       <div className={styles.progressBarContainer}>{renderProgressBar()}</div>
       <div className={styles.datesContainer}>

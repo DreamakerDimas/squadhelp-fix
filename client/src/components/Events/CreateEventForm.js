@@ -47,6 +47,7 @@ const CreateEventForm = (props) => {
       isEnded: false,
     };
     props.createEventRequest(data);
+    props.sortEvents();
   };
 
   return (

@@ -445,3 +445,15 @@ export const getEvents = () => {
     type: ACTION.GET_EVENTS,
   };
 };
+
+export const checkEvents = () => {
+  return {
+    type: ACTION.CHECK_EVENTS,
+  };
+};
+
+export const sortEvents = () => {
+  return {
+    type: ACTION.SORT_EVENTS,
+  };
+};

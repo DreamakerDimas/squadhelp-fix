@@ -28,11 +28,25 @@
             border-radius: 10px
             width: 100%
             align-items: center
-        div
+        &>div
+            position: relative
+            box-sizing: border-box
             font-size: 20px
             cursor: pointer
+            border: 1px solid green
+            border-radius: 5px
+            padding: 0 5px
             &:hover
                 color: grey
+
+            .alarmIndicator
+                top: -6px
+                left: -6px
+                width: 16px
+                height: 16px
+                position: absolute
+                background-color: #ff1414
+                border-radius: 50%
 
     .contentContainer
         flex-grow: 4

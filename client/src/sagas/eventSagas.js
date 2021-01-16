@@ -3,15 +3,16 @@ import ACTION from '../actions/actionTypes';
 import {
   getEventsFromLocal,
   setEventsInLocal,
-  getNotificationEvents,
+  setEventsBooleans,
+  getAlarmedEventsArr,
+  sortEventsArr,
 } from '../api/eventsController';
 
-export function* getEvents(action) {
+export function* getEvents() {
   yield put({ type: ACTION.GET_EVENTS_REQUEST });
   try {
     const data = yield getEventsFromLocal();
     yield put({ type: ACTION.GET_EVENTS_SUCCESS, data: data });
-    //yield put({ type: ACTION.CHECK_EVENTS });
   } catch (err) {
     console.log(err);
     yield put({ type: ACTION.GET_EVENTS_ERROR, error: err });
@@ -20,7 +21,6 @@ export function* getEvents(action) {
 
 export function* createEvent(action) {
   yield put({ type: ACTION.CREATE_EVENT_REQUEST });
-  console.log('saga');
   try {
     const events = yield getEventsFromLocal() || [];
     yield events.push(action.data);
@@ -32,6 +32,31 @@ export function* createEvent(action) {
   }
 }
 
-export function* checkEvents(action) {
-  //code
+export function* checkEvents() {
+  yield put({ type: ACTION.CHECK_EVENTS_REQUEST });
+  try {
+    const data = yield getEventsFromLocal();
+    const checkedEvents = yield setEventsBooleans(data);
+    const alarmedEvents = yield getAlarmedEventsArr(checkedEvents);
+    console.log(alarmedEvents);
+    yield setEventsInLocal(checkedEvents);
+    yield put({
+      type: ACTION.CHECK_EVENTS_SUCCESS,
+      data: { events: checkedEvents, alarmedEvents },
+    });
+  } catch (err) {
+    yield put({ type: ACTION.CHECK_EVENTS_ERROR, error: err });
+  }
+}
+
+export function* sortEvents() {
+  yield put({ type: ACTION.SORT_EVENTS_REQUEST });
+  try {
+    const data = yield getEventsFromLocal();
+    const sortedEventsArr = yield sortEventsArr(data);
+    yield setEventsInLocal(sortedEventsArr);
+    yield put({ type: ACTION.SORT_EVENTS_SUCCESS, data: sortedEventsArr });
+  } catch (err) {
+    yield put({ type: ACTION.SORT_EVENTS_ERROR, error: err });
+  }
 }

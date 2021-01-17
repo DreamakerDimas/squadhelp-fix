@@ -68,6 +68,18 @@ const EventComponent = ({
     };
   };
 
+  const getRemainingTime = () => {
+    const remaining = moment(endDate) - moment(currentDate);
+    const dur = moment.duration(remaining);
+    if (dur.years()) {
+      return `Remaining time: ${dur.years()} year(s), ${dur.months()} month(s), ${dur.days()} day(s), ${dur.hours()} hour(s), ${dur.minutes()} minute(s).`;
+    }
+    if (dur.months()) {
+      return `Remaining time: ${dur.months()} month(s), ${dur.days()} day(s), ${dur.hours()} hour(s), ${dur.minutes()} minute(s).`;
+    }
+    return `Remaining time: ${dur.days()} day(s), ${dur.hours()} hour(s), ${dur.minutes()} minute(s).`;
+  };
+
   const renderProgressBar = () => {
     const {
       toNotificationPercentage,
@@ -126,6 +138,11 @@ const EventComponent = ({
         {isEnded && <h3 className={styles.endMessage}>Event was over!</h3>}
       </div>
       <div className={styles.progressBarContainer}>{renderProgressBar()}</div>
+
+      {!isEnded && (
+        <div className={styles.remainingTime}> {getRemainingTime()} </div>
+      )}
+
       <div className={styles.datesContainer}>
         <div className={styles.date}>
           <span>Created at:</span> <p>{startDate}</p>

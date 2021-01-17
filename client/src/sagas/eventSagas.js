@@ -38,7 +38,6 @@ export function* checkEvents() {
     const data = yield getEventsFromLocal();
     const checkedEvents = yield setEventsBooleans(data);
     const alarmedEvents = yield getAlarmedEventsArr(checkedEvents);
-    console.log(alarmedEvents);
     yield setEventsInLocal(checkedEvents);
     yield put({
       type: ACTION.CHECK_EVENTS_SUCCESS,

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import { clearEventError, createEvent } from '../../actions/actionCreator';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
@@ -14,8 +15,8 @@ import CONSTANTS from '../../constants';
 const { MOMENT_FORMAT } = CONSTANTS;
 
 const CreateEventForm = (props) => {
-  const { error, isFetching } = props.eventsStore;
-  const { handleSubmit, submitting, errorClear } = props;
+  const { isFetching } = props.eventsStore;
+  const { handleSubmit, submitting } = props;
 
   const formInputClasses = {
     container: styles.inputContainer,
@@ -98,12 +99,6 @@ const CreateEventForm = (props) => {
           />
         </div>
 
-        {error && (
-          <div>
-            {error} <span onClick={errorClear()}>x</span>
-          </div>
-        )}
-
         <button
           type="submit"
           disabled={submitting}
@@ -116,6 +111,14 @@ const CreateEventForm = (props) => {
       </form>
     </div>
   );
+};
+
+CreateEventForm.propTypes = {
+  eventsStore: PropTypes.object.isRequired,
+  createEventRequest: PropTypes.func.isRequired,
+  errorClear: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => {

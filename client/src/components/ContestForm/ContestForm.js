@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CONSTANTS from '../../constants';
 import { connect } from 'react-redux';
 import { getDataForContest } from '../../actions/actionCreator';
@@ -244,6 +245,16 @@ const submit = (values) => {
   submitFunc(values);
 };
 
+ContestForm.propTypes = {
+  contestStore: PropTypes.object.isRequired,
+  dataForContest: PropTypes.object.isRequired,
+  initialValues: PropTypes.object.isRequired,
+  getData: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool,
+  contestType: PropTypes.string.isRequired,
+};
+
 const mapStateToProps = (state, ownProps) => {
   return {
     contestStore: state.contestStore,
@@ -251,6 +262,7 @@ const mapStateToProps = (state, ownProps) => {
     initialValues: ownProps.defaultData,
   };
 };
+
 const mapDispatchToProps = (dispatch) => {
   return {
     getData: (data) => dispatch(getDataForContest(data)),

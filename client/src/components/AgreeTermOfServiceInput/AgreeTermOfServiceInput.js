@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const AgreeTermOfServiceInput = ({
   label,
@@ -22,6 +23,15 @@ const AgreeTermOfServiceInput = ({
       {touched && error && <span className={classes.warning}>{error}</span>}
     </div>
   );
+};
+
+AgreeTermOfServiceInput.propTypes = {
+  label: PropTypes.string,
+  id: PropTypes.string,
+  input: PropTypes.object,
+  type: PropTypes.string,
+  classes: PropTypes.object,
+  meta: PropTypes.object,
 };
 
 export default AgreeTermOfServiceInput;

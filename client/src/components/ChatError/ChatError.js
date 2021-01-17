@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './ChatError.module.sass';
 
 const ChatError = (props) => {
@@ -11,6 +12,10 @@ const ChatError = (props) => {
       </div>
     </div>
   );
+};
+
+ChatError.propTypes = {
+  getData: PropTypes.func.isRequired,
 };
 
 export default ChatError;

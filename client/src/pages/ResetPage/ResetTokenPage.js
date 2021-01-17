@@ -1,12 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Logo from '../../components/Logo';
 import { Link } from 'react-router-dom';
 import Error from '../../components/Error/Error';
 import SpinnerLoader from '../../components/Spinner/Spinner';
-import styles from './ResetPage.module.sass';
 import { connect } from 'react-redux';
 import { authActionReset, clearAuth } from '../../actions/actionCreator';
 import CONSTANTS from '../../constants';
+import styles from './ResetPage.module.sass';
 class ResetTokenPage extends React.Component {
   async componentDidMount() {
     await this.sendData();
@@ -57,6 +58,12 @@ class ResetTokenPage extends React.Component {
     );
   }
 }
+
+ResetTokenPage.propTypes = {
+  auth: PropTypes.object.isRequired,
+  authClear: PropTypes.func.isRequired,
+  resetPasswordRequest: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => {
   const { auth } = state;

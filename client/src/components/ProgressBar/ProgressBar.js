@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './ProgressBar.module.sass';
 
 const ProgressBar = (props) => {
@@ -38,4 +39,9 @@ const ProgressBar = (props) => {
 
   return <div className={styles.progressBarContainer}>{renderProgress()}</div>;
 };
+
+ProgressBar.propTypes = {
+  currentStep: PropTypes.number.isRequired,
+};
+
 export default ProgressBar;

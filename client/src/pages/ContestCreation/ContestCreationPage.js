@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import styles from './ContestCreationPage.module.sass';
 import {
   saveContestToStore,
@@ -59,6 +60,14 @@ const ContestCreationPage = (props) => {
       <Footer />
     </div>
   );
+};
+
+ContestCreationPage.propTypes = {
+  contestStore: PropTypes.object.isRequired,
+  bundleStore: PropTypes.object.isRequired,
+  saveContest: PropTypes.func.isRequired,
+  clearDataForContest: PropTypes.func.isRequired,
+  contestType: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => {

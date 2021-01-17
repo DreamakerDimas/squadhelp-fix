@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import style from './SlideBar.module.sass';
 import Flickity from 'react-flickity-component';
 import carouselConstants from '../../carouselConstants';
@@ -70,6 +71,11 @@ const SliderBar = (props) => {
       {renderSlides()}
     </Flickity>
   );
+};
+
+SliderBar.propTypes = {
+  carouselType: PropTypes.string.isRequired,
+  images: PropTypes.array.isRequired,
 };
 
 export default SliderBar;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
   getEvents,
   checkEvents,
@@ -9,6 +10,7 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import CreateEventForm from '../../components/Events/CreateEventForm';
 import EventsList from '../../components/Events/EventsList';
+import SpinnerLoader from '../../components/Spinner/Spinner';
 import styles from './EventsPage.module.sass';
 import CONSTANTS from '../../constants';
 
@@ -18,7 +20,13 @@ const {
   ALARMED_EVENTS,
 } = CONSTANTS.EVENTS_CONTENT_TYPES;
 
-const EventsPage = ({ eventsStore, checkEvents, sortEvents, getEvents }) => {
+const EventsPage = ({
+  eventsStore,
+  checkEvents,
+  sortEvents,
+  getEvents,
+  isFetching,
+}) => {
   const [eventsArr, setEventsArr] = useState([]);
   const [alarmedEventsArr, setAlarmedEventsArr] = useState([]);
   const [switcherId, setSwitcherId] = useState(ALARMED_EVENTS);
@@ -39,7 +47,7 @@ const EventsPage = ({ eventsStore, checkEvents, sortEvents, getEvents }) => {
     return () => clearInterval(interval);
   }, []);
 
-  // set state of eventsArr when store did update
+  // set state of events when store did update
   useEffect(() => {
     setEventsArr(eventsStore.events || []);
     setAlarmedEventsArr(eventsStore.alarmedEvents || []);
@@ -53,7 +61,7 @@ const EventsPage = ({ eventsStore, checkEvents, sortEvents, getEvents }) => {
     setSwitcherId(e.currentTarget.dataset.id);
   }
 
-  // get content for id
+  // get content by id
   const renderContent = () => {
     switch (switcherId) {
       case ALARMED_EVENTS: {
@@ -104,31 +112,45 @@ const EventsPage = ({ eventsStore, checkEvents, sortEvents, getEvents }) => {
   return (
     <>
       <Header />
-      <div className={styles.mainContainer}>
-        <div className={styles.eventsNav}>
-          <div data-id={ALARMED_EVENTS} onClick={setSwitcherHandler}>
-            {alarmedEventsArr.length > 0 && (
-              <div className={styles.alarmIndicator}></div>
-            )}
-            Alarmed events
+      {isFetching ? (
+        <SpinnerLoader />
+      ) : (
+        <>
+          <div className={styles.mainContainer}>
+            <div className={styles.eventsNav}>
+              <div data-id={ALARMED_EVENTS} onClick={setSwitcherHandler}>
+                {alarmedEventsArr.length > 0 && (
+                  <div className={styles.alarmIndicator}></div>
+                )}
+                Alarmed events
+              </div>
+              <div data-id={ALL_EVENTS} onClick={setSwitcherHandler}>
+                All events
+              </div>
+              <div data-id={CREATE_EVENT} onClick={setSwitcherHandler}>
+                Create event
+              </div>
+            </div>
+            <div className={styles.contentContainer}>{renderContent()}</div>
           </div>
-          <div data-id={ALL_EVENTS} onClick={setSwitcherHandler}>
-            All events
-          </div>
-          <div data-id={CREATE_EVENT} onClick={setSwitcherHandler}>
-            Create event
-          </div>
-        </div>
-        <div className={styles.contentContainer}>{renderContent()}</div>
-      </div>
-      <Footer />
+          <Footer />
+        </>
+      )}
     </>
   );
 };
 
+EventsPage.propTypes = {
+  eventsStore: PropTypes.object.isRequired,
+  checkEvents: PropTypes.func.isRequired,
+  sortEvents: PropTypes.func.isRequired,
+  getEvents: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => {
   const { eventsStore } = state;
-  return { eventsStore };
+  const { isFetching } = state.userStore;
+  return { eventsStore, isFetching };
 };
 
 const mapDispatchToProps = (dispatch) => {

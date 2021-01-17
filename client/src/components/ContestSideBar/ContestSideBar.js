@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import styles from './ContestSideBar.module.sass';
 import CONSTANTS from '../../constants';
 import moment from 'moment';
@@ -84,6 +85,12 @@ const ContestSideBar = (props) => {
   };
 
   return renderContestInfo();
+};
+
+ContestSideBar.propTypes = {
+  contestData: PropTypes.object.isRequired,
+  totalEntries: PropTypes.string,
+  data: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {

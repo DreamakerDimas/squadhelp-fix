@@ -1,12 +1,13 @@
 import React from 'react';
-import { selectBundle } from '../../actions/actionCreator';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import BundleBox from '../../components/BundleBox/BundleBox';
-import CONSTANTS from '../../constants';
-import styles from './StartContestPage.module.sass';
 import Footer from '../../components/Footer/Footer';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import Header from '../../components/Header/Header';
+import CONSTANTS from '../../constants';
+import { selectBundle } from '../../actions/actionCreator';
+import styles from './StartContestPage.module.sass';
 
 const StartContestPage = (props) => {
   if (props.userStore.data.role !== CONSTANTS.CUSTOMER) {
@@ -111,6 +112,12 @@ const StartContestPage = (props) => {
       <Footer />
     </div>
   );
+};
+
+StartContestPage.propTypes = {
+  bundleStore: PropTypes.object,
+  userStore: PropTypes.object.isRequired,
+  choseBundle: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

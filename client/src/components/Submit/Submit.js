@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Modal, Button } from 'react-bootstrap';
 
 const ModalSubmit = (props) => {
@@ -19,6 +20,13 @@ const ModalSubmit = (props) => {
       </Modal.Footer>
     </Modal>
   );
+};
+
+ModalSubmit.propTypes = {
+  closeModal: PropTypes.func,
+  denied: PropTypes.func,
+  submit: PropTypes.func,
+  show: PropTypes.bool,
 };
 
 export default ModalSubmit;

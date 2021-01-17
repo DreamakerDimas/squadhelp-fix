@@ -1,8 +1,11 @@
 import React from 'react';
-import styles from './OfferBox.module.sass';
-import CONSTANTS from '../../constants';
 import { connect } from 'react-redux';
 import Rating from 'react-rating';
+import { withRouter } from 'react-router-dom';
+import isEqual from 'lodash/isEqual';
+import classNames from 'classnames';
+import { confirmAlert } from 'react-confirm-alert';
+import PropTypes from 'prop-types';
 import {
   changeMark,
   clearChangeMarkError,
@@ -10,12 +13,10 @@ import {
   changeShowImage,
   changeModalShow,
 } from '../../actions/actionCreator';
-import { withRouter } from 'react-router-dom';
-import isEqual from 'lodash/isEqual';
-import classNames from 'classnames';
-import { confirmAlert } from 'react-confirm-alert';
+import CONSTANTS from '../../constants';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import './confirmStyle.css';
+import styles from './OfferBox.module.sass';
 
 const OfferBox = (props) => {
   const findConversationInfo = () => {
@@ -212,6 +213,18 @@ const OfferBox = (props) => {
       )}
     </div>
   );
+};
+
+OfferBox.propTypes = {
+  changeMark: PropTypes.func.isRequired,
+  clearError: PropTypes.func.isRequired,
+  goToExpandedDialog: PropTypes.func.isRequired,
+  changeShowImage: PropTypes.func.isRequired,
+  changeMarkError: PropTypes.func,
+  id: PropTypes.number.isRequired,
+  role: PropTypes.string.isRequired,
+  messagesPreview: PropTypes.array.isRequired,
+  isShowModal: PropTypes.bool,
 };
 
 const mapDispatchToProps = (dispatch) => {

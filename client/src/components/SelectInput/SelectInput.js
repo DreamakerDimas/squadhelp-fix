@@ -1,5 +1,6 @@
 import React from 'react';
 import { change } from 'redux-form';
+import PropTypes from 'prop-types';
 
 class SelectInput extends React.Component {
   getOptionsArray = () => {
@@ -46,5 +47,10 @@ class SelectInput extends React.Component {
     );
   }
 }
+
+SelectInput.propTypes = {
+  optionsArray: PropTypes.array.isRequired,
+  valueArray: PropTypes.array.isRequired,
+};
 
 export default SelectInput;

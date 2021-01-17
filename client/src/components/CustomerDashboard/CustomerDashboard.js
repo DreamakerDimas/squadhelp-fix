@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
   getContestsForCustomer,
   clearContestList,
@@ -130,6 +131,13 @@ class CustomerDashboard extends React.Component {
     );
   }
 }
+
+CustomerDashboard.propTypes = {
+  getContests: PropTypes.func.isRequired,
+  clearContestList: PropTypes.func.isRequired,
+  newFilter: PropTypes.func.isRequired,
+  contests: PropTypes.array.isRequired,
+};
 
 const mapStateToProps = (state) => {
   return state.contestsList;

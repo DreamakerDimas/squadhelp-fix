@@ -1,7 +1,8 @@
 import React from 'react';
-import styles from './ContestBox.module.sass';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import CONSTANTS from '../../constants';
+import styles from './ContestBox.module.sass';
 
 const ContestBox = (props) => {
   const getTimeStr = () => {
@@ -84,6 +85,10 @@ const ContestBox = (props) => {
       </div>
     </div>
   );
+};
+
+ContestBox.propTypes = {
+  data: PropTypes.object.isRequired,
 };
 
 export default ContestBox;

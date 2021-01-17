@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { authActionResetMail, clearAuth } from '../../actions/actionCreator';
-import styles from './ResetPasswordForm.module.sass';
+import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
+import { authActionResetMail, clearAuth } from '../../actions/actionCreator';
 import FormInput from '../FormInput/FormInput';
 import customValidator from '../../validators/validator';
 import Schemes from '../../validators/validationSchemes';
 import Error from '../../components/Error/Error';
-
+import styles from './ResetPasswordForm.module.sass';
 class ResetPasswordForm extends React.Component {
   componentWillUnmount() {
     this.props.authClear();
@@ -73,6 +73,14 @@ class ResetPasswordForm extends React.Component {
     );
   }
 }
+
+ResetPasswordForm.propTypes = {
+  auth: PropTypes.object.isRequired,
+  resetRequest: PropTypes.func.isRequired,
+  authClear: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+};
 
 const mapStateToProps = (state) => {
   const { auth } = state;

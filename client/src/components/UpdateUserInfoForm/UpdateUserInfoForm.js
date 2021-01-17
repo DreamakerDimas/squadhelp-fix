@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { clearUserError } from '../../actions/actionCreator';
 import styles from './UpdateUserInfoForm.module.sass';
 import ImageUpload from '../InputComponents/ImageUpload/ImageUpload';
@@ -79,6 +80,14 @@ const UpdateUserInfoForm = (props) => {
       </button>
     </form>
   );
+};
+
+UpdateUserInfoForm.propTypes = {
+  error: PropTypes.object,
+  initialValues: PropTypes.object.isRequired,
+  clearUserError: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => {

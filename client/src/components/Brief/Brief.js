@@ -6,6 +6,7 @@ import {
 } from '../../actions/actionCreator';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import ContestForm from '../../components/ContestForm/ContestForm';
 import styles from './Brief.module.sass';
 import { submit } from 'redux-form';
@@ -107,6 +108,19 @@ const Brief = (props) => {
       </div>
     );
   }
+};
+
+Brief.propTypes = {
+  userStore: PropTypes.object,
+  updateContestStore: PropTypes.object,
+  isEditContest: PropTypes.bool,
+  update: PropTypes.func,
+  changeEditContest: PropTypes.func,
+  updateContest: PropTypes.func,
+  clearUpdateContestStore: PropTypes.func,
+  contestData: PropTypes.object,
+  role: PropTypes.string,
+  goChat: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {

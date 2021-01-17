@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './RoleInput.module.sass';
 
 const RoleInput = ({ label, id, strRole, infoRole, input, type }) => {
@@ -13,6 +14,14 @@ const RoleInput = ({ label, id, strRole, infoRole, input, type }) => {
       </div>
     </label>
   );
+};
+
+RoleInput.propTypes = {
+  id: PropTypes.string,
+  strRole: PropTypes.string,
+  infoRole: PropTypes.string,
+  input: PropTypes.object,
+  type: PropTypes.string,
 };
 
 export default RoleInput;

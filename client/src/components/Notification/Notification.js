@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import styles from './Notification.module.sass';
 
@@ -18,6 +19,11 @@ const Notification = (props) => {
       )}
     </div>
   );
+};
+
+Notification.propTypes = {
+  message: PropTypes.string,
+  contestId: PropTypes.number,
 };
 
 export default withRouter(Notification);

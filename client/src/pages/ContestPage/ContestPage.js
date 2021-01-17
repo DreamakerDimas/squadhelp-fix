@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
   getContestById,
   setOfferStatus,
@@ -8,7 +10,6 @@ import {
   changeContestViewMode,
   changeShowImage,
 } from '../../actions/actionCreator';
-import { connect } from 'react-redux';
 import Header from '../../components/Header/Header';
 import ContestSideBar from '../../components/ContestSideBar/ContestSideBar';
 import styles from './ContestPage.module.sass';
@@ -211,6 +212,19 @@ class ContestPage extends React.Component {
     );
   }
 }
+
+ContestPage.propTypes = {
+  contestByIdStore: PropTypes.object.isRequired,
+  userStore: PropTypes.object.isRequired,
+  chatStore: PropTypes.object.isRequired,
+  getData: PropTypes.func.isRequired,
+  setOfferStatus: PropTypes.func.isRequired,
+  clearSetOfferStatusError: PropTypes.func.isRequired,
+  goToExpandedDialog: PropTypes.func.isRequired,
+  changeEditContest: PropTypes.func.isRequired,
+  changeContestViewMode: PropTypes.func.isRequired,
+  changeShowImage: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => {
   const { contestByIdStore, userStore, chatStore } = state;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 const FormInput = (props) => {
@@ -28,6 +29,14 @@ const FormInput = (props) => {
       )}
     </div>
   );
+};
+
+FormInput.propTypes = {
+  label: PropTypes.string,
+  input: PropTypes.object,
+  type: PropTypes.string,
+  classes: PropTypes.object,
+  meta: PropTypes.object,
 };
 
 export default FormInput;

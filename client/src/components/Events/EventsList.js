@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import EventComponent from './EventComponent/EventComponent';
 import styles from './EventsList.module.sass';
 
@@ -18,6 +19,10 @@ const EventsList = ({ eventsArr }) => {
       ))}
     </div>
   );
+};
+
+EventsList.propTypes = {
+  eventsArr: PropTypes.array.isRequired,
 };
 
 export default EventsList;

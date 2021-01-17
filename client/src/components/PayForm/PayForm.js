@@ -1,13 +1,13 @@
 import React from 'react';
 import Cards from 'react-credit-cards';
-import styles from './PayForm.module.sass';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
+import PropTypes from 'prop-types';
 import { changeFocusOnCard } from '../../actions/actionCreator';
 import PayInput from '../InputComponents/PayInput/PayInput';
 import customValidator from '../../validators/validator';
 import Schemes from '../../validators/validationSchemes';
-
+import styles from './PayForm.module.sass';
 import 'react-credit-cards/es/styles-compiled.css';
 
 let isPayForOrder;
@@ -147,6 +147,17 @@ const PayForm = (props) => {
       </div>
     </div>
   );
+};
+
+PayForm.propTypes = {
+  focusOnElement: PropTypes.string,
+  name: PropTypes.string,
+  number: PropTypes.string,
+  cvc: PropTypes.string,
+  expiry: PropTypes.string,
+  changeFocusOnCard: PropTypes.func.isRequired,
+  back: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

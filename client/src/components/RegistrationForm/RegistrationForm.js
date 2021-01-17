@@ -1,6 +1,7 @@
 import React from 'react';
 import Error from '../Error/Error';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { authActionRegister, clearAuth } from '../../actions/actionCreator';
 import styles from './RegistrationForm.module.sass';
 import { Field, reduxForm } from 'redux-form';
@@ -143,6 +144,14 @@ class RegistrationForm extends React.Component {
     );
   }
 }
+
+RegistrationForm.propTypes = {
+  auth: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+  authClear: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => {
   return {

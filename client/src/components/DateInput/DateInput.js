@@ -1,5 +1,6 @@
 import React from 'react';
 import MomentInput from 'react-moment-input';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 const DateInput = (props) => {
@@ -32,6 +33,14 @@ const DateInput = (props) => {
       )}
     </div>
   );
+};
+
+DateInput.propTypes = {
+  input: PropTypes.object,
+  min: PropTypes.object,
+  max: PropTypes.object,
+  classes: PropTypes.object,
+  meta: PropTypes.object,
 };
 
 export default DateInput;

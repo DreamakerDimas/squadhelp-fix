@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './Error.module.sass';
 
 const Error = (props) => {
@@ -31,6 +32,13 @@ const Error = (props) => {
       )}
     </div>
   );
+};
+
+Error.propTypes = {
+  status: PropTypes.number,
+  data: PropTypes.string,
+  clearError: PropTypes.func,
+  withoutClosing: PropTypes.bool,
 };
 
 export default Error;

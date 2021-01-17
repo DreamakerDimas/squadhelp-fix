@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
   getContestsForCreative,
   clearContestList,
@@ -287,6 +288,16 @@ class CreatorDashboard extends React.Component {
     );
   }
 }
+
+CreatorDashboard.propTypes = {
+  dataForContest: PropTypes.object.isRequired,
+  getContests: PropTypes.func.isRequired,
+  clearContestsList: PropTypes.func.isRequired,
+  newFilter: PropTypes.func.isRequired,
+  getDataForContest: PropTypes.func.isRequired,
+  creatorFilter: PropTypes.object.isRequired,
+  isFetching: PropTypes.bool,
+};
 
 const mapStateToProps = (state) => {
   const { contestsList, dataForContest } = state;

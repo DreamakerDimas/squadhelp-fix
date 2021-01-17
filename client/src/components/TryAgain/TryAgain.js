@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './TryAgain.module.sass';
 
 const TryAgain = (props) => {
@@ -9,6 +10,10 @@ const TryAgain = (props) => {
       <i className="fas fa-redo" onClick={() => getData()} />
     </div>
   );
+};
+
+TryAgain.propTypes = {
+  getData: PropTypes.func.isRequired,
 };
 
 export default TryAgain;

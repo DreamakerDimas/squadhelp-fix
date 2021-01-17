@@ -1,8 +1,7 @@
 import React from 'react';
-import Header from '../../components/Header/Header';
 import { connect } from 'react-redux';
-import styles from './UserProfile.module.sass';
-import CONSTANTS from '../../constants';
+import PropTypes from 'prop-types';
+import Header from '../../components/Header/Header';
 import UserInfo from '../../components/UserInfo/UserInfo';
 import PayForm from '../../components/PayForm/PayForm';
 import classNames from 'classnames';
@@ -12,6 +11,8 @@ import {
   clearPaymentStore,
 } from '../../actions/actionCreator';
 import Error from '../../components/Error/Error';
+import styles from './UserProfile.module.sass';
+import CONSTANTS from '../../constants';
 
 const UserProfile = (props) => {
   const pay = (values) => {
@@ -81,6 +82,16 @@ const UserProfile = (props) => {
       </div>
     </div>
   );
+};
+
+UserProfile.propTypes = {
+  balance: PropTypes.number.isRequired,
+  role: PropTypes.string.isRequired,
+  profileModeView: PropTypes.string.isRequired,
+  error: PropTypes.object.isRequired,
+  cashOut: PropTypes.func.isRequired,
+  changeProfileModeView: PropTypes.func.isRequired,
+  clearPaymentStore: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

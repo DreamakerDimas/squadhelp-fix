@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { payRequest, clearPaymentStore } from '../../actions/actionCreator';
 import PayForm from '../../components/PayForm/PayForm';
 import styles from './Payment.module.sass';
@@ -70,6 +71,13 @@ const Payment = (props) => {
       </div>
     </div>
   );
+};
+
+Payment.propTypes = {
+  payment: PropTypes.object.isRequired,
+  contestStore: PropTypes.object.isRequired,
+  pay: PropTypes.func.isRequired,
+  clearPaymentStore: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

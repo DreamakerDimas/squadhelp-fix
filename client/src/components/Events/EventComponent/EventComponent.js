@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import { ProgressBar } from 'react-bootstrap';
 import CONSTANTS from '../../../constants';
 import styles from './EventComponent.module.sass';
@@ -138,6 +139,15 @@ const EventComponent = ({
       </div>
     </div>
   );
+};
+
+EventComponent.propTypes = {
+  name: PropTypes.string.isRequired,
+  startDate: PropTypes.string.isRequired,
+  endDate: PropTypes.string.isRequired,
+  notificationDate: PropTypes.string.isRequired,
+  isAlarmed: PropTypes.bool.isRequired,
+  isEnded: PropTypes.bool.isRequired,
 };
 
 export default EventComponent;

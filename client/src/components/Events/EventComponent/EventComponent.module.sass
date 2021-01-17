@@ -32,10 +32,12 @@
 
     .datesContainer
         width: 100%
-        padding: 0 10px
         display: flex
+        flex-direction: row
         align-items: center
         justify-content: space-around
+        @media ( max-width: 880px )
+            flex-direction: column
         
         .date
             display: flex
@@ -46,6 +48,8 @@
             border-radius: 5px
             color: white
             padding: 5px 10px
+            @media ( max-width: 880px )
+                margin: 10px auto
             span
                 flex-grow: 1
                 font-size: 18px

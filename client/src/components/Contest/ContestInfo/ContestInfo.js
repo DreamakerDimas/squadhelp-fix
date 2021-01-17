@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from '../../Brief/Brief.module.sass';
 import CONSTANTS from '../../../constants';
 import LogoContestSpecialInfo from './LogoContestSpecialInfo';
@@ -94,6 +95,14 @@ const ContestInfo = (props) => {
       </div>
     </div>
   );
+};
+
+ContestInfo.propTypes = {
+  changeEditContest: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
+  contestData: PropTypes.object.isRequired,
+  role: PropTypes.string.isRequired,
+  goChat: PropTypes.func.isRequired,
 };
 
 export default ContestInfo;

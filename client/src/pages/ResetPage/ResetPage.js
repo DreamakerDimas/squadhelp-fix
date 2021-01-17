@@ -38,10 +38,4 @@ const ResetPage = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    clearError: () => dispatch(clearErrorSignUpAndLogin()),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(ResetPage);
+export default ResetPage;

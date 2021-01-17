@@ -1,14 +1,15 @@
 import React from 'react';
-import CONSTANTS from '../../constants';
-import { connect } from 'react-redux';
-import { setOffer, clearAddOfferError } from '../../actions/actionCreator';
-import styles from './OfferForm.module.sass';
 import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { setOffer, clearAddOfferError } from '../../actions/actionCreator';
 import ImageUpload from '../InputComponents/ImageUpload/ImageUpload';
 import FormInput from '../FormInput/FormInput';
 import customValidator from '../../validators/validator';
 import Schemes from '../../validators/validationSchemes';
 import Error from '../../components/Error/Error';
+import styles from './OfferForm.module.sass';
+import CONSTANTS from '../../constants';
 
 let contestType;
 
@@ -77,6 +78,18 @@ const OfferForm = (props) => {
       </form>
     </div>
   );
+};
+
+OfferForm.propTypes = {
+  addOfferError: PropTypes.object.isRequired,
+  contestType: PropTypes.string.isRequired,
+  clearOfferError: PropTypes.func.isRequired,
+  setNewOffer: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  valid: PropTypes.bool.isRequired,
+  contestId: PropTypes.string.isRequired,
+  customerId: PropTypes.string.isRequired,
+  reset: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => {

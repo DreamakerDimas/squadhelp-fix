@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { authActionLogin, clearAuth } from '../../actions/actionCreator';
 import styles from './LoginForm.module.sass';
 import { Field, reduxForm } from 'redux-form';
@@ -68,6 +69,14 @@ class LoginForm extends React.Component {
     );
   }
 }
+
+LoginForm.propTypes = {
+  auth: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+  authClear: PropTypes.func.isRequired,
+  loginRequest: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => {
   const { auth } = state;

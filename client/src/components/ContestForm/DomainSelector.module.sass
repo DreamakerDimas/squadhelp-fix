@@ -1,0 +1,57 @@
+.buttonsContainer 
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-self: center
+    width: 100%
+    @media(max-width: 600px)
+        flex-direction: column
+    
+
+    .buttonContainer
+        box-sizing: border-box
+        display: flex
+        flex-direction: column
+        justify-content: space-around
+        margin: 0 15px 32px 15px !important
+        padding: 15px 20px
+        align-items: center
+        background-color: white !important
+        border: 1px solid #e7eaf3
+        border-radius: .3125rem !important
+        transition: 0.3s
+        cursor: default !important
+        @media(max-width: 600px)
+            flex-direction: row
+            margin: 15px 0 !important
+        &:hover
+            border-color: rgba(44,185,183,.2)
+            box-shadow: 0 0 5px rgba(44,185,183,.125)
+            
+
+    .buttonHeader
+        padding: 7px 15px
+        border-radius: 10rem
+        font-size: 75%
+        line-height: 1
+        color: white
+        background-color: #77838f
+        margin-bottom: 16px
+        transition: all 0.2s ease-in-out
+        @media(max-width: 600px)
+            flex-direction: row
+            margin: 0
+
+    .buttonText
+        font-size: 13px
+        color: #77838f
+        line-height: 1.5
+        text-align: center
+        width: 100%
+
+.selected
+    border: 3px solid rgba(44,185,183,.6) !important
+    .buttonHeader
+        background-color: #2cb9b7 !important
+    .buttonText
+        color: #555C6B !important

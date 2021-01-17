@@ -21,6 +21,7 @@ const ContestCreationPage = (props) => {
         ? '/payment'
         : props.bundleStore.bundle[props.contestType] + 'Contest'
     );
+    console.log(values);
   };
 
   !props.bundleStore.bundle && props.history.replace('/startContest');

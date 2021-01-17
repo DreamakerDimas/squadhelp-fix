@@ -85,4 +85,12 @@ export default {
     ALARMED_EVENTS: 'ALARMED_EVENTS',
   },
   MOMENT_FORMAT: 'YYYY-MM-DD HH:mm',
+  // Important: Don't change the order of strings in domain arrays (index dependency)
+  DOMAIN_TYPES_ARR: ['asname', 'yes', 'no'],
+  DOMAIN_BUTT_HEADERS: { asname: 'Yes', yes: 'Yes', no: 'No' },
+  DOMAIN_BUTT_TEXTS: {
+    asname: 'The Domain should exactly match the name',
+    yes: 'But minor variations are allowed (Recommended)',
+    no: 'I am only looking for a name, not a Domain',
+  },
 };

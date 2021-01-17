@@ -28,7 +28,7 @@
     padding: 3px 20px
     color: #333
   .textArea
-    width: 550px
+    width: 100%
     height: 250px
     box-sizing: border-box
     box-shadow: none
@@ -44,12 +44,10 @@
     padding: 10px 10px
     color: #555
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
-    @media(max-width: 700px)
-      width: auto
     &:focus
       border: 2px solid #28d2d0
   .input
-    width: 550px
+    width: 100%
     height: 46px
     box-sizing: border-box
     box-shadow: none
@@ -65,8 +63,6 @@
     padding: 0 10px
     color: #555
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
-    @media(max-width: 700px)
-      width: auto
     &:focus
       border: 2px solid #28d2d0
 
@@ -77,20 +73,21 @@
   justify-content: center
   align-items: center
   width: 100%
-  @media (max-width: 700px)
-    justify-content: center
   form
     display: flex
     flex-direction: column
+    padding: 10px 20px
+    @media(max-width: 600px)
+      padding: 10px 30px
 
 
   .selectInputContainer
-    margin: 15px 0 0 0
+    margin-top: 15px
     display: flex
     flex-direction: column
     width: 100%
     .select
-      width: 550px
+      width: 100%
       height: 46px
       box-sizing: border-box
       box-shadow: none
@@ -106,8 +103,6 @@
       padding: 0 10px
       color: #555
       transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
-      @media(max-width: 700px)
-        width: min-content
       &:focus
         border: 2px solid #28d2d0
     .selectHeader
@@ -119,7 +114,10 @@
       margin-bottom: 5px
 
 .inputContainer
-  margin: 15px 0 0 0
+  display: flex
+  flex-direction: column
+  align-items: stretch
+  margin-top: 15px
   width: 100%
   .inputHeader
     display: inline-block
@@ -140,8 +138,6 @@
   margin: 10px 0
   padding: 10px 15px
   background-color: #eee
-  @media(max-width: 700px)
-    width: auto
   @media(max-width: 600px)
     display: flex
     flex-direction: column

@@ -50,7 +50,7 @@ class SelectInput extends React.Component {
 
 SelectInput.propTypes = {
   optionsArray: PropTypes.array.isRequired,
-  valueArray: PropTypes.array.isRequired,
+  valueArray: PropTypes.array,
 };
 
 export default SelectInput;

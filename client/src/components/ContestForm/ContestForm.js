@@ -14,6 +14,7 @@ import Schemes from '../../validators/validationSchemes';
 import FieldFileInput from '../InputComponents/FieldFileInput/FieldFileInput';
 import FormTextArea from '../InputComponents/FormTextArea/FormTextArea';
 import TryAgain from '../TryAgain/TryAgain';
+import DomainSelector from './DomainSelector';
 
 let submitFunc;
 
@@ -219,6 +220,17 @@ class ContestForm extends React.Component {
                       warning: styles.warning,
                     }}
                   />
+                </div>
+                <div className={styles.inputContainer}>
+                  <span className={styles.inputHeader}>
+                    Do you want a matching domain (.com URL) with your name?
+                  </span>
+                  <p>
+                    If you want a matching domain, our platform will only accept
+                    those name suggestions where the domain is available.
+                    (Recommended)
+                  </p>
+                  <Field name="domain" component={DomainSelector} />
                 </div>
                 {this.renderSpecialInputs()}
                 <Field

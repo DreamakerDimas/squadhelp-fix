@@ -81,14 +81,14 @@ const OfferForm = (props) => {
 };
 
 OfferForm.propTypes = {
-  addOfferError: PropTypes.object.isRequired,
+  addOfferError: PropTypes.object,
   contestType: PropTypes.string.isRequired,
   clearOfferError: PropTypes.func.isRequired,
   setNewOffer: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   valid: PropTypes.bool.isRequired,
-  contestId: PropTypes.string.isRequired,
-  customerId: PropTypes.string.isRequired,
+  contestId: PropTypes.number.isRequired,
+  customerId: PropTypes.number.isRequired,
   reset: PropTypes.func.isRequired,
 };
 

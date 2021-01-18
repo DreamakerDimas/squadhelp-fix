@@ -89,7 +89,7 @@ const ContestSideBar = (props) => {
 
 ContestSideBar.propTypes = {
   contestData: PropTypes.object.isRequired,
-  totalEntries: PropTypes.string,
+  totalEntries: PropTypes.number,
   data: PropTypes.object,
 };
 

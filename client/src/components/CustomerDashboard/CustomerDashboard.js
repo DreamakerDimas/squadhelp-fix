@@ -134,7 +134,7 @@ class CustomerDashboard extends React.Component {
 
 CustomerDashboard.propTypes = {
   getContests: PropTypes.func.isRequired,
-  clearContestList: PropTypes.func.isRequired,
+  clearContestList: PropTypes.func,
   newFilter: PropTypes.func.isRequired,
   contests: PropTypes.array.isRequired,
 };

@@ -3,6 +3,7 @@ const basicMiddlewares = require('../middlewares/basicMiddlewares');
 const hashPass = require('../middlewares/hashPass');
 const userController = require('../controllers/userController');
 const contestController = require('../controllers/contestController');
+const offerController = require('../controllers/offerController');
 const {
   checkAuth,
   checkToken,
@@ -90,14 +91,14 @@ router.post(
   checkToken,
   upload.uploadLogoFiles,
   basicMiddlewares.canSendOffer,
-  contestController.setNewOffer
+  offerController.setNewOffer
 );
 
 router.post(
   '/setOfferStatus',
   checkToken,
   basicMiddlewares.onlyForCustomerWhoCreateContest,
-  contestController.setOfferStatus
+  offerController.setOfferStatus
 );
 
 router.put(
@@ -154,5 +155,7 @@ router.delete(
 );
 
 router.get('/getCatalogList', checkToken, chatController.getCatalogList);
+
+router.get('/getAllPendingOffers', getAllPendingOffers);
 
 module.exports = router;

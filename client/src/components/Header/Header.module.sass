@@ -143,10 +143,6 @@
       border-left: 1px solid #ebebeb
       height: 40px
       @media(max-width: 600px)
-        margin-left: 60px
-      @media(max-width: 400px)
-        margin-left: 20px
-      @media(max-width: 320px)
         margin-left: 0
 
       .emailIcon
@@ -156,19 +152,22 @@
           cursor: pointer
 
       .userInfo
+        box-sizing: border-box
+        position: relative
         display: flex
+        flex-direction: row
         justify-content: center
         align-items: center
         padding: 10px 15px
         border-right: 1px solid #ebebeb
-        width: 181px
+        box-sizing: border-box
 
         &:hover
           cursor: default
           ul
             display: block
             position: absolute
-            top: 70px
+            top: 40px
 
         ul
           box-sizing: border-box
@@ -177,6 +176,7 @@
           z-index: 500
           list-style: none
           background: white
+          width: 100%
           display: none
 
           li
@@ -228,11 +228,9 @@
       padding: 0 15px
       border-right: 1px solid #ebebeb
       border-left: 1px solid #ebebeb
-      margin-left: 120px
+      margin-left: 90px
       height: 40px
-      @media(max-width: 600px)
-        margin-left: 10px
-      @media(max-width: 360px)
+      @media(max-width: 660px)
         padding: 0 5px
         margin-left: 0
 
@@ -249,7 +247,7 @@
           color: #337ab7
 
   .fixedHeader
-    z-index: 500
+    z-index: 1001
     display: flex
     justify-content: center
     align-items: center

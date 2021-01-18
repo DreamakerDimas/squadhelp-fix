@@ -21,6 +21,11 @@ class Header extends React.Component {
   startContests = () => {
     this.props.history.push('/startContest');
   };
+
+  openOffers = () => {
+    this.props.history.push('/offersModeration');
+  };
+
   renderLoginButtons = () => {
     if (this.props.data) {
       return (
@@ -261,12 +266,21 @@ class Header extends React.Component {
                 </li>
               </ul>
             </div>
-            {this.props.data && this.props.data.role !== CONSTANTS.CREATOR && (
+            {/* START CONTEST BUTTON FOR CUSTOMER */}
+            {this.props.data && this.props.data.role === CONSTANTS.CUSTOMER && (
               <div
                 className={styles.startContestBtn}
                 onClick={this.startContests}
               >
                 START CONTEST
+              </div>
+            )}
+            {/* END of button for CUSTOMER */}
+
+            {/* */}
+            {this.props.data && this.props.data.role === CONSTANTS.MODERATOR && (
+              <div className={styles.startContestBtn} onClick={this.openOffers}>
+                OFFERS
               </div>
             )}
           </div>

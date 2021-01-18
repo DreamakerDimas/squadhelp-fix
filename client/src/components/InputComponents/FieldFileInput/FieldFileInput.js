@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const FieldFileInput = (props) => {
   const getFileName = () => {
@@ -36,6 +37,11 @@ const FieldFileInput = (props) => {
       />
     </div>
   );
+};
+
+FieldFileInput.propTypes = {
+  input: PropTypes.object.isRequired,
+  classes: PropTypes.object,
 };
 
 export default FieldFileInput;

@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 const ImageUpload = (props) => {
   const onChange = (e) => {
@@ -39,6 +40,11 @@ const ImageUpload = (props) => {
       <img id="imagePreview" className={classNames({ [imgStyle]: !!value })} />
     </div>
   );
+};
+
+ImageUpload.propTypes = {
+  input: PropTypes.object,
+  classes: PropTypes.object,
 };
 
 export default ImageUpload;

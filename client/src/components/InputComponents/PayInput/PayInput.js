@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import InputMask from 'react-input-mask';
+import PropTypes from 'prop-types';
 
 const PayInput = (props) => {
   const {
@@ -61,6 +62,17 @@ const PayInput = (props) => {
       </div>
     );
   }
+};
+
+PayInput.propTypes = {
+  label: PropTypes.string,
+  input: PropTypes.object,
+  changeFocus: PropTypes.func,
+  type: PropTypes.string,
+  classes: PropTypes.object,
+  meta: PropTypes.object,
+  isInputMask: PropTypes.bool,
+  mask: PropTypes.string,
 };
 
 export default PayInput;

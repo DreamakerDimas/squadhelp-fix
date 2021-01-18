@@ -136,12 +136,11 @@ const EventComponent = ({
           </h3>
         )}
         {isEnded && <h3 className={styles.endMessage}>Event was over!</h3>}
+        {!isEnded && (
+          <div className={styles.remainingTime}> {getRemainingTime()} </div>
+        )}
       </div>
       <div className={styles.progressBarContainer}>{renderProgressBar()}</div>
-
-      {!isEnded && (
-        <div className={styles.remainingTime}> {getRemainingTime()} </div>
-      )}
 
       <div className={styles.datesContainer}>
         <div className={styles.date}>

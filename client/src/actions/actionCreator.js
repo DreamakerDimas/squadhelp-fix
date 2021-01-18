@@ -457,3 +457,9 @@ export const sortEvents = () => {
     type: ACTION.SORT_EVENTS,
   };
 };
+
+export const clearEventsStore = () => {
+  return {
+    type: ACTION.CLEAR_EVENTS,
+  };
+};

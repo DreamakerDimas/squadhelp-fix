@@ -5,6 +5,7 @@ import {
   getEvents,
   checkEvents,
   sortEvents,
+  clearEventsStore,
 } from '../../actions/actionCreator';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -25,6 +26,7 @@ const EventsPage = ({
   checkEvents,
   sortEvents,
   getEvents,
+  clearEventsStore,
   isFetching,
 }) => {
   const [eventsArr, setEventsArr] = useState([]);
@@ -34,9 +36,17 @@ const EventsPage = ({
   // --Events Controller--
   // on mount
   useEffect(() => {
-    checkEvents();
-    sortEvents();
-    getEvents();
+    const eventsInit = () => {
+      checkEvents();
+      sortEvents();
+      getEvents();
+    };
+    eventsInit();
+
+    // on unmount
+    return () => {
+      clearEventsStore();
+    };
   }, []);
 
   // check events each 10 minutes
@@ -158,6 +168,7 @@ const mapDispatchToProps = (dispatch) => {
     checkEvents: () => dispatch(checkEvents()),
     sortEvents: () => dispatch(sortEvents()),
     getEvents: () => dispatch(getEvents()),
+    clearEventsStore: () => dispatch(clearEventsStore()),
   };
 };
 

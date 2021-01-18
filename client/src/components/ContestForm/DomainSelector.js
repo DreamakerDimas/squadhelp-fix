@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { change } from 'redux-form';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import styles from './DomainSelector.module.sass';
 import CONSTANTS from '../../constants';
 
@@ -10,11 +11,12 @@ const activeButtClass = classNames({
   [styles.selected]: true,
 });
 
-const ButtonGroupComponent = (props) => {
+const DomainSelector = (props) => {
   const {
     input,
     meta: { dispatch, form },
   } = props;
+
   const {
     DOMAIN_TYPES_ARR,
     DOMAIN_BUTT_HEADERS,
@@ -67,4 +69,9 @@ const ButtonGroupComponent = (props) => {
   );
 };
 
-export default ButtonGroupComponent;
+DomainSelector.propTypes = {
+  input: PropTypes.object,
+  meta: PropTypes.object.isRequired,
+};
+
+export default DomainSelector;

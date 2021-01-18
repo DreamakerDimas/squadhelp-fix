@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 const FormTextArea = ({ label, input, classes, meta: { touched, error } }) => {
   const { container, inputStyle, notValid, warning } = classes;
@@ -13,6 +14,13 @@ const FormTextArea = ({ label, input, classes, meta: { touched, error } }) => {
       {touched && error && <span className={warning}>{error}</span>}
     </div>
   );
+};
+
+FormTextArea.propTypes = {
+  label: PropTypes.string,
+  input: PropTypes.object,
+  classes: PropTypes.object,
+  meta: PropTypes.object,
 };
 
 export default FormTextArea;

@@ -21,7 +21,7 @@ import {
   getContestByIdSaga,
   downloadContestFileSaga,
 } from './contestsSagas';
-import { changeMarkSaga, setOfferStatusSaga, addOfferSaga } from './offerSagas';
+import { changeMarkSaga, setOfferStatusSaga, addOfferSaga, getOffersSaga } from './offerSagas';
 import {
   previewSaga,
   getDialog,
@@ -86,6 +86,7 @@ function* rootSaga() {
   yield takeLatest(ACTION.CHECK_EVENTS, checkEvents);
   yield takeLatest(ACTION.SORT_EVENTS, sortEvents);
   yield takeLatest(ACTION.CLEAR_EVENTS, clearEvents);
+  yield takeLatest(ACTION.GET_OFFERS, getOffersSaga)
 }
 
 export default rootSaga;

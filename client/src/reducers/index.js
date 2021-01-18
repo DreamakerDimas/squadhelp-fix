@@ -12,6 +12,7 @@ import updateContestReducer from './updateContestReducer';
 import chatReducer from './chatReducer';
 import userProfileReducer from './userProfileReducer';
 import eventReducer from './eventReducer';
+import offersReducer from './offersReducer';
 
 const appReducer = combineReducers({
   form: formReducer,
@@ -27,6 +28,7 @@ const appReducer = combineReducers({
   chatStore: chatReducer,
   userProfile: userProfileReducer,
   eventsStore: eventReducer,
+  offersStore: offersReducer,
 });
 
 export default appReducer;

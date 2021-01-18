@@ -51,3 +51,14 @@ export function* setOfferStatusSaga(action) {
     yield put({ type: ACTION.SET_OFFER_STATUS_ERROR, error: e.response });
   }
 }
+
+export function* getOffersSaga(action) {
+  yield put({ type: ACTION.GET_OFFERS_REQUEST });
+  try {
+    console.log('action.data', action.data);
+    const response = yield restController.getAllPendingOffers(action.data);
+    yield put({ type: ACTION.GET_OFFERS_SUCCESS, data: response.data });
+  } catch (e) {
+    yield put({ type: ACTION.GET_OFFERS_ERROR, error: e });
+  }
+}

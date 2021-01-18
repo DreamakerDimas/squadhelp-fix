@@ -156,6 +156,6 @@ router.delete(
 
 router.get('/getCatalogList', checkToken, chatController.getCatalogList);
 
-router.get('/getAllPendingOffers', getAllPendingOffers);
+router.post('/getAllPendingOffers', offerController.getAllPendingOffers);
 
 module.exports = router;

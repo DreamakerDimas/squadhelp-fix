@@ -463,3 +463,10 @@ export const clearEventsStore = () => {
     type: ACTION.CLEAR_EVENTS,
   };
 };
+
+export const getOffers = (data) => {
+  return {
+    type: ACTION.GET_OFFERS,
+    data: data,
+  };
+};

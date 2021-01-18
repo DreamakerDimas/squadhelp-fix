@@ -55,7 +55,7 @@ module.exports.getContestById = async (req, res, next) => {
           where:
             req.tokenData.role === CONSTANTS.CREATOR
               ? { userId: req.tokenData.userId }
-              : {},
+              : { moderationStatus: CONSTANTS.MODERATION_STATUS_CHECKED },
           attributes: { exclude: ['userId', 'contestId'] },
           include: [
             {
@@ -249,7 +249,10 @@ module.exports.setOfferStatus = async (req, res, next) => {
 
 module.exports.getCustomersContests = (req, res, next) => {
   db.Contests.findAll({
-    where: { status: req.headers.status, userId: req.tokenData.userId },
+    where: {
+      status: req.headers.status,
+      userId: req.tokenData.userId,
+    },
     limit: req.body.limit,
     offset: req.body.offset ? req.body.offset : 0,
     order: [['id', 'DESC']],
@@ -258,6 +261,9 @@ module.exports.getCustomersContests = (req, res, next) => {
         model: db.Offers,
         required: false,
         attributes: ['id'],
+        where: {
+          moderationStatus: CONSTANTS.MODERATION_STATUS_CHECKED,
+        },
       },
     ],
   })

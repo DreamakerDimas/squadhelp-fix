@@ -21,7 +21,7 @@ const ModeratedOffer = ({ data, moderateHandler, changeShowImage }) => {
         <span>Contest Id: {data.contestId}</span>
       </div>
       <div className={styles.offerBody}>
-        {data.text && <span>Text: {data.text}</span>}
+        {data.text && <span>{data.text}</span>}
         {data.fileName && (
           <img
             className={styles.image}

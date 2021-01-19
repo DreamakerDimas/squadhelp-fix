@@ -53,7 +53,7 @@ module.exports.resetPasswordTokenCheck = async (req, res, next) => {
   }
 };
 
-module.export.checkModeratorToken = async (req, res, next) => {
+module.exports.checkModeratorToken = async (req, res, next) => {
   const accessToken = req.headers.authorization;
   if (!accessToken) {
     return next(new TokenError('need token'));
@@ -61,10 +61,10 @@ module.export.checkModeratorToken = async (req, res, next) => {
   try {
     const tokenData = jwt.verify(accessToken, CONSTANTS.JWT_SECRET);
     const foundUser = await userQueries.findUser({ id: tokenData.userId });
-    if (foundUser.role === 'moderator') {
-      next();
+    if (foundUser.role !== 'moderator') {
+      next(new RightsError());
     }
-    next(new RightsError());
+    next();
   } catch (err) {
     next(new TokenError());
   }

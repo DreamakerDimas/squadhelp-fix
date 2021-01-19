@@ -41,7 +41,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/how-it-works" component={HowItWorks} />
-          <Route exact path="/events" component={EventsPage} />
+          <Route exact path="/events" component={PrivateHoc(EventsPage)} />
           <Route
             exact
             path="/login"

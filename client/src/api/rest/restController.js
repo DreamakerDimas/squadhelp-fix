@@ -76,3 +76,6 @@ export const getAllPendingOffers = (data) =>
     offset: data.offset,
     order: data.order,
   });
+
+export const updateOfferModerationStatus = (data) =>
+  http.put('updateOfferModerationStatus', data);

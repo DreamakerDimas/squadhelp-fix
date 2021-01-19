@@ -470,3 +470,10 @@ export const getOffers = (data) => {
     data: data,
   };
 };
+
+export const moderateOffer = (data) => {
+  return {
+    type: ACTION.MODERATOR_OFFER_UPDATE,
+    data: data,
+  };
+};

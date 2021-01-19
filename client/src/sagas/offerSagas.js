@@ -55,10 +55,19 @@ export function* setOfferStatusSaga(action) {
 export function* getOffersSaga(action) {
   yield put({ type: ACTION.GET_OFFERS_REQUEST });
   try {
-    console.log('action.data', action.data);
     const response = yield restController.getAllPendingOffers(action.data);
     yield put({ type: ACTION.GET_OFFERS_SUCCESS, data: response.data });
   } catch (e) {
-    yield put({ type: ACTION.GET_OFFERS_ERROR, error: e });
+    yield put({ type: ACTION.GET_OFFERS_ERROR, error: e.response });
+  }
+}
+
+export function* moderatorOfferUpdateSaga(action) {
+  yield put({ type: ACTION.MODERATOR_UPDATE_OFFER_REQUEST });
+  try {
+    yield restController.updateOfferModerationStatus(action.data);
+    yield put({ type: ACTION.MODERATOR_UPDATE_OFFER_SUCCESS });
+  } catch (e) {
+    yield put({ type: ACTION.MODERATOR_UPDATE_OFFER_ERROR, error: e.response });
   }
 }

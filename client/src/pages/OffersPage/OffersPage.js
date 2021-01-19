@@ -5,14 +5,18 @@ import styles from './OffersPage.module.sass';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import SpinnerLoader from '../../components/Spinner/Spinner';
-import { getOffers } from '../../actions/actionCreator';
+import {
+  getOffers,
+  moderateOffer,
+  setOffer,
+} from '../../actions/actionCreator';
 import ModeratedOffer from '../../components/ModeratedOffer/ModeratedOffer';
 
 const initSettings = { limit: 10, offset: 0, order: 'asc', page: 1 };
 
 // offset = (page-1)*limit
 
-const OffersPage = ({ isFetching, getOffers, offersStore }) => {
+const OffersPage = ({ isFetching, getOffers, moderateOffer, offersStore }) => {
   const [offersArr, setOffersArr] = useState([]);
   const [settings, setSettings] = useState(initSettings);
 
@@ -25,12 +29,6 @@ const OffersPage = ({ isFetching, getOffers, offersStore }) => {
   useEffect(() => {
     setOffersArr(offersStore.offers);
   }, [offersStore.offers]);
-
-  const renderOffers = () => {
-    return offersArr.map((offer) => {
-      return <ModeratedOffer key={offer.id} data={offer} />;
-    });
-  };
 
   const nextHandler = () => {
     setSettings((prevSettings) => {
@@ -54,6 +52,25 @@ const OffersPage = ({ isFetching, getOffers, offersStore }) => {
     });
   };
 
+  const moderateHandler = (id, isAccepted) => {
+    moderateOffer({ id, isAccepted });
+    setTimeout(() => {
+      getOffers(settings);
+    }, 1000); // for animation and fix
+  };
+
+  const renderOffers = () => {
+    return offersArr.map((offer) => {
+      return (
+        <ModeratedOffer
+          key={offer.id}
+          data={offer}
+          moderateHandler={moderateHandler}
+        />
+      );
+    });
+  };
+
   return (
     <>
       <Header />
@@ -64,7 +81,7 @@ const OffersPage = ({ isFetching, getOffers, offersStore }) => {
           <div className={styles.mainContainer}>
             <div className={styles.settings}></div>
             <div className={styles.contentContainer}>
-              {offersStore.isFetching ? <Footer /> : renderOffers()}
+              {offersStore.isFetching ? <SpinnerLoader /> : renderOffers()}
             </div>
             <div className={styles.pagination}>
               <button disabled={settings.page === 1} onClick={prevHandler}>
@@ -92,6 +109,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getOffers: (data) => dispatch(getOffers(data)),
+    moderateOffer: (data) => dispatch(moderateOffer(data)),
   };
 };
 

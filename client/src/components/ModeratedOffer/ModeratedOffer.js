@@ -1,7 +1,17 @@
 import React from 'react';
 import styles from './ModeratedOffer.module.sass';
 
-const ModeratedOffer = ({ data }) => {
+const ModeratedOffer = ({ data, moderateHandler }) => {
+  const acceptHandler = (e) => {
+    e.preventDefault();
+    moderateHandler(data.id, true);
+  };
+
+  const declineHandler = (e) => {
+    e.preventDefault();
+    moderateHandler(data.id, false);
+  };
+
   return (
     <div className={styles.offerContainer}>
       <div className={styles.offerHeader}>
@@ -15,8 +25,8 @@ const ModeratedOffer = ({ data }) => {
         <span>originalFileName: {data.originalFileName}</span>
       </div>
       <div className={styles.offerActions}>
-        <button>+</button>
-        <button>-</button>
+        <button onClick={acceptHandler}>+</button>
+        <button onClick={declineHandler}>-</button>
       </div>
     </div>
   );

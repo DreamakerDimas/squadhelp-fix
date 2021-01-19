@@ -9,6 +9,7 @@ const {
   createOffer,
 } = require('./queries/offerQueries');
 const CONSTANTS = require('../../constants');
+const { findOne } = require('../models/mongoModels/Message');
 
 const rejectOffer = async (offerId, creatorId, contestId) => {
   const rejectedOffer = await updateOffer(
@@ -174,6 +175,29 @@ module.exports.getAllPendingOffers = async (req, res, next) => {
     }
     res.send({ offers, haveMore: true });
   } catch (err) {
-    console.log(err);
+    next(err);
+  }
+};
+
+module.exports.updateOfferModerationStatus = async (req, res, next) => {
+  const { id, isAccepted } = req.body;
+  try {
+    const offer = await db.Offers.findOne({
+      where: {
+        id,
+        moderationStatus: CONSTANTS.MODERATION_STATUS_PENDING,
+      },
+    });
+    if (isAccepted) {
+      offer.moderationStatus = CONSTANTS.MODERATION_STATUS_CHECKED;
+      await offer.save();
+      res.send();
+    } else {
+      offer.moderationStatus = CONSTANTS.MODERATION_STATUS_REJECTED;
+      await offer.save();
+      res.send();
+    }
+  } catch (err) {
+    next(err);
   }
 };

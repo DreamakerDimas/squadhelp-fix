@@ -7,14 +7,18 @@ const initialState = {
   haveMore: true,
 };
 
-// get-> offset: offset + limit
-
 export default function (state = initialState, action) {
   switch (action.type) {
     case ACTION.GET_OFFERS_REQUEST: {
       return {
         ...state,
         isFetching: true,
+        error: null,
+      };
+    }
+    case ACTION.MODERATOR_UPDATE_OFFER_REQUEST: {
+      return {
+        ...state,
         error: null,
       };
     }
@@ -27,10 +31,23 @@ export default function (state = initialState, action) {
         haveMore: action.data.haveMore,
       };
     }
+    case ACTION.MODERATOR_UPDATE_OFFER_SUCCESS: {
+      return {
+        ...state,
+        error: null,
+        offers: action.data.offers,
+      };
+    }
     case ACTION.GET_OFFERS_ERROR: {
       return {
         ...state,
         isFetching: false,
+        error: action.error,
+      };
+    }
+    case ACTION.MODERATOR_UPDATE_OFFER_ERROR: {
+      return {
+        ...state,
         error: action.error,
       };
     }

@@ -163,4 +163,10 @@ router.post(
   offerController.getAllPendingOffers
 );
 
+router.put(
+  '/updateOfferModerationStatus',
+  checkModeratorToken,
+  offerController.updateOfferModerationStatus
+);
+
 module.exports = router;

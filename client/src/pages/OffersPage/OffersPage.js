@@ -8,21 +8,26 @@ import SpinnerLoader from '../../components/Spinner/Spinner';
 import {
   getOffers,
   moderateOffer,
-  setOffer,
+  clearOffersStore,
 } from '../../actions/actionCreator';
 import ModeratedOffer from '../../components/ModeratedOffer/ModeratedOffer';
 
 const initSettings = { limit: 10, offset: 0, order: 'asc', page: 1 };
 
-// offset = (page-1)*limit
-
-const OffersPage = ({ isFetching, getOffers, moderateOffer, offersStore }) => {
+const OffersPage = ({
+  isFetching,
+  getOffers,
+  moderateOffer,
+  offersStore,
+  clearOffersStore,
+}) => {
   const [offersArr, setOffersArr] = useState([]);
   const [settings, setSettings] = useState(initSettings);
 
   // on settings update
   useEffect(() => {
     getOffers(settings);
+    return clearOffersStore;
   }, [settings]);
 
   // on offers store update
@@ -52,11 +57,12 @@ const OffersPage = ({ isFetching, getOffers, moderateOffer, offersStore }) => {
     });
   };
 
+  // on offer action
   const moderateHandler = (id, isAccepted) => {
     moderateOffer({ id, isAccepted });
     setTimeout(() => {
       getOffers(settings);
-    }, 1000); // for animation and fix
+    }, 1000); // fix
   };
 
   const renderOffers = () => {
@@ -79,7 +85,6 @@ const OffersPage = ({ isFetching, getOffers, moderateOffer, offersStore }) => {
       ) : (
         <>
           <div className={styles.mainContainer}>
-            <div className={styles.settings}></div>
             <div className={styles.contentContainer}>
               {offersStore.isFetching ? <SpinnerLoader /> : renderOffers()}
             </div>
@@ -110,6 +115,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getOffers: (data) => dispatch(getOffers(data)),
     moderateOffer: (data) => dispatch(moderateOffer(data)),
+    clearOffersStore: () => dispatch(clearOffersStore()),
   };
 };
 

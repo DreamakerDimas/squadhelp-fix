@@ -51,6 +51,9 @@ export default function (state = initialState, action) {
         error: action.error,
       };
     }
+    case ACTION.CLEAR_OFFERS_STORE: {
+      return initialState;
+    }
     default:
       return state;
   }

@@ -477,3 +477,9 @@ export const moderateOffer = (data) => {
     data: data,
   };
 };
+
+export const clearOffersStore = () => {
+  return {
+    type: ACTION.CLEAR_OFFERS_STORE,
+  };
+};

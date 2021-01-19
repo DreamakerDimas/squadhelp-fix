@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './ModeratedOffer.module.sass';
+import CONSTANTS from '../../constants';
 
-const ModeratedOffer = ({ data, moderateHandler }) => {
+const ModeratedOffer = ({ data, moderateHandler, changeShowImage }) => {
   const acceptHandler = (e) => {
     e.preventDefault();
     moderateHandler(data.id, true);
@@ -15,18 +16,27 @@ const ModeratedOffer = ({ data, moderateHandler }) => {
   return (
     <div className={styles.offerContainer}>
       <div className={styles.offerHeader}>
-        <span>OfferId: {data.id}</span>
-        <span>UserId: {data.userId}</span>
-        <span>ContestId: {data.contestId}</span>
+        <span>Offer Id: {data.id}</span>
+        <span>User Id: {data.userId}</span>
+        <span>Contest Id: {data.contestId}</span>
       </div>
       <div className={styles.offerBody}>
-        <span>Text: {data.text}</span>
-        <span>fileName: {data.fileName}</span>
-        <span>originalFileName: {data.originalFileName}</span>
+        {data.text && <span>Text: {data.text}</span>}
+        {data.fileName && (
+          <img
+            className={styles.image}
+            src={`${CONSTANTS.publicURL}${data.fileName}`}
+          ></img>
+        )}
+        {data.originalFileName && <span>{data.originalFileName}</span>}
       </div>
       <div className={styles.offerActions}>
-        <button onClick={acceptHandler}>+</button>
-        <button onClick={declineHandler}>-</button>
+        <button className={styles.acceptButt} onClick={acceptHandler}>
+          Confirm
+        </button>
+        <button className={styles.declineButt} onClick={declineHandler}>
+          Decline
+        </button>
       </div>
     </div>
   );

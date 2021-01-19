@@ -8,6 +8,7 @@ const {
   checkAuth,
   checkToken,
   resetPasswordTokenCheck,
+  checkModeratorToken,
 } = require('../middlewares/tokenCheckers');
 const validators = require('../middlewares/validators');
 const chatController = require('../controllers/chatController');
@@ -156,6 +157,10 @@ router.delete(
 
 router.get('/getCatalogList', checkToken, chatController.getCatalogList);
 
-router.post('/getAllPendingOffers', offerController.getAllPendingOffers);
+router.post(
+  '/getAllPendingOffers',
+  checkModeratorToken,
+  offerController.getAllPendingOffers
+);
 
 module.exports = router;

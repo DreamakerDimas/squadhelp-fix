@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const CONSTANTS = require('../../constants');
 const TokenError = require('../errors/TokenError');
+const RightsError = require('../errors/RightsError');
 import userQueries from '../controllers/queries/userQueries';
 
 module.exports.checkAuth = async (req, res, next) => {
@@ -47,6 +48,23 @@ module.exports.resetPasswordTokenCheck = async (req, res, next) => {
   try {
     req.tokenData = jwt.verify(token, CONSTANTS.JWT_SECRET);
     next();
+  } catch (err) {
+    next(new TokenError());
+  }
+};
+
+module.export.checkModeratorToken = async (req, res, next) => {
+  const accessToken = req.headers.authorization;
+  if (!accessToken) {
+    return next(new TokenError('need token'));
+  }
+  try {
+    const tokenData = jwt.verify(accessToken, CONSTANTS.JWT_SECRET);
+    const foundUser = await userQueries.findUser({ id: tokenData.userId });
+    if (foundUser.role === 'moderator') {
+      next();
+    }
+    next(new RightsError());
   } catch (err) {
     next(new TokenError());
   }

@@ -16,10 +16,15 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case ACTION.GET_OFFERS_REQUEST: {
+      const newOffset = state.settings.offset - state.settings.counter;
       return {
         ...state,
         isFetching: true,
         error: null,
+        settings: {
+          ...state.settings,
+          offset: newOffset,
+        },
       };
     }
     case ACTION.MODERATOR_UPDATE_OFFER_REQUEST: {
@@ -29,13 +34,13 @@ export default function (state = initialState, action) {
       };
     }
     case ACTION.GET_OFFERS_SUCCESS: {
-      const newOffset =
-        state.settings.offset + state.settings.limit - state.settings.counter;
+      const newOffset = state.settings.offset + state.settings.limit;
+      const prevOffers = state.offers;
       return {
         ...state,
         isFetching: false,
         error: null,
-        offers: action.data.offers,
+        offers: [...prevOffers, ...action.data.offers],
         haveMore: action.data.haveMore,
         settings: {
           ...state.settings,
@@ -44,14 +49,18 @@ export default function (state = initialState, action) {
       };
     }
     case ACTION.MODERATOR_UPDATE_OFFER_SUCCESS: {
+      const id = action.data.id;
+      const isAccepted = action.data.isAccepted;
       return {
         ...state,
         error: null,
-        offers: action.data.offers,
         settings: {
           ...state.settings,
-          counter: state.settings.counter++,
+          counter: state.settings.counter + 1,
         },
+        offers: state.offers.map((offer) =>
+          offer.id === id ? { ...offer, isAccepted } : offer
+        ),
       };
     }
     case ACTION.GET_OFFERS_ERROR: {

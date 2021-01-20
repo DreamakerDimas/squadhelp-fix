@@ -2,7 +2,19 @@ import React, { useEffect } from 'react';
 import styles from './ModeratedOffer.module.sass';
 import CONSTANTS from '../../constants';
 
-function ModeratedOffer({ data, moderateHandler, childRef }) {
+function ModeratedOffer({ data, moderateHandler, childRef, isFetching }) {
+  const {
+    id,
+    userId,
+    contestId,
+    text,
+    fileName,
+    originalFileName,
+    isAccepted,
+  } = data;
+
+  const isDisabled = typeof isAccepted === 'boolean';
+
   const acceptHandler = (e) => {
     e.preventDefault();
     moderateHandler(data.id, true);
@@ -16,28 +28,47 @@ function ModeratedOffer({ data, moderateHandler, childRef }) {
   return (
     <div ref={childRef} className={styles.offerContainer}>
       <div className={styles.offerHeader}>
-        <span>Offer Id: {data.id}</span>
-        <span>User Id: {data.userId}</span>
-        <span>Contest Id: {data.contestId}</span>
+        <span>Offer Id: {id}</span>
+        <span>User Id: {userId}</span>
+        <span>Contest Id: {contestId}</span>
       </div>
       <div className={styles.offerBody}>
-        {data.text && <span>{data.text}</span>}
-        {data.fileName && (
+        {text && <span>{text}</span>}
+        {fileName && (
           <img
             className={styles.image}
-            src={`${CONSTANTS.publicURL}${data.fileName}`}
+            src={`${CONSTANTS.publicURL}${fileName}`}
           ></img>
         )}
-        {data.originalFileName && <span>{data.originalFileName}</span>}
+        {originalFileName && <span>{originalFileName}</span>}
       </div>
-      <div className={styles.offerActions}>
-        <button className={styles.acceptButt} onClick={acceptHandler}>
-          Confirm
-        </button>
-        <button className={styles.declineButt} onClick={declineHandler}>
-          Decline
-        </button>
-      </div>
+      {!isDisabled && (
+        <div className={styles.offerActions}>
+          <button
+            disabled={isFetching}
+            className={styles.acceptButt}
+            onClick={acceptHandler}
+          >
+            Confirm
+          </button>
+          <button
+            disabled={isFetching}
+            className={styles.declineButt}
+            onClick={declineHandler}
+          >
+            Decline
+          </button>
+        </div>
+      )}
+      {isDisabled && (
+        <div className={styles.statusContainer}>
+          {isAccepted ? (
+            <span className={styles.acceptedSpan}>accepted</span>
+          ) : (
+            <span className={styles.declinedSpan}>rejected</span>
+          )}
+        </div>
+      )}
     </div>
   );
 }

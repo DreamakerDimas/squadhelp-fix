@@ -66,7 +66,7 @@ export function* moderatorOfferUpdateSaga(action) {
   yield put({ type: ACTION.MODERATOR_UPDATE_OFFER_REQUEST });
   try {
     yield restController.updateOfferModerationStatus(action.data);
-    yield put({ type: ACTION.MODERATOR_UPDATE_OFFER_SUCCESS });
+    yield put({ type: ACTION.MODERATOR_UPDATE_OFFER_SUCCESS, data: action.data });
   } catch (e) {
     yield put({ type: ACTION.MODERATOR_UPDATE_OFFER_ERROR, error: e.response });
   }

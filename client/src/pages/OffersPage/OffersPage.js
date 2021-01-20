@@ -23,38 +23,34 @@ const OffersPage = ({
   offersStore,
   clearOffersStore,
 }) => {
-  const { settings } = offersStore;
-  const [offersArr, setOffersArr] = useState([]);
+  const { settings, isFetching, haveMore, offers } = offersStore;
 
   const observer = useRef();
   const lastOfferRef = useCallback(
     (node) => {
-      if (offersStore.isFetching) return;
+      if (isFetching) return;
       if (observer.current) observer.current.disconnect();
 
       observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && offersStore.haveMore) {
+        if (entries[0].isIntersecting && haveMore) {
           getOffers(settings);
         }
       });
 
       if (node) observer.current.observe(node);
     },
-    [offersStore.isFetching, offersStore.haveMore]
+    [isFetching, haveMore]
   );
 
   // first query on mount and clear on unmount
   useEffect(() => {
     getOffers(settings);
+
     return clearOffersStore;
   }, []);
 
-  // update offersArr on offers store update
-  useEffect(() => {
-    setOffersArr((prevArr) => {
-      return [...prevArr, ...offersStore.offers];
-    });
-  }, [offersStore.offers]);
+  // render on store offers update
+  useEffect(() => {}, [offers]);
 
   // on offer action
   const moderateHandler = (id, isAccepted) => {
@@ -63,19 +59,20 @@ const OffersPage = ({
 
   const renderOffers = () => {
     // offers existence check
-    if (offersArr.length === 0 && !offersStore.isFetching) {
+    if (offers.length === 0 && !isFetching) {
       return <div>No offers founded</div>;
     }
 
-    return offersArr.map((offer, index) => {
+    return offers.map((offer, index) => {
       // ref for last offer
-      if (offersArr.length === index + 1) {
+      if (offers.length === index + 1) {
         return (
           <ModeratedOffer
             childRef={lastOfferRef}
             key={offer.id}
             data={offer}
             moderateHandler={moderateHandler}
+            isFetching={isFetching}
           />
         );
       }
@@ -85,6 +82,7 @@ const OffersPage = ({
           key={offer.id}
           data={offer}
           moderateHandler={moderateHandler}
+          isFetching={isFetching}
         />
       );
     });
@@ -100,7 +98,7 @@ const OffersPage = ({
           <div className={styles.mainContainer}>
             <div className={styles.contentContainer}>
               {renderOffers()}
-              {offersStore.isFetching && <SpinnerLoader />}
+              {isFetching && <SpinnerLoader />}
             </div>
           </div>
           <Footer />

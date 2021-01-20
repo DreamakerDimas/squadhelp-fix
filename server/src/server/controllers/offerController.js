@@ -190,13 +190,12 @@ module.exports.updateOfferModerationStatus = async (req, res, next) => {
     });
     if (isAccepted) {
       offer.moderationStatus = CONSTANTS.MODERATION_STATUS_CHECKED;
-      await offer.save();
-      res.send();
     } else {
       offer.moderationStatus = CONSTANTS.MODERATION_STATUS_REJECTED;
-      await offer.save();
-      res.send();
     }
+    await offer.save();
+    req.body.offer = offer;
+    next();
   } catch (err) {
     next(err);
   }

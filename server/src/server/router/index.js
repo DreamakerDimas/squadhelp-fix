@@ -4,6 +4,7 @@ const hashPass = require('../middlewares/hashPass');
 const userController = require('../controllers/userController');
 const contestController = require('../controllers/contestController');
 const offerController = require('../controllers/offerController');
+const mailController = require('../controllers/mailController');
 const {
   checkAuth,
   checkToken,
@@ -166,7 +167,8 @@ router.post(
 router.put(
   '/updateOfferModerationStatus',
   checkModeratorToken,
-  offerController.updateOfferModerationStatus
+  offerController.updateOfferModerationStatus,
+  mailController.sendOfferModerationStatus
 );
 
 module.exports = router;

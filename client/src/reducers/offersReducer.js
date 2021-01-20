@@ -5,6 +5,12 @@ const initialState = {
   isFetching: false,
   error: null,
   haveMore: true,
+  settings: {
+    limit: 10,
+    offset: 0,
+    order: 'asc',
+    counter: 0,
+  },
 };
 
 export default function (state = initialState, action) {
@@ -23,12 +29,18 @@ export default function (state = initialState, action) {
       };
     }
     case ACTION.GET_OFFERS_SUCCESS: {
+      const newOffset =
+        state.settings.offset + state.settings.limit - state.settings.counter;
       return {
         ...state,
         isFetching: false,
         error: null,
         offers: action.data.offers,
         haveMore: action.data.haveMore,
+        settings: {
+          ...state.settings,
+          offset: newOffset,
+        },
       };
     }
     case ACTION.MODERATOR_UPDATE_OFFER_SUCCESS: {
@@ -36,6 +48,10 @@ export default function (state = initialState, action) {
         ...state,
         error: null,
         offers: action.data.offers,
+        settings: {
+          ...state.settings,
+          counter: state.settings.counter++,
+        },
       };
     }
     case ACTION.GET_OFFERS_ERROR: {

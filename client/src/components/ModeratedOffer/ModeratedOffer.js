@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './ModeratedOffer.module.sass';
 import CONSTANTS from '../../constants';
 
-const ModeratedOffer = ({ data, moderateHandler, changeShowImage }) => {
+function ModeratedOffer({ data, moderateHandler, childRef }) {
   const acceptHandler = (e) => {
     e.preventDefault();
     moderateHandler(data.id, true);
@@ -14,7 +14,7 @@ const ModeratedOffer = ({ data, moderateHandler, changeShowImage }) => {
   };
 
   return (
-    <div className={styles.offerContainer}>
+    <div ref={childRef} className={styles.offerContainer}>
       <div className={styles.offerHeader}>
         <span>Offer Id: {data.id}</span>
         <span>User Id: {data.userId}</span>
@@ -40,6 +40,6 @@ const ModeratedOffer = ({ data, moderateHandler, changeShowImage }) => {
       </div>
     </div>
   );
-};
+}
 
 export default ModeratedOffer;

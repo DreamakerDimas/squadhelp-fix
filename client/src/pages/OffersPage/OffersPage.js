@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './OffersPage.module.sass';
@@ -12,61 +12,74 @@ import {
 } from '../../actions/actionCreator';
 import ModeratedOffer from '../../components/ModeratedOffer/ModeratedOffer';
 
-const initSettings = { limit: 10, offset: 0, order: 'asc', page: 1 };
+// For developer:
+// Изменил костыльную пагинацию на lazyloader, всё работает корректно.
+// Сейчас работаю над дизейблом для обработаного оффера.
 
 const OffersPage = ({
-  isFetching,
+  isFetchingUser,
   getOffers,
   moderateOffer,
   offersStore,
   clearOffersStore,
 }) => {
+  const { settings } = offersStore;
   const [offersArr, setOffersArr] = useState([]);
-  const [settings, setSettings] = useState(initSettings);
 
-  // on settings update
+  const observer = useRef();
+  const lastOfferRef = useCallback(
+    (node) => {
+      if (offersStore.isFetching) return;
+      if (observer.current) observer.current.disconnect();
+
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && offersStore.haveMore) {
+          getOffers(settings);
+        }
+      });
+
+      if (node) observer.current.observe(node);
+    },
+    [offersStore.isFetching, offersStore.haveMore]
+  );
+
+  // first query on mount and clear on unmount
   useEffect(() => {
     getOffers(settings);
     return clearOffersStore;
-  }, [settings]);
+  }, []);
 
-  // on offers store update
+  // update offersArr on offers store update
   useEffect(() => {
-    setOffersArr(offersStore.offers);
+    setOffersArr((prevArr) => {
+      return [...prevArr, ...offersStore.offers];
+    });
   }, [offersStore.offers]);
-
-  const nextHandler = () => {
-    setSettings((prevSettings) => {
-      const newPage = prevSettings.page + 1;
-      return {
-        ...prevSettings,
-        page: newPage,
-        offset: prevSettings.page * prevSettings.limit,
-      };
-    });
-  };
-
-  const prevHandler = () => {
-    setSettings((prevSettings) => {
-      const newPage = prevSettings.page - 1;
-      return {
-        ...prevSettings,
-        page: newPage,
-        offset: (newPage - 1) * prevSettings.limit,
-      };
-    });
-  };
 
   // on offer action
   const moderateHandler = (id, isAccepted) => {
     moderateOffer({ id, isAccepted });
-    setTimeout(() => {
-      getOffers(settings);
-    }, 1000); // fix
   };
 
   const renderOffers = () => {
-    return offersArr.map((offer) => {
+    // offers existence check
+    if (offersArr.length === 0 && !offersStore.isFetching) {
+      return <div>No offers founded</div>;
+    }
+
+    return offersArr.map((offer, index) => {
+      // ref for last offer
+      if (offersArr.length === index + 1) {
+        return (
+          <ModeratedOffer
+            childRef={lastOfferRef}
+            key={offer.id}
+            data={offer}
+            moderateHandler={moderateHandler}
+          />
+        );
+      }
+
       return (
         <ModeratedOffer
           key={offer.id}
@@ -80,22 +93,14 @@ const OffersPage = ({
   return (
     <>
       <Header />
-      {isFetching ? (
+      {isFetchingUser ? (
         <SpinnerLoader />
       ) : (
         <>
           <div className={styles.mainContainer}>
             <div className={styles.contentContainer}>
-              {offersStore.isFetching ? <SpinnerLoader /> : renderOffers()}
-            </div>
-            <div className={styles.pagination}>
-              <button disabled={settings.page === 1} onClick={prevHandler}>
-                Prev
-              </button>
-              {settings.page}
-              <button disabled={!offersStore.haveMore} onClick={nextHandler}>
-                Next
-              </button>
+              {renderOffers()}
+              {offersStore.isFetching && <SpinnerLoader />}
             </div>
           </div>
           <Footer />
@@ -106,9 +111,9 @@ const OffersPage = ({
 };
 
 const mapStateToProps = (state) => {
-  const isFetching = state.userStore.isFetching;
+  const isFetchingUser = state.userStore.isFetching;
   const offersStore = state.offersStore;
-  return { isFetching, offersStore };
+  return { isFetchingUser, offersStore };
 };
 
 const mapDispatchToProps = (dispatch) => {

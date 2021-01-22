@@ -15,6 +15,7 @@ class ChatSocket extends WebSocket {
     this.onNewMessage();
     this.onChangeBlockStatus();
   };
+
   onChangeBlockStatus = () => {
     this.socket.on(CONSTANTS.CHANGE_BLOCK_STATUS, (data) => {
       const { message } = data;
@@ -42,10 +43,11 @@ class ChatSocket extends WebSocket {
           isNew = false;
         }
       });
+
       if (isNew) {
         messagesPreview.push(preview);
+        this.dispatch(addMessage({ message, messagesPreview }));
       }
-      this.dispatch(addMessage({ message, messagesPreview }));
     });
   };
 

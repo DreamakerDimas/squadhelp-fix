@@ -159,7 +159,7 @@ module.exports.getAllActiveContests = (req, res, next) => {
       {
         model: db.Offers,
         required: req.body.ownEntries,
-        where: req.body.ownEntries ? { userId: req.tokenData.userId } : {},
+        where: { userId: req.tokenData.userId },
         attributes: ['id'],
       },
     ],

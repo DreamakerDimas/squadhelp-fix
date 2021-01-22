@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
+import ACTION from '../actions/actionTypes';
 import authReducer from './authReducer';
 import getUserReducer from './userReducer';
 import dataForContestReducer from './dataForContestReducer';
@@ -31,4 +32,12 @@ const appReducer = combineReducers({
   offersStore: offersReducer,
 });
 
-export default appReducer;
+const rootReducer = (state, action) => {
+  if (action.type === ACTION.CLEAR_STORE) {
+    state = undefined;
+  }
+
+  return appReducer(state, action);
+};
+
+export default rootReducer;

@@ -3,7 +3,7 @@ import Logo from '../Logo';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import CONSTANTS from '../../constants';
-import { clearUserStore, headerRequest } from '../../actions/actionCreator';
+import { clearStore, headerRequest } from '../../actions/actionCreator';
 import styles from './Header.module.sass';
 class Header extends React.Component {
   componentDidMount() {
@@ -13,8 +13,8 @@ class Header extends React.Component {
   }
 
   logOut = () => {
-    localStorage.clear();
-    this.props.clearUserStore();
+    localStorage.removeItem('accessToken');
+    this.props.clearStore();
     this.props.history.replace('/login');
   };
 
@@ -296,7 +296,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getUser: () => dispatch(headerRequest()),
-    clearUserStore: () => dispatch(clearUserStore()),
+    clearStore: () => dispatch(clearStore()),
   };
 };
 

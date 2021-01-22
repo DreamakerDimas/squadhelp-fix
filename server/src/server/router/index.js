@@ -96,7 +96,7 @@ router.post(
   offerController.setNewOffer
 );
 
-router.post(
+router.put(
   '/setOfferStatus',
   checkToken,
   basicMiddlewares.onlyForCustomerWhoCreateContest,

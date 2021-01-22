@@ -7,8 +7,7 @@ module.exports.updateBankBalance = async (data, predicate, transaction) => {
     returning: true,
     transaction,
   });
-  if (updatedCount < 1) {
-    // !!!!! change 1 on 2
+  if (updatedCount < 2) {
     throw new BankDeclineError('Bank decline transaction');
   }
 };

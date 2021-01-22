@@ -9,7 +9,6 @@ const {
   createOffer,
 } = require('./queries/offerQueries');
 const CONSTANTS = require('../../constants');
-const { findOne } = require('../models/mongoModels/Message');
 
 const rejectOffer = async (offerId, creatorId, contestId) => {
   const rejectedOffer = await updateOffer(
@@ -91,19 +90,6 @@ const resolveOffer = async (
   return updatedOffers[0].dataValues;
 };
 
-const isNextNotExist = async (limit, offset, order) => {
-  const offer = await db.Offers.findOne({
-    where: { moderationStatus: CONSTANTS.MODERATION_STATUS_PENDING },
-    attributes: { exclude: ['status', 'moderationStatus'] },
-    order: [['id', order]],
-    offset: offset + limit + 1,
-  });
-  if (offer) {
-    return false;
-  }
-  return true;
-};
-
 module.exports.setNewOffer = async (req, res, next) => {
   const obj = {};
   if (req.body.contestType === CONSTANTS.LOGO_CONTEST) {
@@ -163,17 +149,17 @@ module.exports.setOfferStatus = async (req, res, next) => {
 module.exports.getAllPendingOffers = async (req, res, next) => {
   try {
     const { order, offset, limit } = req.body;
-    const offers = await db.Offers.findAll({
+    const { count, rows: offers } = await db.Offers.findAndCountAll({
       where: { moderationStatus: CONSTANTS.MODERATION_STATUS_PENDING },
       attributes: { exclude: ['status', 'moderationStatus'] },
       order: [['id', order]],
       offset,
       limit,
     });
-    if (offers.length < limit || (await isNextNotExist(limit, offset, order))) {
-      res.send({ offers, haveMore: false });
+    if (count <= offset + limit) {
+      return res.send({ offers, haveMore: false });
     }
-    res.send({ offers, haveMore: true });
+    return res.send({ offers, haveMore: true });
   } catch (err) {
     next(err);
   }

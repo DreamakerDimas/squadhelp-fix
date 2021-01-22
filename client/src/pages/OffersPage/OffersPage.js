@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './OffersPage.module.sass';
@@ -12,12 +12,6 @@ import {
 } from '../../actions/actionCreator';
 import ModeratedOffer from '../../components/ModeratedOffer/ModeratedOffer';
 
-// For developer:
-// Изменил костыльную пагинацию на lazyloader, всё работает корректно.
-// Оферры дизейблятся после успешной проверки.
-// Поэтому вопрос с подгрузкой отпадает, это задание в принципе выполнено,
-// осталось протестировать.
-
 const OffersPage = ({
   isFetchingUser,
   getOffers,
@@ -27,32 +21,34 @@ const OffersPage = ({
 }) => {
   const { settings, isFetching, haveMore, offers } = offersStore;
 
-  const observer = useRef();
-  const lastOfferRef = useCallback(
-    (node) => {
-      if (isFetching) return;
-      if (observer.current) observer.current.disconnect();
-
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && haveMore) {
-          getOffers(settings);
-        }
-      });
-
-      if (node) observer.current.observe(node);
-    },
-    [isFetching, haveMore]
-  );
-
-  // first query on mount and clear on unmount
+  // on mount
   useEffect(() => {
     getOffers(settings);
 
-    return clearOffersStore;
+    return clearOffersStore();
   }, []);
 
-  // render on store offers update
-  useEffect(() => {}, [offers]);
+  // scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentPosition =
+        window.innerHeight + document.documentElement.scrollTop;
+
+      const isLoadNotNeeded =
+        !haveMore ||
+        isFetching ||
+        currentPosition !== document.documentElement.offsetHeight;
+
+      if (isLoadNotNeeded) return;
+
+      getOffers(settings);
+    };
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isFetching, settings, haveMore]);
 
   // on offer action
   const moderateHandler = (id, isAccepted) => {
@@ -65,29 +61,14 @@ const OffersPage = ({
       return <div>No offers founded</div>;
     }
 
-    return offers.map((offer, index) => {
-      // ref for last offer
-      if (offers.length === index + 1) {
-        return (
-          <ModeratedOffer
-            childRef={lastOfferRef}
-            key={offer.id}
-            data={offer}
-            moderateHandler={moderateHandler}
-            isFetching={isFetching}
-          />
-        );
-      }
-
-      return (
-        <ModeratedOffer
-          key={offer.id}
-          data={offer}
-          moderateHandler={moderateHandler}
-          isFetching={isFetching}
-        />
-      );
-    });
+    return offers.map((offer) => (
+      <ModeratedOffer
+        key={offer.id}
+        data={offer}
+        moderateHandler={moderateHandler}
+        isFetching={isFetching}
+      />
+    ));
   };
 
   return (

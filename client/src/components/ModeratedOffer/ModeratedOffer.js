@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './ModeratedOffer.module.sass';
 import CONSTANTS from '../../constants';
 
-function ModeratedOffer({ data, moderateHandler, childRef, isFetching }) {
+function ModeratedOffer({ data, moderateHandler, isFetching }) {
   const {
     id,
     userId,
@@ -26,12 +26,13 @@ function ModeratedOffer({ data, moderateHandler, childRef, isFetching }) {
   };
 
   return (
-    <div ref={childRef} className={styles.offerContainer}>
+    <div className={styles.offerContainer}>
       <div className={styles.offerHeader}>
         <span>Offer Id: {id}</span>
         <span>User Id: {userId}</span>
         <span>Contest Id: {contestId}</span>
       </div>
+
       <div className={styles.offerBody}>
         {text && <span>{text}</span>}
         {fileName && (
@@ -42,6 +43,7 @@ function ModeratedOffer({ data, moderateHandler, childRef, isFetching }) {
         )}
         {originalFileName && <span>{originalFileName}</span>}
       </div>
+
       {!isDisabled && (
         <div className={styles.offerActions}>
           <button
@@ -60,6 +62,7 @@ function ModeratedOffer({ data, moderateHandler, childRef, isFetching }) {
           </button>
         </div>
       )}
+
       {isDisabled && (
         <div className={styles.statusContainer}>
           {isAccepted ? (

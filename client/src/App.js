@@ -22,6 +22,7 @@ import browserHistory from './browserHistory';
 import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatContainer';
 import HowItWorks from './pages/HowItWorks/HowItWorks';
 import EventsPage from './pages/EventsPage/EventsPage';
+import OffersPage from './pages/OffersPage/OffersPage';
 
 class App extends Component {
   render() {
@@ -90,6 +91,11 @@ class App extends Component {
               contestType: CONSTANTS.LOGO_CONTEST,
               title: 'LOGO',
             })}
+          />
+          <Route
+            exact
+            path="/offersModeration"
+            component={PrivateHoc(OffersPage)}
           />
           <Route exact path="/dashboard" component={PrivateHoc(Dashboard)} />
           <Route

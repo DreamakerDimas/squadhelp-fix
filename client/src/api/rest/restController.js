@@ -69,3 +69,13 @@ export const getContestById = (data) => {
     },
   });
 };
+
+export const getAllPendingOffers = (data) =>
+  http.post('getAllPendingOffers', {
+    limit: data.limit,
+    offset: data.offset,
+    order: data.order,
+  });
+
+export const updateOfferModerationStatus = (data) =>
+  http.put('updateOfferModerationStatus', data);

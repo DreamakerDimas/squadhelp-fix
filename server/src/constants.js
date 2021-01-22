@@ -39,4 +39,7 @@ module.exports = {
       pass: '52c4f6c0-50fd-11eb-875f-87492950ae45',
     },
   },
+  MODERATION_STATUS_PENDING: 'pending',
+  MODERATION_STATUS_CHECKED: 'checked',
+  MODERATION_STATUS_REJECTED: 'rejected',
 };

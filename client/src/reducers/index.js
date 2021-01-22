@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
+import ACTION from '../actions/actionTypes';
 import authReducer from './authReducer';
 import getUserReducer from './userReducer';
 import dataForContestReducer from './dataForContestReducer';
@@ -12,6 +13,7 @@ import updateContestReducer from './updateContestReducer';
 import chatReducer from './chatReducer';
 import userProfileReducer from './userProfileReducer';
 import eventReducer from './eventReducer';
+import offersReducer from './offersReducer';
 
 const appReducer = combineReducers({
   form: formReducer,
@@ -27,6 +29,15 @@ const appReducer = combineReducers({
   chatStore: chatReducer,
   userProfile: userProfileReducer,
   eventsStore: eventReducer,
+  offersStore: offersReducer,
 });
 
-export default appReducer;
+const rootReducer = (state, action) => {
+  if (action.type === ACTION.CLEAR_STORE) {
+    state = undefined;
+  }
+
+  return appReducer(state, action);
+};
+
+export default rootReducer;

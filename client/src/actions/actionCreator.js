@@ -34,9 +34,9 @@ export const clearErrorSignUpAndLogin = () => {
   };
 };
 
-export const clearUserStore = () => {
+export const clearStore = () => {
   return {
-    type: ACTION.CLEAR_USER_STORE,
+    type: ACTION.CLEAR_STORE,
   };
 };
 
@@ -461,5 +461,25 @@ export const sortEvents = () => {
 export const clearEventsStore = () => {
   return {
     type: ACTION.CLEAR_EVENTS,
+  };
+};
+
+export const getOffers = (data) => {
+  return {
+    type: ACTION.GET_OFFERS,
+    data: data,
+  };
+};
+
+export const moderateOffer = (data) => {
+  return {
+    type: ACTION.MODERATOR_OFFER_UPDATE,
+    data: data,
+  };
+};
+
+export const clearOffersStore = () => {
+  return {
+    type: ACTION.CLEAR_OFFERS_STORE,
   };
 };

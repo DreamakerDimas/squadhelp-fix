@@ -194,7 +194,7 @@ module.exports.payment = async (req, res, next) => {
           ? Math.ceil(req.body.price / req.body.contests.length)
           : Math.floor(req.body.price / req.body.contests.length);
       contest = Object.assign(contest, {
-        status: 'active', //status: index === 0 ? 'active' : 'pending',  (( there are no active/pending switcher ))
+        status: index === 0 ? 'active' : 'pending',
         userId: req.tokenData.userId,
         priority: index + 1,
         orderId,

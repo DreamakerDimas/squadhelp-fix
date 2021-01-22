@@ -32,13 +32,6 @@ export default function (state = initialState, action) {
         data: null,
       };
     }
-    case ACTION.CLEAR_USER_STORE: {
-      return {
-        ...state,
-        data: null,
-        error: null,
-      };
-    }
     case ACTION.UPDATE_USER_DATA_SUCCESS: {
       return {
         ...state,

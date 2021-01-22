@@ -3,10 +3,13 @@ const basicMiddlewares = require('../middlewares/basicMiddlewares');
 const hashPass = require('../middlewares/hashPass');
 const userController = require('../controllers/userController');
 const contestController = require('../controllers/contestController');
+const offerController = require('../controllers/offerController');
+const mailController = require('../controllers/mailController');
 const {
   checkAuth,
   checkToken,
   resetPasswordTokenCheck,
+  checkModeratorToken,
 } = require('../middlewares/tokenCheckers');
 const validators = require('../middlewares/validators');
 const chatController = require('../controllers/chatController');
@@ -90,14 +93,14 @@ router.post(
   checkToken,
   upload.uploadLogoFiles,
   basicMiddlewares.canSendOffer,
-  contestController.setNewOffer
+  offerController.setNewOffer
 );
 
-router.post(
+router.put(
   '/setOfferStatus',
   checkToken,
   basicMiddlewares.onlyForCustomerWhoCreateContest,
-  contestController.setOfferStatus
+  offerController.setOfferStatus
 );
 
 router.put(
@@ -154,5 +157,18 @@ router.delete(
 );
 
 router.get('/getCatalogList', checkToken, chatController.getCatalogList);
+
+router.post(
+  '/getAllPendingOffers',
+  checkModeratorToken,
+  offerController.getAllPendingOffers
+);
+
+router.put(
+  '/updateOfferModerationStatus',
+  checkModeratorToken,
+  offerController.updateOfferModerationStatus,
+  mailController.sendOfferModerationStatus
+);
 
 module.exports = router;

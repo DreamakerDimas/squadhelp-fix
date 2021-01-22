@@ -200,6 +200,11 @@ const OfferBox = (props) => {
         {role !== CONSTANTS.CREATOR && (
           <i onClick={goChat} className="fas fa-comments" />
         )}
+        {role === CONSTANTS.CREATOR && (
+          <div className={styles.status}>
+            Moderation status: <strong>{data.moderationStatus}</strong>
+          </div>
+        )}
       </div>
       {props.needButtons(data.status) && (
         <div className={styles.btnsContainer}>

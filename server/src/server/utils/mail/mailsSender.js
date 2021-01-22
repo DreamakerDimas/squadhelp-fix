@@ -17,3 +17,26 @@ module.exports.sendResetToken = async (firstName, recipient, URL, token) => {
     }
   });
 };
+
+module.exports.sendOfferModerationStatus = async (
+  firstName,
+  recipient,
+  title,
+  text,
+  status
+) => {
+  const mailOptions = {
+    from: MAIL_ADDRESS,
+    to: recipient,
+    subject: 'Squadhelp. Your offer moderation status',
+    html: `<h3>Dear ${firstName},</h3> <p>Your offer <strong>${text}</strong> for contest <strong>${title}</strong>, was <strong>${status}</strong> by moderator.</p>`,
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+};

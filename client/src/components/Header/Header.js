@@ -3,7 +3,7 @@ import Logo from '../Logo';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import CONSTANTS from '../../constants';
-import { clearUserStore, headerRequest } from '../../actions/actionCreator';
+import { clearStore, headerRequest } from '../../actions/actionCreator';
 import styles from './Header.module.sass';
 class Header extends React.Component {
   componentDidMount() {
@@ -13,14 +13,19 @@ class Header extends React.Component {
   }
 
   logOut = () => {
-    localStorage.clear();
-    this.props.clearUserStore();
+    localStorage.removeItem('accessToken');
+    this.props.clearStore();
     this.props.history.replace('/login');
   };
 
   startContests = () => {
     this.props.history.push('/startContest');
   };
+
+  openOffers = () => {
+    this.props.history.push('/offersModeration');
+  };
+
   renderLoginButtons = () => {
     if (this.props.data) {
       return (
@@ -261,12 +266,21 @@ class Header extends React.Component {
                 </li>
               </ul>
             </div>
-            {this.props.data && this.props.data.role !== CONSTANTS.CREATOR && (
+            {/* START CONTEST BUTTON FOR CUSTOMER */}
+            {this.props.data && this.props.data.role === CONSTANTS.CUSTOMER && (
               <div
                 className={styles.startContestBtn}
                 onClick={this.startContests}
               >
                 START CONTEST
+              </div>
+            )}
+            {/* END of button for CUSTOMER */}
+
+            {/* */}
+            {this.props.data && this.props.data.role === CONSTANTS.MODERATOR && (
+              <div className={styles.startContestBtn} onClick={this.openOffers}>
+                OFFERS
               </div>
             )}
           </div>
@@ -282,7 +296,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getUser: () => dispatch(headerRequest()),
-    clearUserStore: () => dispatch(clearUserStore()),
+    clearStore: () => dispatch(clearStore()),
   };
 };
 

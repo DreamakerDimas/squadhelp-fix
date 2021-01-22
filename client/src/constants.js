@@ -6,6 +6,7 @@ export default {
   PHONE_NUMBER: '(877)355-3585',
   CUSTOMER: 'customer',
   CREATOR: 'creator',
+  MODERATOR: 'moderator',
   CONTEST_STATUS_ACTIVE: 'active',
   CONTEST_STATUS_FINISHED: 'finished',
   CONTEST_STATUS_PENDING: 'pending',
@@ -85,7 +86,6 @@ export default {
     ALARMED_EVENTS: 'ALARMED_EVENTS',
   },
   MOMENT_FORMAT: 'YYYY-MM-DD HH:mm',
-  // Important: Don't change the order of strings in domain arrays (index dependency)
   DOMAIN_TYPES_ARR: ['asname', 'yes', 'no'],
   DOMAIN_BUTT_HEADERS: { asname: 'Yes', yes: 'Yes', no: 'No' },
   DOMAIN_BUTT_TEXTS: {

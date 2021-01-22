@@ -51,6 +51,9 @@ export default function (state = initialState, action) {
     case ACTION.MODERATOR_UPDATE_OFFER_SUCCESS: {
       const id = action.data.id;
       const isAccepted = action.data.isAccepted;
+      const newOffers = state.offers.map((offer) =>
+        offer.id === id ? { ...offer, isAccepted } : offer
+      );
       return {
         ...state,
         error: null,
@@ -58,9 +61,7 @@ export default function (state = initialState, action) {
           ...state.settings,
           counter: state.settings.counter + 1,
         },
-        offers: state.offers.map((offer) =>
-          offer.id === id ? { ...offer, isAccepted } : offer
-        ),
+        offers: newOffers,
       };
     }
     case ACTION.GET_OFFERS_ERROR: {

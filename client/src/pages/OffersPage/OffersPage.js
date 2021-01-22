@@ -77,15 +77,12 @@ const OffersPage = ({
       {isFetchingUser ? (
         <SpinnerLoader />
       ) : (
-        <>
-          <div className={styles.mainContainer}>
-            <div className={styles.contentContainer}>
-              {renderOffers()}
-              {isFetching && <SpinnerLoader />}
-            </div>
+        <div className={styles.mainContainer}>
+          <div className={styles.contentContainer}>
+            {renderOffers()}
+            {isFetching && <SpinnerLoader />}
           </div>
-          <Footer />
-        </>
+        </div>
       )}
     </>
   );

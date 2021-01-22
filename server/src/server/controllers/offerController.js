@@ -156,6 +156,7 @@ module.exports.getAllPendingOffers = async (req, res, next) => {
       offset,
       limit,
     });
+
     if (count <= offset + limit) {
       return res.send({ offers, haveMore: false });
     }

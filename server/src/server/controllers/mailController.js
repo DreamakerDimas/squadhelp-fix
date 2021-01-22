@@ -21,6 +21,7 @@ module.exports.sendOfferModerationStatus = async (req, res, next) => {
     const { title } = foundContest;
 
     if (text) {
+      // For names
       await sendOfferModerationStatus(
         firstName,
         email,
@@ -29,6 +30,7 @@ module.exports.sendOfferModerationStatus = async (req, res, next) => {
         moderationStatus
       );
     } else {
+      // For logos
       await sendOfferModerationStatus(
         firstName,
         email,
@@ -37,7 +39,7 @@ module.exports.sendOfferModerationStatus = async (req, res, next) => {
         moderationStatus
       );
     }
-    res.send('success');
+    return res.send('success');
   } catch (err) {
     next(err);
   }

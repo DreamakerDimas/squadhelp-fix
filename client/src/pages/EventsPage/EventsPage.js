@@ -29,24 +29,18 @@ const EventsPage = ({
   clearEventsStore,
   isFetching,
 }) => {
-  const [eventsArr, setEventsArr] = useState([]);
-  const [alarmedEventsArr, setAlarmedEventsArr] = useState([]);
+  const { events, alarmedEvents } = eventsStore;
   const [switcherId, setSwitcherId] = useState(ALARMED_EVENTS);
 
   // --Events Controller--
-  // on mount
   useEffect(() => {
-    const eventsInit = () => {
-      checkEvents();
-      sortEvents();
-      getEvents();
-    };
-    eventsInit();
+    // on mount
+    checkEvents();
+    sortEvents();
+    getEvents();
 
     // on unmount
-    return () => {
-      clearEventsStore();
-    };
+    return clearEventsStore;
   }, []);
 
   // check events each 10 minutes
@@ -57,11 +51,8 @@ const EventsPage = ({
     return () => clearInterval(interval);
   }, []);
 
-  // set state of events when store did update
-  useEffect(() => {
-    setEventsArr(eventsStore.events || []);
-    setAlarmedEventsArr(eventsStore.alarmedEvents || []);
-  }, [eventsStore]);
+  // update on store change
+  useEffect(() => {}, [eventsStore]);
 
   // --End of Events Controller--
 
@@ -75,11 +66,11 @@ const EventsPage = ({
   const renderContent = () => {
     switch (switcherId) {
       case ALARMED_EVENTS: {
-        if (alarmedEventsArr.length > 0) {
+        if (alarmedEvents.length > 0) {
           return (
             <>
               <h2>Alarmed Events</h2>
-              <EventsList eventsArr={alarmedEventsArr} />
+              <EventsList eventsArr={alarmedEvents} />
             </>
           );
         }
@@ -92,11 +83,11 @@ const EventsPage = ({
       }
 
       case ALL_EVENTS: {
-        if (eventsArr.length > 0) {
+        if (events.length > 0) {
           return (
             <>
               <h2>All Events</h2>
-              <EventsList eventsArr={eventsArr} />
+              <EventsList eventsArr={events} />
             </>
           );
         }
@@ -112,7 +103,10 @@ const EventsPage = ({
         return (
           <>
             <h2>Create Event</h2>
-            <CreateEventForm sortEvents={sortEvents} />
+            <CreateEventForm
+              sortEvents={sortEvents}
+              setSwitcherId={setSwitcherId}
+            />
           </>
         );
       }
@@ -129,18 +123,21 @@ const EventsPage = ({
           <div className={styles.mainContainer}>
             <div className={styles.eventsNav}>
               <div data-id={ALARMED_EVENTS} onClick={setSwitcherHandler}>
-                {alarmedEventsArr.length > 0 && (
+                {alarmedEvents.length > 0 && (
                   <div className={styles.alarmIndicator}></div>
                 )}
                 Alarmed events
               </div>
+
               <div data-id={ALL_EVENTS} onClick={setSwitcherHandler}>
                 All events
               </div>
+
               <div data-id={CREATE_EVENT} onClick={setSwitcherHandler}>
                 Create event
               </div>
             </div>
+
             <div className={styles.contentContainer}>{renderContent()}</div>
           </div>
           <Footer />

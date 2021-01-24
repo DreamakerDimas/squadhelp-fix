@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './OffersPage.module.sass';
 import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import SpinnerLoader from '../../components/Spinner/Spinner';
 import {
   getOffers,

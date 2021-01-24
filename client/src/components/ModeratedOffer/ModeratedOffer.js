@@ -15,14 +15,12 @@ function ModeratedOffer({ data, moderateHandler, isFetching }) {
 
   const isDisabled = typeof isAccepted === 'boolean';
 
-  const acceptHandler = (e) => {
-    e.preventDefault();
-    moderateHandler(data.id, true);
+  const acceptHandler = () => {
+    moderateHandler(id, true);
   };
 
-  const declineHandler = (e) => {
-    e.preventDefault();
-    moderateHandler(data.id, false);
+  const declineHandler = () => {
+    moderateHandler(id, false);
   };
 
   return (

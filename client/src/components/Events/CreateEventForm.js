@@ -12,11 +12,18 @@ import DateInput from '../DateInput/DateInput';
 import styles from './CreateEventForm.module.sass';
 import CONSTANTS from '../../constants';
 
+const { ALL_EVENTS } = CONSTANTS.EVENTS_CONTENT_TYPES;
 const { MOMENT_FORMAT } = CONSTANTS;
 
 const CreateEventForm = (props) => {
   const { isFetching } = props.eventsStore;
-  const { handleSubmit, submitting } = props;
+  const {
+    handleSubmit,
+    submitting,
+    setSwitcherId,
+    createEventRequest,
+    sortEvents,
+  } = props;
 
   const formInputClasses = {
     container: styles.inputContainer,
@@ -31,11 +38,8 @@ const CreateEventForm = (props) => {
   // endDate for max day in notificationDate (only for display purposes)
   const [endDate, setEndDate] = useState(initDate());
 
-  const parseDate = (value) => {
-    return value
-      ? value.format(MOMENT_FORMAT)
-      : initDate().format(MOMENT_FORMAT);
-  };
+  const parseDate = (value) =>
+    value ? value.format(MOMENT_FORMAT) : initDate().format(MOMENT_FORMAT);
 
   const formatDate = (value) => (value ? moment(value) : initDate());
 
@@ -47,8 +51,9 @@ const CreateEventForm = (props) => {
       isAlarmed: false,
       isEnded: false,
     };
-    props.createEventRequest(data);
-    props.sortEvents();
+    createEventRequest(data);
+    sortEvents();
+    setSwitcherId(ALL_EVENTS);
   };
 
   return (

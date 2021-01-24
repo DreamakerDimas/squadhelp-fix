@@ -26,7 +26,6 @@ const DateInput = (props) => {
         max={max}
         readOnly={false}
         showIcon={true}
-        format="YYYY-MM-DD HH:mm"
       />
       {classes.warning && touched && error && (
         <span className={classes.warning}>{error}</span>

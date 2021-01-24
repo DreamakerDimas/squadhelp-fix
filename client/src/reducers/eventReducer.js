@@ -13,7 +13,6 @@ export default function (state = initialState, action) {
     case ACTION.CREATE_EVENT_REQUEST:
     case ACTION.CHECK_EVENTS_REQUEST:
     case ACTION.SORT_EVENTS_REQUEST:
-    case ACTION.CLEAR_EVENTS_REQUEST:
       return {
         ...state,
         isFetching: true,
@@ -39,14 +38,10 @@ export default function (state = initialState, action) {
         alarmedEvents: action.data.alarmedEvents,
       };
     }
-    case ACTION.CLEAR_EVENTS_SUCCESS: {
-      return initialState;
-    }
     case ACTION.GET_EVENTS_ERROR:
     case ACTION.CREATE_EVENT_ERROR:
     case ACTION.CHECK_EVENTS_ERROR:
     case ACTION.SORT_EVENTS_ERROR:
-    case ACTION.CLEAR_EVENTS_ERROR:
       return {
         ...state,
         isFetching: false,
@@ -58,6 +53,9 @@ export default function (state = initialState, action) {
         ...state,
         error: null,
       };
+    }
+    case ACTION.CLEAR_EVENTS: {
+      return initialState;
     }
     default: {
       return state;

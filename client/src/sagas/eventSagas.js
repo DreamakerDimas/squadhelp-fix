@@ -59,12 +59,3 @@ export function* sortEvents() {
     yield put({ type: ACTION.SORT_EVENTS_ERROR, error: err });
   }
 }
-
-export function* clearEvents() {
-  yield put({ type: ACTION.CLEAR_EVENTS_REQUEST });
-  try {
-    yield put({ type: ACTION.CLEAR_EVENTS_SUCCESS });
-  } catch (err) {
-    yield put({ type: ACTION.CLEAR_EVENTS_ERROR, error: err });
-  }
-}

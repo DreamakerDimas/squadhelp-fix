@@ -458,6 +458,13 @@ export const sortEvents = () => {
   };
 };
 
+export const removeEvent = (data) => {
+  return {
+    type: ACTION.REMOVE_EVENT,
+    data: data,
+  };
+};
+
 export const clearEventsStore = () => {
   return {
     type: ACTION.CLEAR_EVENTS,

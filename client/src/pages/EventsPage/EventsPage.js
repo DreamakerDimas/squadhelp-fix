@@ -51,8 +51,8 @@ const EventsPage = ({
     return () => clearInterval(interval);
   }, []);
 
-  // update on store change
-  useEffect(() => {}, [eventsStore]);
+  // render on store change
+  useEffect(() => {}, [events, alarmedEvents]);
 
   // --End of Events Controller--
 

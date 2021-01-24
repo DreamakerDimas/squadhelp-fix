@@ -59,3 +59,16 @@ export function* sortEvents() {
     yield put({ type: ACTION.SORT_EVENTS_ERROR, error: err });
   }
 }
+
+export function* removeEvent(action) {
+  yield put({ type: ACTION.REMOVE_EVENT_REQUEST });
+  try {
+    const events = yield getEventsFromLocal();
+    const newEvents = events.filter((event) => event.id !== action.data);
+    yield setEventsInLocal(newEvents);
+    yield put({ type: ACTION.REMOVE_EVENT_SUCCESS });
+    yield put({ type: ACTION.GET_EVENTS });
+  } catch (err) {
+    yield put({ type: ACTION.REMOVE_EVENT_ERROR, error: err });
+  }
+}

@@ -4,14 +4,13 @@
     justify-content: space-around
     align-self: center
     width: 100%
-    padding: 5px 10px
     @media(max-width: 600px)
         flex-direction: column
     
 
     .buttonContainer
         width: 33%
-        height: 120px !important
+        height: 120px
         box-sizing: border-box
         display: flex
         flex-direction: column
@@ -28,6 +27,7 @@
             width: 100%
             flex-direction: row
             margin: 15px 0 !important
+            height: 100px
         &:hover
             border-color: rgba(44,185,183,.2)
             box-shadow: 0 0 5px rgba(44,185,183,.125)
@@ -43,7 +43,6 @@
         margin-bottom: 16px
         transition: all 0.2s ease-in-out
         @media(max-width: 600px)
-            flex-direction: row
             margin: 0
 
     .buttonText
@@ -56,6 +55,8 @@
 .selected
     border: 3px solid rgba(44,185,183,.6) !important
     padding: 13px 17px !important
+    @media(max-width: 600px)
+        padding: 13px 18px !important
     .buttonHeader
         background-color: #2cb9b7 !important
     .buttonText

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import PropTypes from 'prop-types';
 import { ProgressBar } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import CONSTANTS from '../../../constants';
 import styles from './EventComponent.module.sass';
 
@@ -12,6 +12,7 @@ const EventComponent = ({
   notificationDate,
   isAlarmed,
   isEnded,
+  deleteEvent,
 }) => {
   const getCurrentDateString = () => moment().format(CONSTANTS.MOMENT_FORMAT);
   const [currentDate, setCurrentDate] = useState(getCurrentDateString());
@@ -24,12 +25,20 @@ const EventComponent = ({
     return () => clearInterval(interval);
   }, []);
 
+  const deleteHandler = (e) => {
+    e.preventDefault();
+    deleteEvent();
+  };
+
+  // get date in unix timestamp
+  const getTimestamp = (date) => moment(date).unix();
+
   // get progress bar numbers in unix format
   const getProgressBarNumbers = () => {
-    const start = moment(startDate).unix();
-    const middle = moment(notificationDate).unix();
-    const end = moment(endDate).unix();
-    const current = moment(currentDate).unix();
+    const start = getTimestamp(startDate);
+    const middle = getTimestamp(notificationDate);
+    const end = getTimestamp(endDate);
+    const current = getTimestamp(currentDate);
 
     return {
       fullBarAmount: end - start,
@@ -38,6 +47,9 @@ const EventComponent = ({
       currentAmount: current - start,
     };
   };
+
+  // calc percentage value
+  const calcPercentage = (half, full) => Math.round((half / full) * 100);
 
   // get progress bar values in percentage
   const getProgressBarPercentages = () => {
@@ -48,16 +60,13 @@ const EventComponent = ({
       currentAmount,
     } = getProgressBarNumbers();
 
-    const toNotificationPercentage = Math.round(
-      (firstHalf / fullBarAmount) * 100
-    );
-    const fromNotificationPercentage = Math.round(
-      (restHalf / fullBarAmount) * 100
-    );
+    const toNotificationPercentage = calcPercentage(firstHalf, fullBarAmount);
+    const fromNotificationPercentage = calcPercentage(restHalf, fullBarAmount);
 
-    const currentPercentage = Math.round((currentAmount / fullBarAmount) * 100);
-    const fromNotificationCurrentPercentage = Math.round(
-      ((currentAmount - firstHalf) / fullBarAmount) * 100
+    const currentPercentage = calcPercentage(currentAmount, fullBarAmount);
+    const fromNotificationCurrentPercentage = calcPercentage(
+      currentAmount - firstHalf,
+      fullBarAmount
     );
 
     return {
@@ -68,16 +77,31 @@ const EventComponent = ({
     };
   };
 
-  const getRemainingTime = () => {
+  const renderRemainingTime = () => {
     const remaining = moment(endDate) - moment(currentDate);
     const dur = moment.duration(remaining);
+
     if (dur.years()) {
-      return `Remaining time: ${dur.years()} year(s), ${dur.months()} month(s), ${dur.days()} day(s), ${dur.hours()} hour(s), ${dur.minutes()} minute(s).`;
+      return `Remaining time: 
+      ${dur.years()} year(s), 
+      ${dur.months()} month(s), 
+      ${dur.days()} day(s), 
+      ${dur.hours()} hour(s), 
+      ${dur.minutes()} minute(s).`;
     }
+
     if (dur.months()) {
-      return `Remaining time: ${dur.months()} month(s), ${dur.days()} day(s), ${dur.hours()} hour(s), ${dur.minutes()} minute(s).`;
+      return `Remaining time: 
+      ${dur.months()} month(s), 
+      ${dur.days()} day(s), 
+      ${dur.hours()} hour(s), 
+      ${dur.minutes()} minute(s).`;
     }
-    return `Remaining time: ${dur.days()} day(s), ${dur.hours()} hour(s), ${dur.minutes()} minute(s).`;
+
+    return `Remaining time: 
+    ${dur.days()} day(s), 
+    ${dur.hours()} hour(s), 
+    ${dur.minutes()} minute(s).`;
   };
 
   const renderProgressBar = () => {
@@ -101,7 +125,7 @@ const EventComponent = ({
         </ProgressBar>
       );
     }
-    //
+    // ---
 
     // if current date after notification date
     if (isAlarmed) {
@@ -116,7 +140,7 @@ const EventComponent = ({
         </ProgressBar>
       );
     }
-    //
+    // ---
 
     // if current date before notification date
     return (
@@ -126,6 +150,7 @@ const EventComponent = ({
     );
   };
 
+  // Main return ---
   return (
     <div className={styles.mainContainer}>
       <div className={styles.eventHead}>
@@ -137,7 +162,7 @@ const EventComponent = ({
         )}
         {isEnded && <h3 className={styles.endMessage}>Event was over!</h3>}
         {!isEnded && (
-          <div className={styles.remainingTime}> {getRemainingTime()} </div>
+          <div className={styles.remainingTime}> {renderRemainingTime()} </div>
         )}
       </div>
       <div className={styles.progressBarContainer}>{renderProgressBar()}</div>
@@ -152,6 +177,10 @@ const EventComponent = ({
         <div className={styles.date}>
           <span>End date:</span> <p>{endDate}</p>
         </div>
+      </div>
+
+      <div className={styles.removeButt} onClick={deleteHandler}>
+        <span>Delete</span>
       </div>
     </div>
   );

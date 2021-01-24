@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { clearEventError, createEvent } from '../../actions/actionCreator';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import { v4 as uuidv4 } from 'uuid';
 
 import customValidator from '../../validators/validator';
 import Schemes from '../../validators/validationSchemes';
@@ -50,6 +51,7 @@ const CreateEventForm = (props) => {
       startDate: moment().format(MOMENT_FORMAT),
       isAlarmed: false,
       isEnded: false,
+      id: uuidv4(),
     };
     createEventRequest(data);
     sortEvents();

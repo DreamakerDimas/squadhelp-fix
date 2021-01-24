@@ -180,7 +180,7 @@ const EventComponent = ({
       </div>
 
       <div className={styles.removeButt} onClick={deleteHandler}>
-        <span>Delete</span>
+        <span>&times;</span>
       </div>
     </div>
   );

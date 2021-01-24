@@ -7,6 +7,7 @@
     padding: 20px 10px
     margin-bottom: 30px
     background-color: #ebeef0
+    transition: background 0.5s
     &:hover
         background-color: #b3d4fc
 
@@ -67,12 +68,23 @@
                 margin: 0
 
     .removeButt
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 35px
+        height: 35px
         position: absolute
-        top: 50px
-        right: 50px
-        background-color: red
+        top: 15px
+        right: 15px
+        background-color: #dd3619e0 
+        color: white
         cursor: pointer
         user-select: none
+        font-size: 35px
+        &:hover
+            box-sizing: border-box
+            background-color: #dd3619
+            border: 1px solid white
 
 .alarmMessage
     background-color: #bd731f 

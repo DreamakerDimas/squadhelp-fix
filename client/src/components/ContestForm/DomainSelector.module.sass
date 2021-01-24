@@ -1,14 +1,17 @@
 .buttonsContainer 
     display: flex
     flex-direction: row
-    justify-content: space-between
+    justify-content: space-around
     align-self: center
     width: 100%
+    padding: 5px 10px
     @media(max-width: 600px)
         flex-direction: column
     
 
     .buttonContainer
+        width: 33%
+        height: 120px !important
         box-sizing: border-box
         display: flex
         flex-direction: column
@@ -22,6 +25,7 @@
         transition: 0.3s
         cursor: default !important
         @media(max-width: 600px)
+            width: 100%
             flex-direction: row
             margin: 15px 0 !important
         &:hover
@@ -51,6 +55,7 @@
 
 .selected
     border: 3px solid rgba(44,185,183,.6) !important
+    padding: 13px 17px !important
     .buttonHeader
         background-color: #2cb9b7 !important
     .buttonText

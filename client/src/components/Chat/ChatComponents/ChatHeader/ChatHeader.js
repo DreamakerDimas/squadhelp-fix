@@ -4,6 +4,7 @@ import {
   backToDialogList,
   changeChatFavorite,
   changeChatBlock,
+  getPreviewChat,
 } from '../../../../actions/actionCreator';
 import styles from './ChatHeader.module.sass';
 import CONSTANTS from '../../../../constants';
@@ -31,12 +32,15 @@ const ChatHeader = (props) => {
   };
 
   const { avatar, firstName } = props.interlocutor;
-  const { backToDialogList, chatData, userId } = props;
+  const { backToDialogList, getPreviewChat, chatData, userId } = props;
   return (
     <div className={styles.chatHeader}>
       <div
         className={styles.buttonContainer}
-        onClick={() => backToDialogList()}
+        onClick={() => {
+          getPreviewChat();
+          backToDialogList();
+        }}
       >
         <img
           src={`${CONSTANTS.STATIC_IMAGES_PATH}arrow-left-thick.png`}
@@ -104,6 +108,7 @@ const mapDispatchToProps = (dispatch) => {
     backToDialogList: () => dispatch(backToDialogList()),
     changeChatFavorite: (data) => dispatch(changeChatFavorite(data)),
     changeChatBlock: (data) => dispatch(changeChatBlock(data)),
+    getPreviewChat: () => dispatch(getPreviewChat()),
   };
 };
 

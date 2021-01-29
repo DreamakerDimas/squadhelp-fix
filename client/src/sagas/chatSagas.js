@@ -7,7 +7,10 @@ import isEqual from 'lodash/isEqual';
 export function* previewSaga() {
   try {
     const { data } = yield restController.getPreviewChat();
-    yield put({ type: ACTION.GET_PREVIEW_CHAT, data: data });
+    const sortedData = yield data.sort(
+      (a, b) => new Date(b.createAt) - new Date(a.createAt)
+    );
+    yield put({ type: ACTION.GET_PREVIEW_CHAT, data: sortedData });
   } catch (err) {
     yield put({ type: ACTION.GET_PREVIEW_CHAT_ERROR, error: err.response });
   }

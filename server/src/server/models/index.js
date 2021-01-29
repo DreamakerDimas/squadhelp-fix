@@ -47,6 +47,14 @@ db['Contests'].hasMany(db['Offers'], {
 db['Users'].hasMany(db['Offers'], { foreignKey: 'userId', targetKey: 'id' });
 db['Users'].hasMany(db['Contests'], { foreignKey: 'userId', targetKey: 'id' });
 db['Users'].hasMany(db['Ratings'], { foreignKey: 'userId', targetKey: 'id' });
+db['Users'].hasMany(db['Catalogs'], {
+  foreignKey: 'userId',
+  targetKey: 'id',
+});
+db['Users'].hasMany(db['Messages'], {
+  foreignKey: 'sender',
+  targetKey: 'id',
+});
 
 db['Offers'].belongsTo(db['Users'], { foreignKey: 'userId', sourceKey: 'id' });
 db['Offers'].belongsTo(db['Contests'], {
@@ -55,10 +63,39 @@ db['Offers'].belongsTo(db['Contests'], {
 });
 db['Offers'].hasOne(db['Ratings'], { foreignKey: 'offerId', targetKey: 'id' });
 
-db['Ratings'].belongsTo(db['Users'], { foreignKey: 'userId', targetKey: 'id' });
+db['Ratings'].belongsTo(db['Users'], { foreignKey: 'userId', sourceKey: 'id' });
 db['Ratings'].belongsTo(db['Offers'], {
   foreignKey: 'offerId',
-  targetKey: 'id',
+  sourceKey: 'id',
+});
+
+db['Conversations'].hasMany(db['Messages'], {
+  foreignKey: 'conversation',
+  targetKey: '_id',
+});
+db['Conversations'].belongsToMany(db['Catalogs'], {
+  foreignKey: 'conversationId',
+  targetKey: '_id',
+  through: 'CatalogsToConversations',
+});
+
+db['Catalogs'].belongsTo(db['Users'], {
+  foreignKey: 'userId',
+  sourceKey: 'id',
+});
+db['Catalogs'].belongsToMany(db['Conversations'], {
+  foreignKey: 'catalogId',
+  targetKey: '_id',
+  through: 'CatalogsToConversations',
+});
+
+db['Messages'].belongsTo(db['Conversations'], {
+  foreignKey: 'conversation',
+  sourceKey: '_id',
+});
+db['Messages'].belongsTo(db['Users'], {
+  foreignKey: 'sender',
+  sourceKey: '_id',
 });
 
 db.sequelize = sequelize;

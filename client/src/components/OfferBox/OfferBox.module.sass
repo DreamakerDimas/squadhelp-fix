@@ -2,15 +2,15 @@
   display: flex
   margin-top: 15px
   align-self: stretch
-  padding: 30px 40px 10px 40px
+  padding: 30px 40px
   background-color: #f9fafb
   flex-direction: column
   justify-content: flex-start
   border-radius: 10px
   position: relative
   align-items: flex-start
-  @media(max-width: 450px)
-    padding: 10px 0
+  @media(max-width: 1000px)
+    padding: 10px 0 30px
   i
     position: absolute
     left: calc(100% - 35px)
@@ -55,10 +55,18 @@
     align-items: center
     justify-content: space-between
     position: relative
-    @media(max-width: 500px)
+    @media(max-width: 1000px)
       flex-direction: column
     .userInfo
+      display: flex
+      flex-direction: column
       min-width: 215px
+      @media(max-width: 1000px)
+        justify-content: center
+        align-items: center
+        width: 100%
+        border-bottom: 1px solid #556da557
+        padding: 20px
     i
       cursor: pointer
       position: absolute
@@ -83,20 +91,22 @@
       flex-direction: column
       justify-content: flex-start
       align-items: center
-      @media(max-width: 800px)
+      @media(max-width: 1000px)
         margin-top: 10px
         max-width: 200px
       .responseLogo
         width: auto
         height: 100px
       .response
+        font-size: 22px
         text-align: center
         overflow-wrap: break-word
         align-self: stretch
-        margin-left: 10px
+        margin-left: 25px
         color: #556da5
         margin-bottom: 10px
-        font-size: 18px
+        @media(max-width: 1000px)
+          margin: 10px auto
     .creativeRating
       display: flex
       margin-top: 5px
@@ -133,6 +143,7 @@
   background-color: #CD5C5C
 
 .status
+  padding: 5px 10px
   background-color: #ebeef0
   border-radius: 5px
   color: #556da5

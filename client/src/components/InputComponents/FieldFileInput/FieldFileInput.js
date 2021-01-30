@@ -34,6 +34,7 @@ const FieldFileInput = (props) => {
         id="fileInput"
         type="file"
         onChange={onChange}
+        accept="image/gif, image/png, image/jpeg, image/bmp, image/webp, image/svg+xml"
       />
     </div>
   );

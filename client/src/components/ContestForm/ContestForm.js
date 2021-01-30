@@ -230,7 +230,11 @@ class ContestForm extends React.Component {
                     those name suggestions where the domain is available.
                     (Recommended)
                   </p>
-                  <Field name="domain" component={DomainSelector} />
+                  <Field
+                    type="select"
+                    name="domain"
+                    component={DomainSelector}
+                  />
                 </div>
                 {this.renderSpecialInputs()}
                 <Field

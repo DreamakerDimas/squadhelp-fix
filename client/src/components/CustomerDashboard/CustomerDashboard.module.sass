@@ -1,7 +1,6 @@
 .mainContainer
-  width: 1200px
-  margin: 0 auto
-  margin-top: 50px
+  width: 100%
+  margin: 50px 40px
   display: flex
   flex-direction: row
   justify-content: flex-start
@@ -29,8 +28,7 @@
     margin-top: 15px
   .filterContainer
     min-width: 250px
-    height: 350px
-    padding-top: 30px
+    padding: 20px 0
     margin-right: 50px
     display: flex
     flex-direction: column
@@ -39,28 +37,27 @@
     background-color: white
     margin-bottom: 15px
     @media(max-width: 1000px)
-      padding-top: 10px
+      padding: 10px 5px
       flex-direction: row
       margin-right: 0
-      justify-content: center
-      height: 80px
+      justify-content: space-around
     .filter
-      margin-top: 15px
+      margin: 10px 0
       align-self: stretch
       text-align: center
       color: #46568a
       font-size: 18px
       border-radius: 10px
       padding: 10px
+      user-select: none
       @media(max-width: 1000px)
-        height: 20px
         margin: 0 5px
       &:hover
         background-color: #eefaea
         cursor: pointer
     .activeFilter
       transition: 0.5s background-color
-      margin-top: 15px
+      margin: 10px 0
       align-self: stretch
       text-align: center
       font-size: 18px
@@ -68,8 +65,8 @@
       padding: 10px
       background-color: #4e618d
       color: white
+      user-select: none
       @media(max-width: 1000px)
-        height: 20px
         margin: 0 5px
       &:hover 
         cursor: default

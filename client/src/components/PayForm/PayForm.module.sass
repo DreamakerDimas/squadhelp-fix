@@ -7,21 +7,21 @@
   display: flex
   flex-direction: column
   justify-content: flex-start
-  align-items: flex-start
+  align-items: center
   @media(max-width: 480px)
     padding: 0
   .headerInfo
     padding: 0 15px
     margin-bottom: 25px
-    font-size: 18px
+    font-size: 22px
     margin-top: 10px
+    color: #46568a
   .cardContainer
     align-self: center
     padding: 0 25px
     @media(max-width: 480px)
       padding: 0
   .buttonsContainer
-    align-self: center
     display: flex
     flex-direction: row
     align-items: center
@@ -33,12 +33,15 @@
       font-size: 20px
       padding: 8px 50px
       cursor: pointer
-      background-color: #f3875d
+      background-color: #46568a
       text-align: center
       line-height: 1.4
       color: white
       border: 1px solid transparent
       border-radius: 4px
+      user-select: none
+      &:hover
+        background-color: #f3875d 
       @media(max-width: 480px)
         padding: 8px 30px
     .backButton
@@ -51,10 +54,12 @@
       border-radius: 4px
       color: white
       margin-left: 10px
+      user-select: none
       @media(max-width: 480px)
         padding: 8px 30px
       &:hover
         cursor: pointer
+        background-color: #f3875d 
   .totalSum
     margin-top: 25px
     padding: 0 15px

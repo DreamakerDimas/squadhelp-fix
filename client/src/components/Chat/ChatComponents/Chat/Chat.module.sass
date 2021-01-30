@@ -2,6 +2,7 @@
   position: fixed
   float: right
   top: 30%
+  left: -290px
   width: 290px
   border-radius: 8px
   box-sizing: border-box
@@ -10,8 +11,9 @@
   z-index: 500
   overflow: visible
   box-shadow:  0 5px 10px 3px rgba(0, 0, 0, 0.1)
-  left: -290px
   transition: left ease 0.25s
+  @media(max-width: 700px)
+    top: 30px
   .buttonsContainer
     display: flex
     flex-direction: row
@@ -19,6 +21,7 @@
     align-items: center
     margin-bottom: 10px
     .button
+      box-sizing: border-box
       cursor: pointer
       border-top-left-radius: 6px
       border-top-right-radius: 6px
@@ -28,8 +31,8 @@
       align-items: center
       justify-content: center
       height: 25px
+      user-select: none
       &:hover
-        box-sizing: border-box
         border: 0.5px solid #d6d1d1
         background-color: #f3f3f3
     .activeButton
@@ -68,5 +71,7 @@
     border-top-left-radius: 8px
     color: white
     text-align: center
+    @media(max-width: 700px)
+      border-top-left-radius: 0
 .showChat
   left: 0

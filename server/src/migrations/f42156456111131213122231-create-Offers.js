@@ -41,6 +41,10 @@ module.exports = {
         allowNull: true,
         defaultValue: 'pending',
       },
+      moderationStatus: {
+        type: Sequelize.ENUM('pending', 'checked', 'rejected'),
+        defaultValue: 'pending',
+      },
     });
   },
   down: (queryInterface, Sequelize) => {

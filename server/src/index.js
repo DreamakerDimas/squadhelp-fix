@@ -1,10 +1,10 @@
-require('./server/dbMongo/mongoose');
+// require('./dbMongo/mongoose'); //-- don't need for now
 const http = require('http');
 const express = require('express');
-const router = require('./server/router');
+const router = require('./router');
 const cors = require('cors');
 const controller = require('./socketInit');
-const handlerError = require('./server/handlerError/handler');
+const handlerError = require('./handlerError/handler');
 const { loggerInit } = require('./logger');
 
 const PORT = process.env.PORT || 9632;

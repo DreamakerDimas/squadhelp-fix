@@ -1,36 +1,25 @@
 'use strict';
 const uuid = require('uuid/v4');
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Messages', {
+    return queryInterface.createTable('Conversations', {
       _id: {
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: () => uuid(),
         allowNull: false,
       },
-      body: {
-        type: Sequelize.STRING,
+      participants: {
         allowNull: false,
+        type: Sequelize.ARRAY(Sequelize.INTEGER),
       },
-      conversation: {
-        type: Sequelize.UUID,
-        references: {
-          model: 'Conversations',
-          key: '_id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+      blackList: {
+        type: Sequelize.ARRAY(Sequelize.BOOLEAN),
+        defaultValue: [false, false],
       },
-      sender: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+      favoriteList: {
+        type: Sequelize.ARRAY(Sequelize.BOOLEAN),
+        defaultValue: [false, false],
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -43,6 +32,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Messages');
+    return queryInterface.dropTable('Conversations');
   },
 };

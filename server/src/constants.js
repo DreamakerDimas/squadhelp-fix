@@ -31,7 +31,7 @@ module.exports = {
   NOTIFICATION_CHANGE_OFFER_STATUS: 'changeOfferStatus',
   NEW_MESSAGE: 'newMessage',
   CHANGE_BLOCK_STATUS: 'CHANGE_BLOCK_STATUS',
-  MAIL_ADDRESS: 'dart.dimas@gmail.com',
+  MAIL_ADDRESS: 'dart.dimas@gmail.com', // if change also need changes in settings
   NODE_MAILER_SETTINGS: {
     service: 'DebugMail',
     auth: {

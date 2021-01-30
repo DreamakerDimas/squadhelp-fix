@@ -1,6 +1,6 @@
 const db = require('../models/index');
 const userQueries = require('./queries/userQueries');
-const controller = require('../../socketInit');
+const controller = require('../socketInit');
 const _ = require('lodash');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;

@@ -2,7 +2,7 @@ const ApplicationError = require('./ApplicationError');
 
 class UncorrectPassword extends ApplicationError {
   constructor(message) {
-    super(message || 'uncorrect password', 406);
+    super(message || 'incorrect password', 406);
   }
 }
 

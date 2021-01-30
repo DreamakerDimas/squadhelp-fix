@@ -1,14 +1,14 @@
 const db = require('../models/index');
 const ServerError = require('../errors/ServerError');
 const userQueries = require('./queries/userQueries');
-const controller = require('../../socketInit');
+const controller = require('../socketInit');
 const contestQueries = require('./queries/contestQueries');
 const {
   updateOffer,
   updateOfferStatus,
   createOffer,
 } = require('./queries/offerQueries');
-const CONSTANTS = require('../../constants');
+const CONSTANTS = require('../constants');
 
 const rejectOffer = async (offerId, creatorId, contestId) => {
   const rejectedOffer = await updateOffer(

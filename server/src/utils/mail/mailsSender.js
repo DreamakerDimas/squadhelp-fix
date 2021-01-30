@@ -1,5 +1,5 @@
 const transporter = require('./mailTransporter');
-const { MAIL_ADDRESS } = require('../../../constants');
+const { MAIL_ADDRESS } = require('../../constants');
 
 module.exports.sendResetToken = async (firstName, recipient, URL, token) => {
   const mailOptions = {

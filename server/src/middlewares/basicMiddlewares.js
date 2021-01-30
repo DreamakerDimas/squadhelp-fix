@@ -1,7 +1,7 @@
 const bd = require('../models/index');
 const RightsError = require('../errors/RightsError');
 const ServerError = require('../errors/ServerError');
-import CONSTANTS from '../../constants';
+import CONSTANTS from '../constants';
 
 module.exports.parseBody = (req, res, next) => {
   req.body.contests = JSON.parse(req.body.contests);

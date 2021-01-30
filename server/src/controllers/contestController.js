@@ -3,7 +3,7 @@ const ServerError = require('../errors/ServerError');
 
 const contestQueries = require('./queries/contestQueries');
 const UtilFunctions = require('../utils/functions');
-const CONSTANTS = require('../../constants');
+const CONSTANTS = require('../constants');
 
 module.exports.dataForContest = async (req, res, next) => {
   let response = {};

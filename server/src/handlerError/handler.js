@@ -1,4 +1,4 @@
-const { logWrite } = require('../../logger');
+const { logWrite } = require('../logger');
 
 module.exports = (err, req, res, next) => {
   console.log(err);

@@ -75,9 +75,10 @@ class CustomerDashboard extends React.Component {
       <div className={styles.mainContainer}>
         <div className={styles.filterContainer}>
           <div
-            onClick={() =>
-              this.props.newFilter(CONSTANTS.CONTEST_STATUS_ACTIVE)
-            }
+            onClick={() => {
+              if (customerFilter !== CONSTANTS.CONTEST_STATUS_ACTIVE)
+                return this.props.newFilter(CONSTANTS.CONTEST_STATUS_ACTIVE);
+            }}
             className={classNames({
               [styles.activeFilter]:
                 CONSTANTS.CONTEST_STATUS_ACTIVE === customerFilter,
@@ -88,9 +89,10 @@ class CustomerDashboard extends React.Component {
             Active Contests
           </div>
           <div
-            onClick={() =>
-              this.props.newFilter(CONSTANTS.CONTEST_STATUS_FINISHED)
-            }
+            onClick={() => {
+              if (customerFilter !== CONSTANTS.CONTEST_STATUS_FINISHED)
+                return this.props.newFilter(CONSTANTS.CONTEST_STATUS_FINISHED);
+            }}
             className={classNames({
               [styles.activeFilter]:
                 CONSTANTS.CONTEST_STATUS_FINISHED === customerFilter,
@@ -101,9 +103,10 @@ class CustomerDashboard extends React.Component {
             Completed contests
           </div>
           <div
-            onClick={() =>
-              this.props.newFilter(CONSTANTS.CONTEST_STATUS_PENDING)
-            }
+            onClick={() => {
+              if (customerFilter !== CONSTANTS.CONTEST_STATUS_PENDING)
+                return this.props.newFilter(CONSTANTS.CONTEST_STATUS_PENDING);
+            }}
             className={classNames({
               [styles.activeFilter]:
                 CONSTANTS.CONTEST_STATUS_PENDING === customerFilter,

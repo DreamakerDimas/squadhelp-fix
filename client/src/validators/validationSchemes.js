@@ -101,6 +101,7 @@ export default {
     nameVenture: yup.string(),
     typeOfTagline: yup.string(),
     brandStyle: yup.string(),
+    domain: yup.string().required('domain required'),
   }),
 
   filterSchema: yup.object().shape({

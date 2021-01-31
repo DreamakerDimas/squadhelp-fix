@@ -53,6 +53,7 @@ class CustomerDashboard extends React.Component {
           data={contests[i]}
           key={contests[i].id}
           goToExtended={this.goToExtended}
+          showStatus={false}
         />
       );
     }

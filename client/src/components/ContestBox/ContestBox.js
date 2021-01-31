@@ -1,10 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import classNames from 'classnames';
 import CONSTANTS from '../../constants';
 import styles from './ContestBox.module.sass';
 
 const ContestBox = (props) => {
+  const { id, title, contestType, prize, count, status } = props.data;
+  const statusClass = classNames({
+    [styles.status]: true,
+    [styles.active]: status === 'active',
+    [styles.finished]: status === 'finished',
+    [styles.pending]: status === 'pending',
+  });
+
   const getTimeStr = () => {
     const diff = moment.duration(moment().diff(moment(props.data.createdAt)));
     let str = '';
@@ -26,7 +35,6 @@ const ContestBox = (props) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-  const { id, title, contestType, prize, count } = props.data;
   return (
     <div
       className={styles.contestBoxContainer}
@@ -36,6 +44,11 @@ const ContestBox = (props) => {
         <div className={styles.titleAndIdContainer}>
           <span className={styles.title}>{title}</span>
           <span className={styles.id}>{`(#${id})`}</span>
+          {props.showStatus && (
+            <div className={styles.statusContainer}>
+              <span className={statusClass}>{status}</span>
+            </div>
+          )}
         </div>
         <div className={styles.contestType}>
           <span>{`${ucFirstLetter(

@@ -24,7 +24,7 @@ const OffersPage = ({
   useEffect(() => {
     getOffers(settings);
 
-    return clearOffersStore();
+    return clearOffersStore;
   }, []);
 
   // scroll

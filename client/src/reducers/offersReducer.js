@@ -2,7 +2,7 @@ import ACTION from '../actions/actionTypes';
 
 const initialState = {
   offers: [],
-  isFetching: false,
+  isFetching: true,
   error: null,
   haveMore: true,
   settings: {

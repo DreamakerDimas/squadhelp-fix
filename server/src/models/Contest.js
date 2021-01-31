@@ -86,6 +86,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.INTEGER,
       },
+      domain: {
+        allowNull: false,
+        type: DataTypes.ENUM('asname', 'yes', 'no'),
+      },
     },
     {
       timestamps: false,

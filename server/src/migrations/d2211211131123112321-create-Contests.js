@@ -85,6 +85,10 @@ module.exports = {
           key: 'id',
         },
       },
+      domain: {
+        allowNull: false,
+        type: Sequelize.ENUM('asname', 'yes', 'no'),
+      },
     });
   },
   down: (queryInterface, Sequelize) => {

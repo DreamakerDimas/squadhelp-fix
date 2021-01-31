@@ -40,11 +40,9 @@ const DomainSelector = ({ input }) => {
   };
 
   return (
-    <>
-      <ButtonGroup className={styles.buttonsContainer}>
-        {renderButtons()}
-      </ButtonGroup>
-    </>
+    <ButtonGroup className={styles.buttonsContainer}>
+      {renderButtons()}
+    </ButtonGroup>
   );
 };
 

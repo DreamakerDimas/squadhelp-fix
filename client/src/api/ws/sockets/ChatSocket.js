@@ -46,8 +46,8 @@ class ChatSocket extends WebSocket {
 
       if (isNew) {
         messagesPreview.push(preview);
-        this.dispatch(addMessage({ message, messagesPreview }));
       }
+      this.dispatch(addMessage({ message, messagesPreview }));
     });
   };
 

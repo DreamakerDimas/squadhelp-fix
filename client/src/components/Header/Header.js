@@ -2,9 +2,11 @@ import React from 'react';
 import Logo from '../Logo';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import CONSTANTS from '../../constants';
 import { clearStore, headerRequest } from '../../actions/actionCreator';
+import { controller, chatController } from '../../api/ws/socketController';
 import styles from './Header.module.sass';
+import CONSTANTS from '../../constants';
+
 class Header extends React.Component {
   componentDidMount() {
     if (!this.props.data) {
@@ -13,8 +15,11 @@ class Header extends React.Component {
   }
 
   logOut = () => {
+    controller.unsubscribe(this.props.data.id);
+    chatController.unsubscribeChat(this.props.data.id);
     localStorage.removeItem('accessToken');
     this.props.clearStore();
+    //socket
     this.props.history.replace('/login');
   };
 

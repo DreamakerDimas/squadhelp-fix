@@ -87,7 +87,8 @@ const resolveOffer = async (
   controller
     .getNotificationController()
     .emitChangeOfferStatus(creatorId, 'Someone of your offers WIN', contestId);
-  return updatedOffers[0].dataValues;
+
+  return updatedOffers.find((offer) => offer.id === offerId);
 };
 
 module.exports.setNewOffer = async (req, res, next) => {
@@ -123,6 +124,7 @@ module.exports.setOfferStatus = async (req, res, next) => {
         req.body.creatorId,
         req.body.contestId
       );
+      console.log(offer);
       res.send(offer);
     } catch (err) {
       next(err);

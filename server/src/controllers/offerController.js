@@ -124,7 +124,6 @@ module.exports.setOfferStatus = async (req, res, next) => {
         req.body.creatorId,
         req.body.contestId
       );
-      console.log(offer);
       res.send(offer);
     } catch (err) {
       next(err);

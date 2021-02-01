@@ -322,7 +322,6 @@ module.exports.changeCatalogName = async (req, res, next) => {
 
     const catalogObj = { _id, catalogName, chats };
 
-    console.log(catalogObj);
     res.send(catalogObj);
   } catch (err) {
     next(err);

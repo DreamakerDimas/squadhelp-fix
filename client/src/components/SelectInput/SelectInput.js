@@ -49,7 +49,7 @@ class SelectInput extends React.Component {
 }
 
 SelectInput.propTypes = {
-  optionsArray: PropTypes.array.isRequired,
+  optionsArray: PropTypes.array,
   valueArray: PropTypes.array,
 };
 

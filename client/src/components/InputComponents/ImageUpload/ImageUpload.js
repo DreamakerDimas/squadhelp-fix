@@ -32,7 +32,8 @@ const ImageUpload = (props) => {
         <input
           id="fileInput"
           type="file"
-          accept=".jpg, .png, .jpeg"
+          accept="image/gif, image/png, image/jpeg"
+          //accept=".jpg, .png, .jpeg"
           onChange={onChange}
         />
         <label htmlFor="fileInput">Chose file</label>

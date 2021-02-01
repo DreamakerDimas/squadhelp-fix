@@ -12,24 +12,25 @@ class ContestsContainer extends React.Component {
   }
 
   scrollHandler = () => {
+    const { isFetching, haveMore } = this.props;
     if (
       window.innerHeight + document.documentElement.scrollTop ===
       document.documentElement.offsetHeight
     ) {
-      if (this.props.haveMore) {
+      if (haveMore && !isFetching) {
         this.props.loadMore(this.props.children.length);
       }
     }
   };
 
   render() {
-    const { isFetching } = this.props;
-    if (!isFetching && this.props.children.length === 0) {
+    const { isFetching, children } = this.props;
+    if (!isFetching && children.length === 0) {
       return <div className={styles.notFound}>Nothing not found</div>;
     } else {
       return (
         <div>
-          {this.props.children}
+          {children}
           {isFetching && (
             <div className={styles.spinnerContainer}>
               <Spinner />

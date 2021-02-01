@@ -14,6 +14,7 @@
     display: flex
     flex-direction: column
     justify-content: center
+    align-content: center
     align-items: stretch
     align-self: stretch
     min-width: 260px
@@ -44,16 +45,32 @@
     font-size: 16px
     color: white
 
-  .termsOfService
-    text-align: center
-    color: white
-    font-size: 16px
+  .termsOfServiceContainer
     min-width: 260px
     align-self: stretch
-    margin-right: 20px
-    margin-left: 20px
-    margin-bottom: 10px
+    margin: 10px 20px 20px
 
+    .termsOfService
+      border: 1px solid white
+      color: white
+      font-size: 16px
+      margin-bottom: 10px
+      label
+        display: flex
+        flex-direction: row
+        justify-content: stretch
+        align-items: center
+        text-align: center
+        padding: 20px 10px
+        margin: 0
+        input
+          margin: auto 10px
+          width: 18px
+          height: 18px
+        a
+          text-decoration: underline
+          &:hover
+            color: #00eeff
 
     .fieldWarning
       font-size: 15px

@@ -120,7 +120,7 @@ class RegistrationForm extends React.Component {
               id={CONSTANTS.CREATOR}
             />
           </div>
-          <div className={styles.termsOfService}>
+          <div className={styles.termsOfServiceContainer}>
             <Field
               name="agreeOfTerms"
               classes={{

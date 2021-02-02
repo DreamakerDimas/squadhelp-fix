@@ -52,11 +52,21 @@ export function* setOfferStatusSaga(action) {
   }
 }
 
-export function* getOffersSaga(action) {
+export function* getModeratedOffersSaga(action) {
   yield put({ type: ACTION.GET_OFFERS_REQUEST });
   try {
     const response = yield restController.getAllPendingOffers(action.data);
-    yield put({ type: ACTION.GET_OFFERS_SUCCESS, data: response.data });
+    const { haveMore } = response.data;
+
+    const store = yield select((state) => state.offersStore);
+    const prevOffers = store.offers;
+    const offers = [...prevOffers, ...response.data.offers];
+    const offset = store.settings.offset + store.settings.limit;
+
+    yield put({
+      type: ACTION.GET_OFFERS_SUCCESS,
+      data: { haveMore, offers, offset },
+    });
   } catch (e) {
     yield put({ type: ACTION.GET_OFFERS_ERROR, error: e.response });
   }
@@ -66,7 +76,17 @@ export function* moderatorOfferUpdateSaga(action) {
   yield put({ type: ACTION.MODERATOR_UPDATE_OFFER_REQUEST });
   try {
     yield restController.updateOfferModerationStatus(action.data);
-    yield put({ type: ACTION.MODERATOR_UPDATE_OFFER_SUCCESS, data: action.data });
+    const store = yield select((state) => state.offersStore);
+    --store.settings.offset;
+    const { id, isAccepted } = action.data;
+    const newOffers = store.offers.map((offer) =>
+      offer.id === id ? { ...offer, isAccepted } : offer
+    );
+
+    yield put({
+      type: ACTION.MODERATOR_UPDATE_OFFER_SUCCESS,
+      data: { settings: store.settings, offers: newOffers },
+    });
   } catch (e) {
     yield put({ type: ACTION.MODERATOR_UPDATE_OFFER_ERROR, error: e.response });
   }

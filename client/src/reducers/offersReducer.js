@@ -9,59 +9,45 @@ const initialState = {
     limit: 10,
     offset: 0,
     order: 'asc',
-    counter: 0,
   },
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case ACTION.GET_OFFERS_REQUEST: {
-      const newOffset = state.settings.offset - state.settings.counter;
       return {
         ...state,
         isFetching: true,
         error: null,
-        settings: {
-          ...state.settings,
-          offset: newOffset,
-        },
       };
     }
     case ACTION.MODERATOR_UPDATE_OFFER_REQUEST: {
       return {
         ...state,
+        isFetching: true,
         error: null,
       };
     }
     case ACTION.GET_OFFERS_SUCCESS: {
-      const newOffset = state.settings.offset + state.settings.limit;
-      const prevOffers = state.offers;
       return {
         ...state,
         isFetching: false,
         error: null,
-        offers: [...prevOffers, ...action.data.offers],
+        offers: action.data.offers,
         haveMore: action.data.haveMore,
         settings: {
           ...state.settings,
-          offset: newOffset,
+          offset: action.data.offset,
         },
       };
     }
     case ACTION.MODERATOR_UPDATE_OFFER_SUCCESS: {
-      const id = action.data.id;
-      const isAccepted = action.data.isAccepted;
-      const newOffers = state.offers.map((offer) =>
-        offer.id === id ? { ...offer, isAccepted } : offer
-      );
       return {
         ...state,
         error: null,
-        settings: {
-          ...state.settings,
-          counter: state.settings.counter + 1,
-        },
-        offers: newOffers,
+        isFetching: false,
+        offers: action.data.offers,
+        settings: action.data.settings,
       };
     }
     case ACTION.GET_OFFERS_ERROR: {
@@ -74,6 +60,7 @@ export default function (state = initialState, action) {
     case ACTION.MODERATOR_UPDATE_OFFER_ERROR: {
       return {
         ...state,
+        isFetching: false,
         error: action.error,
       };
     }

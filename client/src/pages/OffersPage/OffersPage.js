@@ -32,13 +32,12 @@ const OffersPage = ({
     const handleScroll = () => {
       const currentPosition =
         window.innerHeight + document.documentElement.scrollTop;
-
-      const isLoadNotNeeded =
+      const isLoadNotNeed =
         !haveMore ||
         isFetching ||
         currentPosition !== document.documentElement.offsetHeight;
 
-      if (isLoadNotNeeded) return;
+      if (isLoadNotNeed) return;
 
       getOffers(settings);
     };
@@ -54,10 +53,19 @@ const OffersPage = ({
     moderateOffer({ id, isAccepted });
   };
 
+  const updateHandler = () => {
+    getOffers(settings);
+  };
+
   const renderOffers = () => {
     // offers existence check
     if (offers.length === 0 && !isFetching) {
-      return <div>No offers founded</div>;
+      return (
+        <div className={styles.noOffers}>
+          <span>No offers founded</span>{' '}
+          <i class="fas fa-redo" onClick={updateHandler}></i>
+        </div>
+      );
     }
 
     return offers.map((offer) => (
@@ -85,6 +93,14 @@ const OffersPage = ({
       )}
     </>
   );
+};
+
+OffersPage.propTypes = {
+  isFetchingUser: PropTypes.bool.isRequired,
+  getOffers: PropTypes.func.isRequired,
+  moderateOffer: PropTypes.func.isRequired,
+  offersStore: PropTypes.object.isRequired,
+  clearOffersStore: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

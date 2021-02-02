@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './ModeratedOffer.module.sass';
 import CONSTANTS from '../../constants';
 
@@ -71,5 +72,11 @@ function ModeratedOffer({ data, moderateHandler, isFetching }) {
     </div>
   );
 }
+
+ModeratedOffer.propTypes = {
+  data: PropTypes.object.isRequired,
+  moderateHandler: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+};
 
 export default ModeratedOffer;

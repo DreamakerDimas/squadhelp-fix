@@ -8,9 +8,10 @@ const Clients = () => {
     <div className={styles.mainContainer}>
       <div className={styles.textContainer}>Featured In</div>
       <div className={styles.linksContainer}>
-        <Link
+        <a
           className={styles.linkBody}
-          to="http://www.forbes.com/sites/forbestreptalks/2016/07/11/not-sure-how-to-name-a-startup-squadhelp-will-crowdsource-it-for-199"
+          href="http://www.forbes.com/sites/forbestreptalks/2016/07/11/not-sure-how-to-name-a-startup-squadhelp-will-crowdsource-it-for-199"
+          target="_blank"
         >
           <img
             className={styles.imgTop}
@@ -22,11 +23,12 @@ const Clients = () => {
             src={CONSTANTS.STATIC_IMAGES_PATH + '/sponsors/Forbes-active.png'}
             alt="Image Description"
           />
-        </Link>
+        </a>
 
-        <Link
+        <a
           className={styles.linkBody}
-          to="http://thenextweb.com/contributors/crowdsource-startup-name-with-squadhelp/"
+          href="http://thenextweb.com/contributors/crowdsource-startup-name-with-squadhelp/"
+          target="_blank"
         >
           <img
             className={styles.imgTop}
@@ -43,11 +45,12 @@ const Clients = () => {
             }
             alt="Image Description"
           />
-        </Link>
+        </a>
 
-        <Link
+        <a
           className={styles.linkBody}
-          to="http://mashable.com/2011/04/01/make-money-crowdworking/"
+          href="http://mashable.com/2011/04/01/make-money-crowdworking/"
+          target="_blank"
         >
           <img
             className={styles.imgTop}
@@ -61,7 +64,7 @@ const Clients = () => {
             src={CONSTANTS.STATIC_IMAGES_PATH + '/sponsors/mashable-active.png'}
             alt="Image Description"
           />
-        </Link>
+        </a>
       </div>
     </div>
   );

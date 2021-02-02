@@ -14,7 +14,6 @@ const DomainSelector = ({ input }) => {
   const { DOMAIN_BUTTONS } = CONSTANTS;
 
   function clickHandler(event) {
-    event.preventDefault();
     input.onChange(event.currentTarget.dataset.selector);
   }
 

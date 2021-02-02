@@ -42,7 +42,7 @@ function ModeratedOffer({ data, moderateHandler, isFetching }) {
         {originalFileName && <span>{originalFileName}</span>}
       </div>
 
-      {!isDisabled && (
+      {!isDisabled ? (
         <div className={styles.offerActions}>
           <button
             disabled={isFetching}
@@ -59,9 +59,7 @@ function ModeratedOffer({ data, moderateHandler, isFetching }) {
             Decline
           </button>
         </div>
-      )}
-
-      {isDisabled && (
+      ) : (
         <div className={styles.statusContainer}>
           {isAccepted ? (
             <span className={styles.acceptedSpan}>accepted</span>

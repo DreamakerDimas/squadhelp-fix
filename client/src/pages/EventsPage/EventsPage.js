@@ -53,62 +53,59 @@ const EventsPage = ({
 
   // render on store change
   useEffect(() => {}, [events, alarmedEvents]);
-
   // --End of Events Controller--
 
-  // set content component id
+  // --Render--
   function setSwitcherHandler(e) {
-    e.preventDefault();
     setSwitcherId(e.currentTarget.dataset.id);
   }
+
+  const getAlarmedList = () =>
+    alarmedEvents.length > 0 ? (
+      <>
+        <h2>Alarmed Events</h2>
+        <EventsList eventsArr={alarmedEvents} />
+      </>
+    ) : (
+      <>
+        <h2>Alarmed Events</h2>
+        <h3>No alarmed events found</h3>
+      </>
+    );
+
+  const getEventsList = () =>
+    events.length > 0 ? (
+      <>
+        <h2>All Events</h2>
+        <EventsList eventsArr={events} />
+      </>
+    ) : (
+      <>
+        <h2>All Events</h2>
+        <h3>No events found</h3>
+      </>
+    );
+
+  const getEventCreationForm = () => (
+    <>
+      <h2>Create Event</h2>
+      <CreateEventForm sortEvents={sortEvents} setSwitcherId={setSwitcherId} />
+    </>
+  );
 
   // get content by id
   const renderContent = () => {
     switch (switcherId) {
       case ALARMED_EVENTS: {
-        if (alarmedEvents.length > 0) {
-          return (
-            <>
-              <h2>Alarmed Events</h2>
-              <EventsList eventsArr={alarmedEvents} />
-            </>
-          );
-        }
-        return (
-          <>
-            <h2>Alarmed Events</h2>
-            <h3>No alarmed events yet</h3>
-          </>
-        );
+        return getAlarmedList();
       }
 
       case ALL_EVENTS: {
-        if (events.length > 0) {
-          return (
-            <>
-              <h2>All Events</h2>
-              <EventsList eventsArr={events} />
-            </>
-          );
-        }
-        return (
-          <>
-            <h2>All Events</h2>
-            <h3>No events yet</h3>
-          </>
-        );
+        return getEventsList();
       }
 
       case CREATE_EVENT: {
-        return (
-          <>
-            <h2>Create Event</h2>
-            <CreateEventForm
-              sortEvents={sortEvents}
-              setSwitcherId={setSwitcherId}
-            />
-          </>
-        );
+        return getEventCreationForm();
       }
     }
   };

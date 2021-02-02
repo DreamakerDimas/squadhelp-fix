@@ -3,6 +3,7 @@ import { initSocket } from '../api/ws/socketController';
 import { Provider } from 'react-redux';
 import configureStore from './configureStore';
 import App from '../App';
+import SlideUp from '../components/SlideUp/SlideUp';
 
 class Setup extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Setup extends React.Component {
   render() {
     return (
       <Provider store={this.state.store}>
+        <SlideUp />
         <App />
       </Provider>
     );

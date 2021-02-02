@@ -85,10 +85,10 @@ const UserProfile = (props) => {
 };
 
 UserProfile.propTypes = {
-  balance: PropTypes.number.isRequired,
+  balance: PropTypes.string,
   role: PropTypes.string.isRequired,
   profileModeView: PropTypes.string.isRequired,
-  error: PropTypes.object.isRequired,
+  error: PropTypes.object,
   cashOut: PropTypes.func.isRequired,
   changeProfileModeView: PropTypes.func.isRequired,
   clearPaymentStore: PropTypes.func.isRequired,

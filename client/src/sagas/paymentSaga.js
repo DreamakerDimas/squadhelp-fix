@@ -10,14 +10,14 @@ export function* paymentSaga(action) {
     yield restController.payment(action.data);
     history.replace('dashboard');
     yield put({ type: ACTION.CLEAR_CONTEST_STORE });
-    yield put({ type: ACTION.CLEAR_PAYMENT_STORE });
+    yield put({ type: ACTION.PAYMENT_ACTION_SUCCESS });
   } catch (err) {
     yield put({ type: ACTION.PAYMENT_ACTION_ERROR, error: err.response });
   }
 }
 
 export function* cashOutSaga(action) {
-  yield put({ type: ACTION.PAYMENT_ACTION_REQUEST, data: action.data });
+  yield put({ type: ACTION.PAYMENT_ACTION_REQUEST });
   try {
     const { data } = yield restController.cashOut(action.data);
     yield put({ type: ACTION.UPDATE_USER_DATA_SUCCESS, data });

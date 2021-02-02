@@ -13,8 +13,13 @@ const Clients = () => {
           to="http://www.forbes.com/sites/forbestreptalks/2016/07/11/not-sure-how-to-name-a-startup-squadhelp-will-crowdsource-it-for-199"
         >
           <img
-            className={styles.SVG}
-            src={CONSTANTS.STATIC_IMAGES_PATH + '/svg/forbes.svg'}
+            className={styles.imgTop}
+            src={CONSTANTS.STATIC_IMAGES_PATH + '/sponsors/Forbes-inactive.png'}
+            alt="Image Description"
+          />
+          <img
+            className={styles.imgBot}
+            src={CONSTANTS.STATIC_IMAGES_PATH + '/sponsors/Forbes-active.png'}
             alt="Image Description"
           />
         </Link>
@@ -24,19 +29,18 @@ const Clients = () => {
           to="http://thenextweb.com/contributors/crowdsource-startup-name-with-squadhelp/"
         >
           <img
-            className={styles.SVG}
-            src={CONSTANTS.STATIC_IMAGES_PATH + '/svg/TNW.svg'}
+            className={styles.imgTop}
+            src={
+              CONSTANTS.STATIC_IMAGES_PATH +
+              '/sponsors/the_next_web_inactive.png'
+            }
             alt="Image Description"
           />
-        </Link>
-
-        <Link
-          className={styles.linkBody}
-          to="http://www.chicagotribune.com/bluesky/originals/ct-squadhelp-startup-names-bsi-20170331-story.html"
-        >
           <img
-            className={styles.SVG}
-            src={CONSTANTS.STATIC_IMAGES_PATH + '/svg/chicago.svg'}
+            className={styles.imgBot}
+            src={
+              CONSTANTS.STATIC_IMAGES_PATH + '/sponsors/the_next_web_active.png'
+            }
             alt="Image Description"
           />
         </Link>
@@ -46,8 +50,15 @@ const Clients = () => {
           to="http://mashable.com/2011/04/01/make-money-crowdworking/"
         >
           <img
-            className={styles.SVG}
-            src={CONSTANTS.STATIC_IMAGES_PATH + '/svg/Mashable.svg'}
+            className={styles.imgTop}
+            src={
+              CONSTANTS.STATIC_IMAGES_PATH + '/sponsors/mashable-inactive.png'
+            }
+            alt="Image Description"
+          />
+          <img
+            className={styles.imgBot}
+            src={CONSTANTS.STATIC_IMAGES_PATH + '/sponsors/mashable-active.png'}
             alt="Image Description"
           />
         </Link>

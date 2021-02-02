@@ -2,11 +2,12 @@
     display: flex
     flex-direction: row
     justify-content: space-between
-    align-items: center
+    align-items: flex-start
     padding: 0 15px
     margin-bottom: 30px
 
     .textContainer
+        margin-top: 50px
         padding: 0 16px
         font-size: 30px
 
@@ -20,6 +21,20 @@
         flex-wrap: wrap
 
         .linkBody
-            padding: 20px
+            position:relative
+            margin: 40px 20px
+            width: 100px
             img
-                width: 96px
+                position: absolute
+                transition: opacity 0.4s ease-in-out
+                width: 100px
+
+            .imgTop
+                opacity: 1
+                &:hover
+                    opacity: 0
+
+            .imgBot
+                opacity: 0
+                &:hover 
+                    opacity: 1

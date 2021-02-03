@@ -9,6 +9,7 @@ const userQueries = require('./queries/userQueries');
 const bankQueries = require('./queries/bankQueries');
 const ratingQueries = require('./queries/ratingQueries');
 const { sendResetToken } = require('../utils/mail/mailsSender');
+const { getPricesArr } = require('../utils/functions');
 
 module.exports.loginRequest = async (req, res, next) => {
   try {
@@ -159,40 +160,37 @@ module.exports.changeMark = async (req, res, next) => {
 };
 
 module.exports.payment = async (req, res, next) => {
-  let transaction;
+  const { price, contests, number, cvc, expiry } = req.body;
+  const transaction = await db.sequelize.transaction();
   try {
-    transaction = await db.sequelize.transaction();
     await bankQueries.updateBankBalance(
       {
         balance: db.sequelize.literal(`
                 CASE
-            WHEN "cardNumber"='${req.body.number.replace(
-              / /g,
-              ''
-            )}' AND "cvc"='${req.body.cvc}' AND "expiry"='${req.body.expiry}'
-                THEN "balance"-${req.body.price}
-            WHEN "cardNumber"='${CONSTANTS.SQUADHELP_BANK_NUMBER}' AND "cvc"='${
-          CONSTANTS.SQUADHELP_BANK_CVC
-        }' AND "expiry"='${CONSTANTS.SQUADHELP_BANK_EXPIRY}'
-                THEN "balance"+${req.body.price} END
+            WHEN "cardNumber"='${number.replace(/ /g, '')}' 
+            AND "cvc"='${cvc}' 
+            AND "expiry"='${expiry}'
+                THEN "balance"-${price}
+            WHEN "cardNumber"='${CONSTANTS.SQUADHELP_BANK_NUMBER}' 
+            AND "cvc"='${CONSTANTS.SQUADHELP_BANK_CVC}' 
+            AND "expiry"='${CONSTANTS.SQUADHELP_BANK_EXPIRY}'
+                THEN "balance"+${price} END
         `),
       },
       {
         cardNumber: {
           [db.sequelize.Op.in]: [
             CONSTANTS.SQUADHELP_BANK_NUMBER,
-            req.body.number.replace(/ /g, ''),
+            number.replace(/ /g, ''),
           ],
         },
       },
       transaction
     );
     const orderId = uuid();
-    req.body.contests.forEach((contest, index) => {
-      const prize =
-        index === req.body.contests.length - 1
-          ? Math.ceil(req.body.price / req.body.contests.length)
-          : Math.floor(req.body.price / req.body.contests.length);
+    const pricesArr = getPricesArr(price, contests.length);
+    contests.forEach((contest, index) => {
+      const prize = pricesArr[index];
       contest = Object.assign(contest, {
         status: index === 0 ? 'active' : 'pending',
         userId: req.tokenData.userId,
@@ -202,7 +200,7 @@ module.exports.payment = async (req, res, next) => {
         prize,
       });
     });
-    await db.Contests.bulkCreate(req.body.contests, transaction);
+    await db.Contests.bulkCreate(contests, transaction);
     transaction.commit();
     res.send();
   } catch (err) {

@@ -22,7 +22,17 @@ const ContestInfo = (props) => {
     fileName,
     User,
     status,
+    domain,
   } = contestData;
+
+  const getDomainString = () => {
+    let string = '';
+    CONSTANTS.DOMAIN_BUTTONS.forEach((value, index) => {
+      if (value.type === domain) string = value.body;
+    });
+    return string;
+  };
+
   return (
     <div className={styles.mainContestInfoContainer}>
       <div className={styles.infoContainer}>
@@ -78,6 +88,10 @@ const ContestInfo = (props) => {
         <div className={styles.dataContainer}>
           <span className={styles.label}>Industry of company</span>
           <span className={styles.data}>{industry}</span>
+        </div>
+        <div className={styles.dataContainer}>
+          <span className={styles.label}>Domain match</span>
+          <span className={styles.data}>{getDomainString()}</span>
         </div>
         {originalFileName && (
           <div className={styles.dataContainer}>

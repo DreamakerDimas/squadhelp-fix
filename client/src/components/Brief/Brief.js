@@ -37,6 +37,7 @@ const Brief = (props) => {
       typeOfTagline,
       originalFileName,
       contestType,
+      domain,
     } = props.contestData;
     const data = {
       focusOfWork,
@@ -50,7 +51,9 @@ const Brief = (props) => {
       typeOfTagline,
       originalFileName,
       contestType,
+      domain,
     };
+
     const defaultData = {};
     Object.keys(data).forEach((key) => {
       if (data[key]) {

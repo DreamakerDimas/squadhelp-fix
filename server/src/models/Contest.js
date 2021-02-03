@@ -80,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       prize: {
         allowNull: false,
-        type: DataTypes.DECIMAL,
+        type: DataTypes.DECIMAL(10, 2),
       },
       priority: {
         allowNull: false,

@@ -3,6 +3,7 @@ const serverIP = '172.18.0.4';
 const serverPort = env === 'production' ? 3000 : 9632;
 
 export default {
+  CONTESTS_PRICE: '100.00',
   PHONE_NUMBER: '(877)355-3585',
   CUSTOMER: 'customer',
   CREATOR: 'creator',

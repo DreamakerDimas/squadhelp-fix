@@ -7,6 +7,7 @@ import styles from './Payment.module.sass';
 import isEmpty from 'lodash/isEmpty';
 import Error from '../../components/Error/Error';
 import Logo from '../../components/Logo';
+import CONSTANTS from '../../constants';
 
 const Payment = (props) => {
   const pay = (values) => {
@@ -23,7 +24,7 @@ const Payment = (props) => {
     data.append('expiry', expiry);
     data.append('cvc', cvc);
     data.append('contests', JSON.stringify(contestArray));
-    data.append('price', '100');
+    data.append('price', CONSTANTS.CONTESTS_PRICE);
     props.pay({
       formData: data,
     });
@@ -60,11 +61,13 @@ const Payment = (props) => {
           <span className={styles.orderHeader}>Order Summary</span>
           <div className={styles.packageInfoContainer}>
             <span className={styles.packageName}>Package Name: Standard</span>
-            <span className={styles.packagePrice}>$100 USD</span>
+            <span className={styles.packagePrice}>
+              ${CONSTANTS.CONTESTS_PRICE} USD
+            </span>
           </div>
           <div className={styles.resultPriceContainer}>
             <span>Total:</span>
-            <span>$100.00 USD</span>
+            <span>${CONSTANTS.CONTESTS_PRICE} USD</span>
           </div>
           <a href="http://www.google.com">Have a promo code?</a>
         </div>

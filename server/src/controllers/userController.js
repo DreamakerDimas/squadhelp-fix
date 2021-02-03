@@ -160,7 +160,8 @@ module.exports.changeMark = async (req, res, next) => {
 };
 
 module.exports.payment = async (req, res, next) => {
-  const { price, contests, number, cvc, expiry } = req.body;
+  const price = Number(req.body.price);
+  const { contests, number, cvc, expiry } = req.body;
   const transaction = await db.sequelize.transaction();
   try {
     await bankQueries.updateBankBalance(

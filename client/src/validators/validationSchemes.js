@@ -154,7 +154,18 @@ export default {
   }),
 
   CashoutSchema: yup.object().shape({
-    sum: yup.number().min(5, 'min sum is 5$').required('required'),
+    sum: yup
+      .number()
+      .min(5, 'min sum is 5$')
+      .test(
+        'test-sum',
+        'should have money format ("11.11" or "11")',
+        (value) => {
+          const strNum = Number(value).toString();
+          return strNum.match(/^(\d{1,}\.\d{1,2}|\d{1,})$/);
+        }
+      )
+      .required('required'),
     number: yup
       .string()
       .test(

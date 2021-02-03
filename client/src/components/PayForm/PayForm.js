@@ -156,7 +156,7 @@ PayForm.propTypes = {
   cvc: PropTypes.string,
   expiry: PropTypes.string,
   changeFocusOnCard: PropTypes.func.isRequired,
-  back: PropTypes.func.isRequired,
+  back: PropTypes.func,
   handleSubmit: PropTypes.func.isRequired,
 };
 

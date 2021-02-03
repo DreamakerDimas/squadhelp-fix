@@ -189,6 +189,7 @@ module.exports.payment = async (req, res, next) => {
       transaction
     );
     const orderId = uuid();
+
     const pricesArr = getPricesArr(price, contests.length);
     contests.forEach((contest, index) => {
       const prize = pricesArr[index];
@@ -201,6 +202,7 @@ module.exports.payment = async (req, res, next) => {
         prize,
       });
     });
+
     await db.Contests.bulkCreate(contests, transaction);
     transaction.commit();
     res.send();

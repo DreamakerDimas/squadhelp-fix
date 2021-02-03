@@ -27,7 +27,7 @@ const ContestInfo = (props) => {
 
   const getDomainString = () => {
     let string = '';
-    CONSTANTS.DOMAIN_BUTTONS.forEach((value, index) => {
+    CONSTANTS.DOMAIN_BUTTONS.forEach((value) => {
       if (value.type === domain) string = value.body;
     });
     return string;

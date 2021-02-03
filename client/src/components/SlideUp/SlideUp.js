@@ -19,8 +19,7 @@ const SlideUp = () => {
   // scroll listener
   useEffect(() => {
     const handleScroll = () => {
-      const currentPosition = document.documentElement.scrollTop;
-      if (currentPosition <= 500) {
+      if (window.scrollY <= 500) {
         setHided(true);
         return;
       }

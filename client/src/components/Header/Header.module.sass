@@ -4,6 +4,8 @@
   flex-direction: column
   justify-content: flex-start
   width: 100%
+  background-color: white
+  z-index: 1005
 
   .navContainer
     width: 100%
@@ -67,6 +69,7 @@
               width: 200px
 
           li
+            position: relative
             display: flex
             align-items: center
             justify-content: flex-start
@@ -82,13 +85,16 @@
                 color: #f27e51
 
               ul
+                box-sizing: border-box
                 display: block
                 position: absolute
-                border: 1px solid #eee
+                border: 1px solid #d6d6d6
+                border-top: 3px solid #5f76c0
                 z-index: 1000
-                top: 133px
+                top: 62px
                 background-color: white
                 margin-left: -15px
+                animation: showList 0.3s ease-out normal
                 @media(max-width: 700px)
                   position: sticky
                   
@@ -136,7 +142,7 @@
     flex-direction: row
     align-items: center
     justify-content: space-around
-    border-bottom: 1px solid #ebebeb
+    border-bottom: 1px solid #ebebeb 
 
     .userButtonsContainer
       margin-left: 100px
@@ -145,6 +151,10 @@
       display: flex
       border-left: 1px solid #ebebeb
       height: 40px
+      a
+        &:hover
+          span
+            color: #f27e51
       @media(max-width: 600px)
         margin-left: 0
 
@@ -273,3 +283,25 @@
       color: lightyellow
       text-decoration: underline
 
+
+.fixed
+  position: fixed
+  animation: show 0.5s ease-in-out normal
+  margin-top: 30px !important
+  background-color: white
+  z-index: 1000
+
+.marginTop
+  height: 63px
+
+@keyframes show
+  0%
+    transform: translateY(-63px)
+  100%
+    transform: translateY(0)
+
+@keyframes showList
+  0%
+    transform: translateY(10px)
+  100%
+    transform: translateY(0)

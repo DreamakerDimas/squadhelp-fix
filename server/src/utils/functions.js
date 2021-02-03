@@ -49,3 +49,50 @@ const types = [
   'logo,tagline',
   'name,logo',
 ];
+
+// Calculate contests price
+module.exports.getPricesArr = (totalPrice, num) => {
+  const priceForEach = formValuta(totalPrice / num);
+  const initPricesArr = formArr(priceForEach, num);
+
+  const pricesSum = getSum(initPricesArr);
+
+  const pricesArr = changeLastValue(
+    initPricesArr,
+    priceForEach,
+    totalPrice,
+    pricesSum
+  );
+
+  return pricesArr;
+};
+
+function formValuta(val) {
+  return Number(val.toFixed(2));
+}
+
+function formArr(val, num) {
+  const priceArr = [];
+  for (let i = 1; i <= num; i++) {
+    priceArr.push(val);
+  }
+  return priceArr;
+}
+
+function getSum(arr) {
+  return arr.reduce((sum, value) => {
+    return (sum += value);
+  }, 0);
+}
+
+function changeLastValue(arr, val, initPrice, priceSum) {
+  if (priceSum > initPrice) {
+    arr[arr.length - 1] = formValuta(val - (priceSum - initPrice));
+  }
+
+  if (priceSum < initPrice) {
+    arr[arr.length - 1] = formValuta(val + (initPrice - priceSum));
+  }
+
+  return arr;
+}

@@ -174,7 +174,8 @@ module.exports.payment = async (req, res, next) => {
             WHEN "cardNumber"='${CONSTANTS.SQUADHELP_BANK_NUMBER}' 
             AND "cvc"='${CONSTANTS.SQUADHELP_BANK_CVC}' 
             AND "expiry"='${CONSTANTS.SQUADHELP_BANK_EXPIRY}'
-                THEN "balance"+${price} END
+                THEN "balance"+${price} 
+            END
         `),
       },
       {
@@ -234,38 +235,33 @@ module.exports.updateUser = async (req, res, next) => {
 };
 
 module.exports.cashOut = async (req, res, next) => {
-  let transaction;
+  const { sum, number, expiry, cvc } = req.body;
+  const transaction = await db.sequelize.transaction();
   try {
-    transaction = await db.sequelize.transaction();
     const updatedUser = await userQueries.updateUser(
-      { balance: db.sequelize.literal('balance - ' + req.body.sum) },
+      { balance: db.sequelize.literal('balance - ' + sum) },
       req.tokenData.userId,
       transaction
     );
     await bankQueries.updateBankBalance(
       {
         balance: db.sequelize.literal(`CASE 
-                WHEN "cardNumber"='${req.body.number.replace(
-                  / /g,
-                  ''
-                )}' AND "expiry"='${req.body.expiry}' AND "cvc"='${
-          req.body.cvc
-        }'
-                    THEN "balance"+${req.body.sum}
-                WHEN "cardNumber"='${
-                  CONSTANTS.SQUADHELP_BANK_NUMBER
-                }' AND "expiry"='${
-          CONSTANTS.SQUADHELP_BANK_EXPIRY
-        }' AND "cvc"='${CONSTANTS.SQUADHELP_BANK_CVC}'
-                    THEN "balance"-${req.body.sum}
-                 END
+                WHEN "cardNumber"='${number.replace(/ /g, '')}' 
+                AND "expiry"='${expiry}' 
+                AND "cvc"='${cvc}'
+                    THEN "balance"+${sum}
+                WHEN "cardNumber"='${CONSTANTS.SQUADHELP_BANK_NUMBER}' 
+                AND "expiry"='${CONSTANTS.SQUADHELP_BANK_EXPIRY}' 
+                AND "cvc"='${CONSTANTS.SQUADHELP_BANK_CVC}'
+                    THEN "balance"-${sum}
+                END
                 `),
       },
       {
         cardNumber: {
           [db.sequelize.Op.in]: [
             CONSTANTS.SQUADHELP_BANK_NUMBER,
-            req.body.number.replace(/ /g, ''),
+            number.replace(/ /g, ''),
           ],
         },
       },

@@ -48,7 +48,6 @@
             color: #f18762
 
   .signUpContainer
-    width: 72%
     min-width: 280px
     min-height: 650px
     padding: 40px
@@ -64,7 +63,8 @@
       padding-left: 45px
       padding-right: 100px
       @media (max-width: 530px)
-        padding-right: 45px
+        padding: 0
+        width: 100%
 
 
     .linkLoginContainer
@@ -78,6 +78,7 @@
         font-weight: bold
         height: 40px
         text-decoration: none
+        user-select: none
         transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s
         &:hover
           transform: translateY(-4px) 

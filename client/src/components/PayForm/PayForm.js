@@ -8,6 +8,7 @@ import PayInput from '../InputComponents/PayInput/PayInput';
 import customValidator from '../../validators/validator';
 import Schemes from '../../validators/validationSchemes';
 import styles from './PayForm.module.sass';
+import Error from '../../components/Error/Error';
 import 'react-credit-cards/es/styles-compiled.css';
 
 let isPayForOrder;
@@ -22,7 +23,16 @@ const PayForm = (props) => {
   };
 
   isPayForOrder = props.isPayForOrder;
-  const { handleSubmit, focusOnElement, name, number, expiry, cvc } = props;
+  const {
+    handleSubmit,
+    focusOnElement,
+    name,
+    number,
+    expiry,
+    cvc,
+    submitError,
+    clearError,
+  } = props;
   return (
     <div className={styles.payFormContainer}>
       <span className={styles.headerInfo}>Payment Information</span>
@@ -135,6 +145,17 @@ const PayForm = (props) => {
           <span>Total: $100.00</span>
         </div>
       )}
+
+      {submitError && (
+        <div className={styles.errorContainer}>
+          <Error
+            data={submitError.data}
+            status={submitError.status}
+            clearError={clearError}
+          />
+        </div>
+      )}
+
       <div className={styles.buttonsContainer}>
         <button form="myForm" className={styles.payButton} type="submit">
           <span>{isPayForOrder ? 'Pay Now' : 'CashOut'}</span>

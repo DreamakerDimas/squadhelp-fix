@@ -40,13 +40,6 @@ class RegistrationForm extends React.Component {
     };
     return (
       <div className={styles.signUpFormContainer}>
-        {error && (
-          <Error
-            data={error.data}
-            status={error.status}
-            clearError={authClear}
-          />
-        )}
         <div className={styles.headerFormContainer}>
           <h2>CREATE AN ACCOUNT</h2>
           <h4>We always keep your name and email address private.</h4>
@@ -132,6 +125,13 @@ class RegistrationForm extends React.Component {
               type="checkbox"
             />
           </div>
+          {error && (
+            <Error
+              data={error.data}
+              status={error.status}
+              clearError={authClear}
+            />
+          )}
           <button
             type="submit"
             disabled={submitting}

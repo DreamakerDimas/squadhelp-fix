@@ -5,7 +5,6 @@ import { payRequest, clearPaymentStore } from '../../actions/actionCreator';
 import PayForm from '../../components/PayForm/PayForm';
 import styles from './Payment.module.sass';
 import isEmpty from 'lodash/isEmpty';
-import Error from '../../components/Error/Error';
 import Logo from '../../components/Logo';
 import CONSTANTS from '../../constants';
 
@@ -48,14 +47,13 @@ const Payment = (props) => {
       <div className={styles.mainContainer}>
         <div className={styles.paymentContainer}>
           <span className={styles.headerLabel}>Checkout</span>
-          {error && (
-            <Error
-              data={error.data}
-              status={error.status}
-              clearError={clearPaymentStore}
-            />
-          )}
-          <PayForm sendRequest={pay} back={goBack} isPayForOrder={true} />
+          <PayForm
+            sendRequest={pay}
+            back={goBack}
+            isPayForOrder={true}
+            submitError={error}
+            clearError={clearPaymentStore}
+          />
         </div>
         <div className={styles.orderInfoContainer}>
           <span className={styles.orderHeader}>Order Summary</span>

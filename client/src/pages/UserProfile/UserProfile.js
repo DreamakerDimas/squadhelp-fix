@@ -10,7 +10,6 @@ import {
   changeProfileModeView,
   clearPaymentStore,
 } from '../../actions/actionCreator';
-import Error from '../../components/Error/Error';
 import styles from './UserProfile.module.sass';
 import CONSTANTS from '../../constants';
 
@@ -67,14 +66,11 @@ const UserProfile = (props) => {
               </span>
             ) : (
               <div>
-                {error && (
-                  <Error
-                    data={error.data}
-                    status={error.status}
-                    clearError={clearPaymentStore}
-                  />
-                )}
-                <PayForm sendRequest={pay} />
+                <PayForm
+                  sendRequest={pay}
+                  submitError={error}
+                  clearError={clearPaymentStore}
+                />
               </div>
             )}
           </div>

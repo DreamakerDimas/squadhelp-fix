@@ -31,13 +31,6 @@ class ResetPasswordForm extends React.Component {
 
     return (
       <div className={styles.resetForm}>
-        {error && (
-          <Error
-            data={error.data}
-            status={error.status}
-            clearError={authClear}
-          />
-        )}
         <h2>RESET PASSWORD</h2>
         <h3>
           Write the email of your account and new password. To your email will
@@ -58,6 +51,14 @@ class ResetPasswordForm extends React.Component {
             type="password"
             label="Password"
           />
+          {error && (
+            <Error
+              data={error.data}
+              status={error.status}
+              clearError={authClear}
+            />
+          )}
+          {message && <h3>{message}</h3>}
           <button
             type="submit"
             disabled={submitting}
@@ -68,7 +69,6 @@ class ResetPasswordForm extends React.Component {
             </span>
           </button>
         </form>
-        {message && <h3>{message}</h3>}
       </div>
     );
   }

@@ -12,6 +12,8 @@
   min-width: 280px
   min-height: 650px
   flex-direction: column
+  @media (max-width: 700px)
+    width: 100%
 
 .headerPagesLinks
   display: flex
@@ -21,29 +23,39 @@
   margin-top: 26px
   padding-left: 45px
   padding-right: 100px
-  @media (max-width: 530px)
-    padding-right: 45px
+  @media (max-width: 700px)
+    padding-right: 0
+    width: 100%
 
 .buttonsContainer
   display: flex
   justify-content: space-between
   align-items: center
-  min-width: 180px
+  min-width: 200px
   padding-left: 20px
 
 .linkContainer
   border: 1px solid white
   width: 80px
   border-radius: 4px
-  display: flex
-  justify-content: center
-  align-items: center
   font-size: 18px
   font-weight: bold
   height: 40px
   text-decoration: none
+  user-select: none
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s
+  a
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 100%
+    height: 100%
   span
     color: white
+  &:hover
+    transform: translateY(-4px) 
+    box-shadow: 0px 3px 4px -2px rgba(0,0,0,0.5)
+    background-color: #3e9df5
 
 .resetFormContainer
   display: flex

@@ -1,13 +1,14 @@
 .errorContainer
   width: auto
+  margin: auto 20px
   align-self: center
   display: flex
   flex-direction: row
   justify-content: center
   align-items: center
-  border-radius: 26px
+  border-radius: 5px
   padding: 15px 10px
-  background-color: red
+  border: 1px solid red
   position: relative
   cursor: default
   span
@@ -17,13 +18,9 @@
     color: white
     font-size: 26px
     position: absolute
-    top: -4px
-    right: -4px
-    transition: font-size 0.2s
+    top: 2px
+    right: 2px
+    transition: color 0.2s
     &:hover
-      top: -8px
-      right: -8px
-      color: #4e618d
-      font-size: 32px
-      transition: font-size 0.2s
+      color: #aa4c4c
       cursor: pointer

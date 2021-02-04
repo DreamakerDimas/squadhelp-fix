@@ -29,6 +29,10 @@ class Header extends React.Component {
   }
 
   handleScroll = () => {
+    if (window.outerWidth <= 700) {
+      this.setState({ isFixed: false });
+      return;
+    }
     if (window.scrollY >= 80) {
       this.setState({ isFixed: true });
     } else {
@@ -163,11 +167,13 @@ class Header extends React.Component {
               <div className={styles.nav}>
                 <ul>
                   <li>
-                    <span>NAME IDEAS</span>
-                    <img
-                      src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
-                      alt="menu"
-                    />
+                    <div>
+                      <span>NAME IDEAS</span>
+                      <img
+                        src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
+                        alt="menu"
+                      />
+                    </div>
                     <ul>
                       <li>
                         <a href="http://www.google.com">Beauty</a>
@@ -196,11 +202,13 @@ class Header extends React.Component {
                     </ul>
                   </li>
                   <li>
-                    <span>CONTESTS</span>
-                    <img
-                      src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
-                      alt="menu"
-                    />
+                    <div>
+                      <span>CONTESTS</span>
+                      <img
+                        src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
+                        alt="menu"
+                      />
+                    </div>
                     <ul>
                       <li>
                         <Link to="/how-it-works">HOW IT WORKS</Link>
@@ -229,11 +237,13 @@ class Header extends React.Component {
                     </ul>
                   </li>
                   <li>
-                    <span>Our Work</span>
-                    <img
-                      src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
-                      alt="menu"
-                    />
+                    <div>
+                      <span>Our Work</span>
+                      <img
+                        src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
+                        alt="menu"
+                      />
+                    </div>
                     <ul>
                       <li>
                         <a href="http://www.google.com">NAMES</a>
@@ -250,11 +260,13 @@ class Header extends React.Component {
                     </ul>
                   </li>
                   <li>
-                    <span>Names For Sale</span>
-                    <img
-                      src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
-                      alt="menu"
-                    />
+                    <div>
+                      <span>Names For Sale</span>
+                      <img
+                        src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
+                        alt="menu"
+                      />
+                    </div>
                     <ul>
                       <li>
                         <a href="http://www.google.com">POPULAR NAMES</a>
@@ -277,11 +289,13 @@ class Header extends React.Component {
                     </ul>
                   </li>
                   <li>
-                    <span>Blog</span>
-                    <img
-                      src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
-                      alt="menu"
-                    />
+                    <div>
+                      <span>Blog</span>
+                      <img
+                        src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
+                        alt="menu"
+                      />
+                    </div>
                     <ul>
                       <li>
                         <a href="http://www.google.com">

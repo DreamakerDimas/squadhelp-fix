@@ -89,7 +89,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         messages: [],
-        interlocutor: null,
         error: action.error,
       };
     }

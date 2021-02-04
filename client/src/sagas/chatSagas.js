@@ -19,6 +19,7 @@ export function* previewSaga() {
 export function* getDialog(action) {
   try {
     const { data } = yield restController.getDialog(action.data);
+    console.log(data);
     yield put({ type: ACTION.GET_DIALOG_MESSAGES, data: data });
   } catch (err) {
     yield put({ type: ACTION.GET_DIALOG_MESSAGES_ERROR, error: err.response });

@@ -14,7 +14,6 @@ export function* getEvents() {
     const data = yield getEventsFromLocal();
     yield put({ type: ACTION.GET_EVENTS_SUCCESS, data: data });
   } catch (err) {
-    console.log(err);
     yield put({ type: ACTION.GET_EVENTS_ERROR, error: err });
   }
 }
@@ -27,7 +26,6 @@ export function* createEvent(action) {
     yield setEventsInLocal(events);
     yield put({ type: ACTION.CREATE_EVENT_SUCCESS, data: events });
   } catch (err) {
-    console.log(err);
     yield put({ type: ACTION.CREATE_EVENT_ERROR, error: err });
   }
 }

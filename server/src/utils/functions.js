@@ -31,7 +31,7 @@ module.exports.createWhereForAllContests = (
       ],
     },
   });
-  object.order.push(['id', 'desc']); // !!! change to awardSort?
+  object.order.push(['id', 'desc']);
   return object;
 };
 

@@ -134,8 +134,6 @@ module.exports.getDialog = async (req, res, next) => {
         order: [['createdAt', 'ASC']],
       },
     });
-    const { Messages: messages } = conversation.toJSON();
-
     const {
       firstName,
       lastName,
@@ -145,6 +143,21 @@ module.exports.getDialog = async (req, res, next) => {
     } = await userQueries.findUser({
       id: req.params.interlocutorId,
     });
+
+    // if new chat
+    if (conversation === null) {
+      return res.send({
+        messages: [],
+        interlocutor: {
+          firstName,
+          lastName,
+          displayName,
+          id,
+          avatar,
+        },
+      });
+    }
+    const { Messages: messages } = conversation.toJSON();
 
     res.send({
       messages,
@@ -412,6 +425,7 @@ module.exports.getCatalogList = async (req, res, next) => {
       where: {
         userId: req.tokenData.userId,
       },
+      order: [['catalogName', 'asc']],
       include: {
         model: db.Conversations,
         attributes: ['_id'],

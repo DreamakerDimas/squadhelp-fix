@@ -29,7 +29,7 @@ class Header extends React.Component {
   }
 
   handleScroll = () => {
-    if (window.outerWidth <= 700) {
+    if (window.innerWidth <= 800) {
       this.setState({ isFixed: false });
       return;
     }

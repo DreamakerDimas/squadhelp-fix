@@ -67,11 +67,13 @@ class Header extends React.Component {
                   ? CONSTANTS.ANONYM_IMAGE_PATH
                   : `${CONSTANTS.publicURL}${this.props.data.avatar}`
               }
+              className={styles.avatar}
               alt="user"
             />
             <span>{`Hi, ${this.props.data.displayName}`}</span>
             <img
               src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
+              className={styles.arrow}
               alt="menu"
             />
             <ul>
@@ -171,6 +173,7 @@ class Header extends React.Component {
                       <span>NAME IDEAS</span>
                       <img
                         src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
+                        className={styles.arrow}
                         alt="menu"
                       />
                     </div>
@@ -206,6 +209,7 @@ class Header extends React.Component {
                       <span>CONTESTS</span>
                       <img
                         src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
+                        className={styles.arrow}
                         alt="menu"
                       />
                     </div>
@@ -241,6 +245,7 @@ class Header extends React.Component {
                       <span>Our Work</span>
                       <img
                         src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
+                        className={styles.arrow}
                         alt="menu"
                       />
                     </div>
@@ -264,6 +269,7 @@ class Header extends React.Component {
                       <span>Names For Sale</span>
                       <img
                         src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
+                        className={styles.arrow}
                         alt="menu"
                       />
                     </div>
@@ -293,6 +299,7 @@ class Header extends React.Component {
                       <span>Blog</span>
                       <img
                         src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
+                        className={styles.arrow}
                         alt="menu"
                       />
                     </div>

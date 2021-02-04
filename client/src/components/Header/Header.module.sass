@@ -194,12 +194,14 @@
         ul
           box-sizing: border-box
           padding: 0 5px
-          border: 1px solid #eee
+          box-shadow: inset 0 -5px 4px -4px rgba(0,0,0,0.1), inset 5px 0px 4px -4px rgba(0,0,0,0.1), inset -5px 0px 4px -4px rgba(0,0,0,0.1) 
+          border-top: 3px solid #5f76c0
           z-index: 500
           list-style: none
           background: white
           width: 100%
           display: none
+          animation: showList 0.3s ease-out normal
 
           li
             text-align: left

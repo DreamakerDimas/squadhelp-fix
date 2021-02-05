@@ -6,14 +6,14 @@ module.exports = {
         name: 'SquadHelp',
         expiry: '11/20',
         cvc: '453',
-        balance: 0,
+        balance: 0.00,
       },
       {
         cardNumber: '4111111111111111',
         name: 'yriy',
-        expiry: '09/19',
+        expiry: '09/22',
         cvc: '043',
-        balance: 5000,
+        balance: 5000.00,
       },
     ], {});
   },

@@ -27,6 +27,18 @@ export function* addOfferSaga(action) {
     const offers = yield select((state) => state.contestByIdStore.offers);
     offers.unshift(data);
     yield put({ type: ACTION.ADD_NEW_OFFER_TO_STORE, data: offers });
+
+    // update contestsList
+    const contestId = action.data.get('contestId');
+    const contests = yield select((state) => state.contestsList.contests);
+    const newContests = contests.map((contest) => {
+      if (contest.id === Number(contestId)) {
+        contest.Offers = offers.map((offer) => offer.id);
+        contest.count++;
+      }
+      return contest;
+    });
+    yield put({ type: ACTION.UPDATE_CONTESTS, data: newContests });
   } catch (e) {
     yield put({ type: ACTION.ADD_OFFER_ERROR, error: e.response });
   }

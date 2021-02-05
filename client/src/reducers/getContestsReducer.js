@@ -49,6 +49,12 @@ export default function (state = initialState, action) {
         contests: [],
       };
     }
+    case ACTION.UPDATE_CONTESTS: {
+      return {
+        ...state,
+        contests: action.data,
+      };
+    }
     case ACTION.SET_NEW_CUSTOMER_FILTER: {
       return {
         ...initialState,

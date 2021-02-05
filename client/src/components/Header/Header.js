@@ -22,10 +22,12 @@ class Header extends React.Component {
       this.props.getUser();
     }
     window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('resize', this.handleScroll);
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('resize', this.handleScroll);
   }
 
   handleScroll = () => {

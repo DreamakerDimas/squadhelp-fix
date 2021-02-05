@@ -11,7 +11,6 @@ const ContestBox = (props) => {
     [styles.status]: true,
     [styles.active]: status === 'active',
     [styles.finished]: status === 'finished',
-    [styles.pending]: status === 'pending',
   });
 
   const getTimeStr = () => {

@@ -12,6 +12,11 @@ module.exports.logWrite = async (err) => {
     stackTrace: stack,
   };
 
+  // Create directory
+  if (!fs.existsSync(constants.LOGS_DIRECTORY)) {
+    fs.mkdirSync(constants.LOGS_DIRECTORY);
+  }
+
   // Get file size
   let fileSize;
   try {

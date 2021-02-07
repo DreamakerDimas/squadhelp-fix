@@ -6,12 +6,14 @@
 
 
 started_at=$(date +"%s")
+export DOCKER_CLIENT_TIMEOUT=220
+export COMPOSE_HTTP_TIMEOUT=220
 
 echo "-----> Provisioning containers"
-docker-compose --file docker-compose-dev.yaml up
+docker-compose --file docker-compose-dev.yaml up -d
 echo ""
 
-web=$(docker-compose --file docker-compose-dev.yaml ps | grep squadhelp_server-dev_1 | awk '{print $1}')
+web=$(docker-compose --file docker-compose-dev.yaml ps -q server-dev) 
 
 # Run Sequalize's migrations.
 echo "-----> Running application migrations"

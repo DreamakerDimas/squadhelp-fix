@@ -57,14 +57,12 @@ module.exports.getPricesArr = (totalPrice, num) => {
 
   const pricesSum = getSum(initPricesArr);
 
-  const pricesArr = changeLastValue(
+  return changeLastValue(
     initPricesArr,
     priceForEach,
     totalPrice,
     pricesSum
   );
-
-  return pricesArr;
 };
 
 function formValuta(val) {

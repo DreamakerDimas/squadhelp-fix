@@ -12,11 +12,6 @@ module.exports.logWrite = async (err) => {
     stackTrace: stack,
   };
 
-  // Create directory
-  if (!fs.existsSync(constants.LOGS_DIRECTORY)) {
-    fs.mkdirSync(constants.LOGS_DIRECTORY);
-  }
-
   // Get file size
   let fileSize;
   try {
@@ -45,11 +40,17 @@ module.exports.logWrite = async (err) => {
 
 // Moves current logs to [timestamp].json at 23:00 everyday
 module.exports.loggerInit = async () => {
+  // Create directory
+  if (!fs.existsSync(constants.LOGS_DIRECTORY)) {
+    fs.mkdirSync(constants.LOGS_DIRECTORY);
+  }
+
   // Every 1 minute
   setInterval(() => {
     // check time
     const currentTime = new Date();
-    if (currentTime.getHours() === 23 && currentTime.getMinutes === 0) {
+    // UTC time
+    if (currentTime.getHours() === 23 && currentTime.getMinutes() === 0) {
       console.log('Logs reserving started...');
       try {
         // rw access check

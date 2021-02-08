@@ -26,9 +26,10 @@ services:
       - db-dev
       - mongo-dev
     volumes:
-      - ./var/www/html/images:/var/www/html/images
+      - ./server/public/images:/var/www/html/images
       - ./server:/server
       - /server/node_modules
+    restart: on-failure
 
   mongo-dev:
     image: mongo:3.6
@@ -46,6 +47,7 @@ services:
       - POSTGRES_DB=todo-dev
     ports:
       - '5432:5432'
+    restart: on-failure
 
 volumes:
   server-dev:
